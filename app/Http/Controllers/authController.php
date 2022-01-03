@@ -23,16 +23,7 @@ class authController extends Controller
         if($user){
             $request->session()->put('id',$user->id);
             $request->session()->put('name',$user->name);
-            $request->session()->put('familyname',$user->familyname);
-            $request->session()->put('email',$user->email);
-            $request->session()->put('password',$user->password);
-            $request->session()->put('phone',$user->phone);
-            $request->session()->put('transporteur',$user->transporteur);
-            $request->session()->put('wilaya',$user->wilaya);
-            $request->session()->put('certifie',$user->certifie);
-            $request->session()->put('demande',$user->demande);
-            $request->session()->put('statut',$user->statut);
-            $request->session()->put('justificatif',$user->justificatif);
+            
             return response()->json([
                 'status_code' => 501,
                 'message' => 'Login',
@@ -49,16 +40,7 @@ class authController extends Controller
     public function logout(Request $request)
     {
         $request->session()->forget('name');
-        $request->session()->forget('familyname');
-        $request->session()->forget('email');
-        $request->session()->forget('password');
-        $request->session()->forget('phone');
-        $request->session()->forget('transporteur');
-        $request->session()->forget('wilaya');
-        $request->session()->forget('certifie');
-        $request->session()->forget('demande');
-        $request->session()->forget('statut');
-        $request->session()->forget('justificatif');
+        $request->session()->forget('id');
 
         return redirect()->route('acceuil');
     }
