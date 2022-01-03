@@ -1,11 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\authController;
 use App\Http\Controllers\newsController;
 use App\Http\Controllers\acceuilController;
 use App\Http\Controllers\annonceController;
 use App\Http\Controllers\contactController;
-use App\Http\Controllers\inscriptionController;
+use App\Http\Controllers\profileController;
 use App\Http\Controllers\news_detailsController;
 use App\Http\Controllers\presentationController;
 use App\Http\Controllers\statistiquesController;
@@ -22,11 +23,15 @@ use App\Http\Controllers\statistiquesController;
 */
 
 Route::get('/acceuil', [acceuilController::class,'index'])->name('acceuil');
+Route::get('/show', [acceuilController::class,'show'])->name('show');
+
+Route::post('/acceuil', [acceuilController::class,'index'])->name('acceuil_connexion');
+
 
 Route::post('/acceuil', [acceuilController::class,'search'])->name('search');
 
-Route::post('/annonce', [annonceController::class,'index'])->name('annonce');
-
+Route::get('/annonce', [annonceController::class,'index'])->name('annonce');
+Route::post('/annonce', [annonceController::class,'add_annonce'])->name('add_annonce');
 
 Route::get('/presentation', [presentationController::class,'index'])->name('presentation');
 
@@ -37,9 +42,11 @@ Route::get('/statistiques', [statistiquesController::class,'index'])->name('stat
 
 Route::get('/contact', [contactController::class,'index'])->name('contact');
 
-Route::get('/inscription', [inscriptionController::class,'index'])->name('inscription');
+Route::get('/inscription', [authController::class,'register_show'])->name('inscription');
+Route::post('/inscription', [authController::class,'register'])->name('add_user');
 
-Route::post('/inscription', [inscriptionController::class,'add_user'])->name('add_user');
+Route::post('/connexion', [authController::class,'login'])->name('login');
+Route::get('/deconnexion', [authController::class,'logout'])->name('logout');
 
-Route::post('/connexion', [connexionController::class,'check_user'])->name('check_user');
+Route::get('/profile', [profileController::class,'index'])->name('profile');
 

@@ -152,7 +152,7 @@
                                           <div class="form-group">
                                               <select class="mul-select" id="wilaya" name="wilaya[]" multiple="true">
                                                 @foreach ($wilayas as $wilaya)
-                                                  <option value="{{$wilaya}}" >{{$wilaya}}</option>
+                                                  <option value="{{$wilaya->nom}}" >{{$wilaya->nom}}</option>
                                                 @endforeach
                                               </select>
                                           </div> 
@@ -171,7 +171,7 @@
 
                             <div class="col-md-6 col-sm-12 certifie_section">
                               <fieldset>                       
-                              <label for="demande">Choose a profile picture:</label>
+                              <label for="demande">uploader votre demande</label>
                               <input type="file"
                                     id="demande" name="demande"
                                     accept="image/png, image/jpeg, .doc, .docx, application/pdf">

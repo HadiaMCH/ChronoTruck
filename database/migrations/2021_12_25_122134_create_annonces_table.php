@@ -26,10 +26,9 @@ class CreateAnnoncesTable extends Migration
             $table->enum('fourchette_volume_min', ['0','100l','500l','1kl','5kl','10kl','50kl']);
             $table->enum('fourchette_volume_max', ['100l','500l','1kl','5kl','10kl','50kl','100kl']);
             $table->enum('moyen_transport', ['camion', 'bus', 'voiture', 'moto']);
-            $table->enum('status',['validée', 'en attente', 'refusée']);
-            //transporteur
-            $table->boolean('validee');
-            $table->dateTime('date');
+            $table->enum('status',['validée', 'en attente', 'erreur']);
+            $table->double('tarif')->nullable();
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }

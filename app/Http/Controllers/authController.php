@@ -2,22 +2,75 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\news;
 use App\Models\User;
 use App\Models\wilaya;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Storage;
 
-class inscriptionController extends Controller
+class authController extends Controller
 {
-    public function index()
+    public function login(Request $request)
     {        
-        $wilayas=['Adrar','Chlef','Laghouat','Oum El Bouaghi','Batna','Béjaïa','Biskra','Béchar','Blida','Bouira','Tamanrasset','Tébessa','Tlemcen','Tiaret','Tizi Ouzou','Alger','Djelfa','Jijel','Sétif','Saïda','Skikda','Sidi Bel Abbès','Annaba','Guelma','Constantine','Médéa','Mostaganem','MSila','Mascara','Ouargla','Oran','El Bayadh','Illizi','Bordj Bou Arreridj','Boumerdès','El Tarf','Tindouf','Tissemsilt','El Oued','Khenchela','Souk Ahras','Tipaza','Mila','Aïn Defla','Naâma','Aïn Témouchent','Ghardaïa','Relizane','Timimoun','Bordj Badji Mokhtar','Ouled Djellal','Béni Abbès','In Salah','In Guezzam','Touggourt','Djanet','El MGhair','El Meniaa'];
+        $request->validate([
+            'email'=>'string',
+            'password'=>'string',
+        ]);
+        $email=$request->email;
+        $password=$request->password;
+
+        $user= User::where('email',$email)->where('password',$password)->first();
+        if($user){
+            $request->session()->put('id',$user->id);
+            $request->session()->put('name',$user->name);
+            $request->session()->put('familyname',$user->familyname);
+            $request->session()->put('email',$user->email);
+            $request->session()->put('password',$user->password);
+            $request->session()->put('phone',$user->phone);
+            $request->session()->put('transporteur',$user->transporteur);
+            $request->session()->put('wilaya',$user->wilaya);
+            $request->session()->put('certifie',$user->certifie);
+            $request->session()->put('demande',$user->demande);
+            $request->session()->put('statut',$user->statut);
+            $request->session()->put('justificatif',$user->justificatif);
+            return response()->json([
+                'status_code' => 501,
+                'message' => 'Login',
+              ]);
+        }
+        else{
+            return response()->json([
+                'status_code' => 500,
+                'message' => 'Error in Login',
+              ]);
+        }
+    }
+
+    public function logout(Request $request)
+    {
+        $request->session()->forget('name');
+        $request->session()->forget('familyname');
+        $request->session()->forget('email');
+        $request->session()->forget('password');
+        $request->session()->forget('phone');
+        $request->session()->forget('transporteur');
+        $request->session()->forget('wilaya');
+        $request->session()->forget('certifie');
+        $request->session()->forget('demande');
+        $request->session()->forget('statut');
+        $request->session()->forget('justificatif');
+
+        return redirect()->route('acceuil');
+    }
+
+    public function register_show()
+    {        
+        $wilayas=wilaya::all();
         $statut_creation='before';
         return view('inscription',compact('wilayas','statut_creation'));
     }
 
-    public function add_user(Request $request)
+    public function register(Request $request)
     {        
         $request->validate(['nom'=>'string',
             'prenom'=>'string',
@@ -71,8 +124,9 @@ class inscriptionController extends Controller
                 ]); 
             }
         } 
-        $wilayas=['Adrar','Chlef','Laghouat','Oum El Bouaghi','Batna','Béjaïa','Biskra','Béchar','Blida','Bouira','Tamanrasset','Tébessa','Tlemcen','Tiaret','Tizi Ouzou','Alger','Djelfa','Jijel','Sétif','Saïda','Skikda','Sidi Bel Abbès','Annaba','Guelma','Constantine','Médéa','Mostaganem','MSila','Mascara','Ouargla','Oran','El Bayadh','Illizi','Bordj Bou Arreridj','Boumerdès','El Tarf','Tindouf','Tissemsilt','El Oued','Khenchela','Souk Ahras','Tipaza','Mila','Aïn Defla','Naâma','Aïn Témouchent','Ghardaïa','Relizane','Timimoun','Bordj Badji Mokhtar','Ouled Djellal','Béni Abbès','In Salah','In Guezzam','Touggourt','Djanet','El MGhair','El Meniaa'];
+        $wilayas=wilaya::all();
         $statut_creation='after';
         return view('inscription',compact('wilayas','statut_creation'));
     }
+
 }

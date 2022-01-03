@@ -38,6 +38,18 @@
               <li class="nav-item">
                 <a class="nav-link" href="{{ route('contact') }}">Contact</a>
               </li>
+              @if(session('name')) 
+              <li class="nav-item">
+                  <div class="main-button">
+                    <a rel="nofollow" href="{{ route('profile') }}" >profile</a>
+                  </div>
+              </li>
+              <li class="nav-item">
+                  <div class="main-button">
+                  <a rel="nofollow" id="logout_botton" href="{{ route('logout') }}" >déconnecter</a>
+                  </div>
+              </li>
+              @else
               <li class="nav-item">
                   <div class="main-button">
                     <a rel="nofollow" href="{{ route('inscription') }}" >Inscription</a>
@@ -48,6 +60,7 @@
                   <a rel="nofollow" href="" data-toggle="modal" data-target="#loginModal">Connexion</a>
                   </div>
               </li>
+              @endif
             </ul>
           </div>
         </div>
@@ -92,7 +105,8 @@
                                 <h2>connectez-vous sur votre compte</h2>
                               </div>
                               <div class="content">
-                                <form id="connexion" action="{{route('check_user')}}" method="post">
+                                <form >
+                                  @csrf
                                       <div class="row">
                                         <div class="col-md-12 col-sm-12">
                                           <fieldset>
@@ -102,6 +116,11 @@
                                         <div class="col-md-12 col-sm-12">
                                           <fieldset>
                                             <input name="password" type="password" id="password" placeholder="votre mot de passe">
+                                          </fieldset>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12" id="incorrect_login">
+                                          <fieldset>
+                                            <label >email ou mot de passe incorrect. Réessayez</label>
                                           </fieldset>
                                         </div>
                                         <div class="col-lg-12">
@@ -125,10 +144,6 @@
            </div>  
       </div>  
  </div>  
- <script>  
-      $('#form_submit').click(function(){  
-           
-      }); 
 
      <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -140,5 +155,47 @@
     <script src="assets/js/slick.js"></script>
     <script src="assets/js/isotope.js"></script>
     <script src="assets/js/accordions.js"></script>
+    
+    <script>
+      $("#form_submit").click(function (e) {
+          $.ajaxSetup({
+              headers: {
+                  'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+              }
+          });
+          e.preventDefault();
+          let formData = {
+            email : $("#email").val(),
+            password : $("#password").val(),
+          };
+          let type = "POST";
+          let ajaxurl = "{{route('login')}}";
+
+          $.ajax({
+              type: type,
+              url: ajaxurl,
+              data: formData,
+              dataType: 'json',
+              success: function (response) {
+                if (response['status_code']!=501){
+                  $("#email").css("border-color", "#d93025");
+                  $("#email").css("color", "#d93025");
+                  $("#password").css("border-color", "#d93025");
+                  $("#password").css("color", "#d93025");
+                  $("#email").attr("placeholder","votre email");
+                  $("#password").attr("placeholder","votre mot de passe");
+                  $("#incorrect_login").css("display","block");
+                  $("#password").css("margin-bottom","5px");
+                }
+                else{
+                  window.location.replace("http://localhost/chronotruck/public/acceuil");
+                }
+              },
+              error: function (response) {
+                  console.log(response);
+              }
+            });
+       });  
+    </script>
   </body>
 </html>
