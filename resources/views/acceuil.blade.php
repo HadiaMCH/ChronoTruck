@@ -93,7 +93,7 @@
     <section class="blog-posts">
       <div class="container">
       @if(session('name')) <!-- Resultat du recherche       connected -->
-        <div class="row" id="search_result_connected">
+        <div class="row" id="search_result_connected">  
 
         </div>
       </div>
@@ -109,8 +109,7 @@
       </div>  
     </section> 
       @else <!-- Resultat du recherche       not connected -->
-        <div class="row" id="search_result_not_connected">
-          
+        <div class="row" id="search_result_not_connected">                        
 
         </div>
       </div>
@@ -327,8 +326,9 @@
                         text += response[i].texte[j];
                         j++;
                       }
-                      $("#search_result_not_connected").prepend('<div class="col-lg-3"><div class="all-blog-posts"><div class="blog-post"><div class="blog-thumb"><img src="'+response[i].img+'" alt=""></div><div class="down-content"><span>'+response[i].titre+'</span><ul class="post-info"><li>Admin</li><li>'+response[i].updated_at+'</li></ul><p>'+text+'<a href="" data-toggle="modal" data-target="#loginModal" >...lire la suite</a></p><ul class="post-info"><li>de '+response[i].depart+' vers '+response[i].arriver+'</li></ul></div></div></div></div>');
-                      $("#search_result_connected").prepend('<div class="col-lg-3"><div class="all-blog-posts"><div class="blog-post"><div class="blog-thumb"><img src="'+response[i].img+'" alt=""></div><div class="down-content"><span>'+response[i].titre+'</span><ul class="post-info"><li>Admin</li><li>'+response[i].updated_at+'</li></ul><p>'+text+'<a href="{{ route('annonce') }}" >...lire la suite</a></p><ul class="post-info"><li>de '+response[i].depart+' vers '+response[i].arriver+'</li></ul></div></div></div></div>');                   
+                      let d = new Date(response[i].created_at);
+                      $("#search_result_not_connected").prepend('<div class="col-lg-3"><div class="all-blog-posts"><div class="blog-post"><div class="blog-thumb"><img src="'+response[i].img+'" alt=""></div><div class="down-content"><span>'+response[i].titre+'</span><ul class="post-info"><li>'+d.getHours() + ":" + d.getMinutes() + " " + d.getDate()+'-'+ d.getMonth()+'-'+d.getFullYear()+'</li></ul><p>'+text+'<a href="" data-toggle="modal" data-target="#loginModal" >...lire la suite</a></p><ul class="post-info"><li>de '+response[i].depart+' vers '+response[i].arriver+'</li></ul></div></div></div></div>');                
+                      $("#search_result_connected").prepend('<div class="col-lg-3"><div class="all-blog-posts"><div class="blog-post"><div class="blog-thumb"><img src="'+response[i].img+'" alt=""></div><div class="down-content"><span>'+response[i].titre+'</span><ul class="post-info"><li>'+'    '+'</li><li>'+d.getHours() + ":" + d.getMinutes() + " " + d.getDate()+'-'+ d.getMonth()+'-'+d.getFullYear()+'</li></ul><p>'+text+'<a href="annonce/'+response[i].id+'" >...lire la suite</a></p><ul class="post-info"><li>de '+response[i].depart+' vers '+response[i].arriver+'</li></ul></div></div></div></div>');                   
                     }
                   }
                   else{
@@ -372,9 +372,9 @@
                         text += response[i].texte[j];
                         j++;
                       }
-
-                      $("#search_result_not_connected").prepend('<div class="col-lg-3"><div class="all-blog-posts"><div class="blog-post"><div class="blog-thumb"><img src="'+response[i].img+'" alt=""></div><div class="down-content"><span>'+response[i].titre+'</span><ul class="post-info"><li>Admin</li><li>'+response[i].updated_at+'</li></ul><p>'+text+'<a href="" data-toggle="modal" data-target="#loginModal" >...lire la suite</a></p><ul class="post-info"><li>de '+response[i].depart+' vers '+response[i].arriver+'</li>                </ul><ul class="post-info"><li>'+response[i].transport_type+'</li></ul><ul class="post-info"><li>entre '+response[i].fourchette_poid_min+'et'+response[i].fourchette_poid_max+'</li></ul><ul class="post-info"><li>entre '+response[i].fourchette_volume_min+'et'+response[i].fourchette_volume_max+'</li></ul></div></div></div></div>');
-                      $("#search_result_connected").prepend('<div class="col-lg-3"><div class="all-blog-posts"><div class="blog-post"><div class="blog-thumb"><img src="'+response[i].img+'" alt=""></div><div class="down-content"><span>'+response[i].titre+'</span><ul class="post-info"><li>Admin</li><li>'+response[i].updated_at+'</li></ul><p>'+text+'<a href="{{ route('annonce') }}" >...lire la suite</a></p><ul class="post-info"><li>de '+response[i].depart+' vers '+response[i].arriver+'</li>                </ul><ul class="post-info"><li>'+response[i].transport_type+'</li></ul><ul class="post-info"><li>entre '+response[i].fourchette_poid_min+'et'+response[i].fourchette_poid_max+'</li></ul><ul class="post-info"><li>entre '+response[i].fourchette_volume_min+'et'+response[i].fourchette_volume_max+'</li></ul></div></div></div></div>');
+                      let d = new Date(response[i].created_at);
+                      $("#search_result_not_connected").prepend('<div class="col-lg-3"><div class="all-blog-posts"><div class="blog-post"><div class="blog-thumb"><img src="'+response[i].img+'" alt=""></div><div class="down-content"><span>'+response[i].titre+'</span><ul class="post-info"><li>'+d.getHours() + ":" + d.getMinutes() + " " + d.getDate()+'-'+ d.getMonth()+'-'+d.getFullYear()+'</li></ul><p>'+text+'<a href="" data-toggle="modal" data-target="#loginModal" >...lire la suite</a></p><ul class="post-info"><li>de '+response[i].depart+' vers '+response[i].arriver+'</li></ul><ul class="post-info"><li>'+response[i].transport_type+'</li></ul><ul class="post-info"><li>entre '+response[i].fourchette_poid_min+'et'+response[i].fourchette_poid_max+'</li></ul><ul class="post-info"><li>entre '+response[i].fourchette_volume_min+'et'+response[i].fourchette_volume_max+'</li></ul></div></div></div></div>');                     
+                      $("#search_result_connected").prepend('<div class="col-lg-3"><div class="all-blog-posts"><div class="blog-post"><div class="blog-thumb"><img src="'+response[i].img+'" alt=""></div><div class="down-content"><span>'+response[i].titre+'</span><ul class="post-info"><li>'+'    '+'</li><li>'+d.getHours() + ":" + d.getMinutes() + " " + d.getDate()+'-'+ d.getMonth()+'-'+d.getFullYear()+'</li></ul><p>'+text+'<a href="annonce/'+response[i].id+'" >...lire la suite</a></p><ul class="post-info"><li>de '+response[i].depart+' vers '+response[i].arriver+'</li></ul><ul class="post-info"><li>'+response[i].transport_type+'</li></ul><ul class="post-info"><li>entre '+response[i].fourchette_poid_min+'et'+response[i].fourchette_poid_max+'</li></ul><ul class="post-info"><li>entre '+response[i].fourchette_volume_min+'et'+response[i].fourchette_volume_max+'</li></ul></div></div></div></div>');                     
                     }
                   }
                   else{

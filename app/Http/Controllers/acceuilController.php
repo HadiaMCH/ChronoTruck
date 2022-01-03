@@ -6,6 +6,7 @@ use App\Models\news;
 use App\Models\wilaya;
 use App\Models\annonce;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Routing\Controller;
 use App\Http\Controllers\annonceController;
 
@@ -23,14 +24,18 @@ class acceuilController extends Controller
         $moyen_transports= annonceController::getEnumValues('annonces','moyen_transport');
         $wilayas=wilaya::all();
         $news=news::all()->take(6);
-        
         return view('acceuil',compact('news','status','transport_types','fourchette_poid_mins','fourchette_poid_maxs','fourchette_volume_mins','fourchette_volume_maxs','moyen_transports','wilayas'));
     }
 
     public function show()
     {
         $annonces= annonce::where("status","validée")->orderBy('updated_at', 'desc')->take(8)->get();
+        
         if ($annonces->count()){
+
+            foreach ($annonces as $annonce){ 
+                $annonce->created_at= Carbon::parse($annonce->created_at)->format('h:i d/m/Y');
+                }
             return response()->json($annonces);
         }
         else{
@@ -49,6 +54,10 @@ class acceuilController extends Controller
         $ville_arriver=$request->input('ville_arriver');
         $annonces= annonce::where("depart","$ville_depart")->where("arriver","$ville_arriver")->take(8)->get();
         if ($annonces->count()){
+            foreach ($annonces as $annonce){ 
+                $annonce->created_at= Carbon::parse($annonce->created_at)->format('h:i d/m/Y');
+                }
+                
             return response()->json($annonces);
         }
         else{

@@ -30,7 +30,7 @@ Route::post('/acceuil', [acceuilController::class,'index'])->name('acceuil_conne
 
 Route::post('/acceuil', [acceuilController::class,'search'])->name('search');
 
-Route::get('/annonce', [annonceController::class,'index'])->name('annonce');
+Route::get('/annonce/{id}', [annonceController::class,'index'])->name('annonce');
 Route::post('/annonce', [annonceController::class,'add_annonce'])->name('add_annonce');
 
 Route::get('/presentation', [presentationController::class,'index'])->name('presentation');

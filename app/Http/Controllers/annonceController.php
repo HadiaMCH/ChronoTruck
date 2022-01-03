@@ -11,9 +11,10 @@ use App\Http\Controllers\annonceController;
 
 class annonceController extends Controller
 {
-    public function index()
+    public function index($id)
     {                
-        return view('annonce');
+        $annonce= annonce::where("id","$id")->first();
+        return view('annonce',compact('annonce'));
     }
 
     public function add_annonce(Request $request)
@@ -32,7 +33,7 @@ class annonceController extends Controller
             'moyen_transport'=>'string',
         ]);
         $img= Storage::disk('public')->put('images',$request->image);
-        annonce::create([
+        $annonce=annonce::create([
             'titre'=>$request->titre,
             'img'=>$img,
             'texte'=>$request->texte,
@@ -45,12 +46,9 @@ class annonceController extends Controller
             'fourchette_volume_max'=>$request->fourchette_volume_max,
             'status'=>'en attente',
             'tarif'=>null,
-            'user_id'=>$request->session('id'),
-            'user_id'=>$request->transport_type,        
+            'user_id'=>$request->session()->get('id'),
         ]); 
-
-        return redirect()->route('annonce');
-        
+        return redirect()->route('annonce', ['id' => $annonce->id]);        
     }
 
     public static function getEnumValues($table, $column) {

@@ -22,6 +22,7 @@ class annonce extends Model
         'fourchette_volume_min',
         'fourchette_volume_max',
         'moyen_transport',
+        'user_id'
     ];
 
     public function User()

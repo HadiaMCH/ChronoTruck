@@ -13,9 +13,8 @@
         <!-- Additional CSS Files -->
         <link rel="stylesheet" href= "assets/css/app.css">
         <link rel="stylesheet" href="assets/css/owl.css">
-    </head>
-    <body>
-        
+    </head>  
+
     <!-- Header -->
     <header >
       <nav class="navbar navbar-expand-lg">
