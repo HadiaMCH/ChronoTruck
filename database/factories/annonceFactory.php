@@ -19,7 +19,6 @@ class annonceFactory extends Factory
             'depart'=> $this->faker->words($nb = 1, $asText = false)  ,
             'arriver'=> $this->faker->words($nb = 1, $asText = false)  , 
             'texte'=> $this->faker->paragraph($nbSentences = 5, $variableNbSentences = true),
-            'date'=> $this->faker->dateTimeThisMonth($max = 'now', $timezone = null),
         ];
     }
 }

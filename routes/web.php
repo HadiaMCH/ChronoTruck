@@ -32,6 +32,10 @@ Route::post('/acceuil', [acceuilController::class,'search'])->name('search');
 
 Route::get('/annonce/{id}', [annonceController::class,'index'])->name('annonce');
 Route::post('/annonce', [annonceController::class,'add_annonce'])->name('add_annonce');
+Route::post('/annonce/modifier/{id}', [annonceController::class,'modifier']);
+Route::get('/annonce/delete/{id}', [annonceController::class,'delete']);
+Route::get('/annonce/cancel/{id}', [annonceController::class,'cancel']);
+
 
 Route::get('/presentation', [presentationController::class,'index'])->name('presentation');
 
@@ -49,4 +53,9 @@ Route::post('/connexion', [authController::class,'login'])->name('login');
 Route::get('/deconnexion', [authController::class,'logout'])->name('logout');
 
 Route::get('/profile', [profileController::class,'index'])->name('profile');
+Route::post('/profile', [profileController::class,'check_password'])->name('check_password');
+Route::post('/modifier', [profileController::class,'modifier'])->name('modifier');
+Route::post('/etre_transporteur', [profileController::class,'etre_transporteur'])->name('etre_transporteur');
+Route::post('/etre_certifie', [profileController::class,'etre_certifie'])->name('etre_certifie');
+
 

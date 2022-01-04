@@ -29,7 +29,7 @@ class acceuilController extends Controller
 
     public function show()
     {
-        $annonces= annonce::where("status","validée")->orderBy('updated_at', 'desc')->take(8)->get();
+        $annonces= annonce::where("status","validée")->where("archiver","0")->orderBy('updated_at', 'desc')->take(8)->get();
         
         if ($annonces->count()){
 
@@ -52,7 +52,7 @@ class acceuilController extends Controller
         ]);
         $ville_depart=$request->input('ville_depart');
         $ville_arriver=$request->input('ville_arriver');
-        $annonces= annonce::where("depart","$ville_depart")->where("arriver","$ville_arriver")->take(8)->get();
+        $annonces= annonce::where("depart","$ville_depart")->where("arriver","$ville_arriver")->where("archiver","0")->take(8)->get();
         if ($annonces->count()){
             foreach ($annonces as $annonce){ 
                 $annonce->created_at= Carbon::parse($annonce->created_at)->format('h:i d/m/Y');

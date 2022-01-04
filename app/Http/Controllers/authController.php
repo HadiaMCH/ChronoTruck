@@ -23,6 +23,8 @@ class authController extends Controller
         if($user){
             $request->session()->put('id',$user->id);
             $request->session()->put('name',$user->name);
+            $request->session()->put('familyname',$user->familyname);
+            $request->session()->put('password',$user->password);
             
             return response()->json([
                 'status_code' => 501,
@@ -41,6 +43,8 @@ class authController extends Controller
     {
         $request->session()->forget('name');
         $request->session()->forget('id');
+        $request->session()->forget('password');
+        $request->session()->forget('familyname');
 
         return redirect()->route('acceuil');
     }
@@ -90,7 +94,6 @@ class authController extends Controller
             else{ //transporteur certifie
                 $certifie=1;
                 $demande= Storage::disk('local')->put('demandes',$request->demande);
-                $statut='en attente';
                 User::create([
                     'name'=>$request->nom,
                     'familyname'=>$request->prenom,
@@ -102,7 +105,6 @@ class authController extends Controller
                     'wilaya'=>$wilaya,
                     'certifie'=>$certifie,
                     'demande'=>$demande,
-                    'statut'=>$statut,
                 ]); 
             }
         } 

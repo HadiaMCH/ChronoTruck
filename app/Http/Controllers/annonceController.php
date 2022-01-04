@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\wilaya;
 use App\Models\annonce;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -12,9 +13,16 @@ use App\Http\Controllers\annonceController;
 class annonceController extends Controller
 {
     public function index($id)
-    {                
+    {    
+        $transport_types= annonceController::getEnumValues('annonces','transport_type');
+        $fourchette_poid_mins= annonceController::getEnumValues('annonces','fourchette_poid_min');
+        $fourchette_poid_maxs= annonceController::getEnumValues('annonces','fourchette_poid_max');
+        $fourchette_volume_mins= annonceController::getEnumValues('annonces','fourchette_volume_min');
+        $fourchette_volume_maxs= annonceController::getEnumValues('annonces','fourchette_volume_max');
+        $moyen_transports= annonceController::getEnumValues('annonces','moyen_transport');
+        $wilayas=wilaya::all();            
         $annonce= annonce::where("id","$id")->first();
-        return view('annonce',compact('annonce'));
+        return view('annonce',compact('annonce','transport_types','fourchette_poid_mins','fourchette_poid_maxs','fourchette_volume_mins','fourchette_volume_maxs','moyen_transports','wilayas'));
     }
 
     public function add_annonce(Request $request)
@@ -44,7 +52,6 @@ class annonceController extends Controller
             'fourchette_poid_max'=>$request->fourchette_poid_max,
             'fourchette_volume_min'=>$request->fourchette_volume_min,
             'fourchette_volume_max'=>$request->fourchette_volume_max,
-            'status'=>'en attente',
             'tarif'=>null,
             'user_id'=>$request->session()->get('id'),
         ]); 
@@ -60,4 +67,72 @@ class annonceController extends Controller
         }
         return $values;
       }
+
+      public function delete($id)
+      {
+        annonce::where('id',$id)->update(['archiver'=>1]);
+        return redirect()->route('acceuil');        
+      }
+
+      public function cancel($id)
+      {
+        annonce::where('id',$id)->delete();
+        return redirect()->route('acceuil');        
+      }
+
+      public function modifier(Request $request,$id)
+      {
+        $annonce = annonce::where('id',$id)->first();
+          if($request->titre != $annonce->titre){
+            annonce::where('id',$id)->update(['titre'=>$request->titre]);
+          }
+
+          if($request->texte != $annonce->texte){
+            annonce::where('id',$id)->update(['texte'=>$request->texte]);
+          }
+
+          if($request->image){
+            $img= Storage::disk('public')->put('images',$request->image);
+            annonce::where('id',$id)->update(['img'=>$img]);
+          }
+
+          if($request->texte != $annonce->texte){
+            annonce::where('id',$id)->update(['texte'=>$request->texte]);
+          }
+
+          if($request->depart != $annonce->depart){
+            annonce::where('id',$id)->update(['depart'=>$request->depart]);
+          }
+
+          if($request->arriver != $annonce->arriver){
+            annonce::where('id',$id)->update(['arriver'=>$request->arriver]);
+          }
+
+          if($request->transport_type != $annonce->transport_type){
+            annonce::where('id',$id)->update(['transport_type'=>$request->transport_type]);
+          }
+
+          if($request->fourchette_poid_min != $annonce->fourchette_poid_min){
+            annonce::where('id',$id)->update(['fourchette_poid_min'=>$request->fourchette_poid_min]);
+          }
+
+          if($request->fourchette_poid_max != $annonce->fourchette_poid_max){
+            annonce::where('id',$id)->update(['fourchette_poid_max'=>$request->fourchette_poid_max]);
+          }
+
+          if($request->fourchette_volume_min != $annonce->fourchette_volume_min){
+            annonce::where('id',$id)->update(['fourchette_volume_min'=>$request->fourchette_volume_min]);
+          }
+
+          if($request->fourchette_volume_max != $annonce->fourchette_volume_max){
+            annonce::where('id',$id)->update(['fourchette_volume_max'=>$request->fourchette_volume_max]);
+          }
+
+          if($request->moyen_transport != $annonce->moyen_transport){
+            annonce::where('id',$id)->update(['moyen_transport'=>$request->moyen_transport]);
+          }
+
+          return redirect()->route('annonce', ['id' => $id]);        
+      }
+
 }

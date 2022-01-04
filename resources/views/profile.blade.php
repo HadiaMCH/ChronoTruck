@@ -87,7 +87,7 @@
                     <div class="content">
                       <ul>
                         <li>
-                            <a href="" data-toggle="modal" data-target="#wilaya"><div class="right-content">
+                            <a href="" data-toggle="modal" data-target="#wilaya_modal"><div class="right-content">
                             <h4> les wilayas que vous comptez desservir :</h4>
                             <p>{{$user->wilaya}}</p></a>
                           </div>
@@ -212,12 +212,14 @@
                     <div class="content">
                       <ul>
                         @if($user->annonces->count()) 
-                            @foreach ($user->annonces as $annonce)   
+                            @foreach ($user->annonces as $annonce) 
+                              @if(!$annonce->archiver)  
                                 <li><a href="annonce/{{$annonce->id}}">
                                 <h5>{{$annonce->titre}}</h5>
                                 <span>de {{$annonce->depart}} vers {{$annonce->arriver}}</span>
                                 <span>{{$annonce->created_at}}</span>
                                 </a></li>
+                                @endif
                             @endforeach
                         @endif
                       </ul>
@@ -245,7 +247,7 @@
                             <h2>modifier votre nom</h2>
                           </div>
                           <div class="content">
-                            <form >
+                            <form id="name_form">
                               @csrf
                                 <div class="col-md-12 col-sm-12">
                                   <fieldset>
@@ -254,7 +256,7 @@
                                 </div>
                                 <div class="col-md-12 col-sm-12">
                                   <fieldset>
-                                    <input name="password" type="password" id="password" placeholder="mot de passe" required="">
+                                    <input name="password" type="password" id="name_password" placeholder="mot de passe" required="">
                                   </fieldset>
                                 </div>
                                 <div class="col-lg-12">
@@ -288,7 +290,7 @@
                             <h2>modifier votre prénom</h2>
                           </div>
                           <div class="content">
-                            <form >
+                            <form id="familyname_form">
                               @csrf
                                 <div class="col-md-12 col-sm-12">
                                   <fieldset>
@@ -297,7 +299,7 @@
                                 </div>
                                 <div class="col-md-12 col-sm-12">
                                   <fieldset>
-                                    <input name="password" type="password" id="password" placeholder="mot de passe" required="">
+                                    <input name="password" type="password" id="familyname_password" placeholder="mot de passe" required="">
                                   </fieldset>
                                 </div>
                                 <div class="col-lg-12">
@@ -331,7 +333,7 @@
                             <h2>modifier votre numéro de téléphone</h2>
                           </div>
                           <div class="content">
-                            <form >
+                            <form id="phone_form">
                               @csrf
                                 <div class="col-md-12 col-sm-12">
                                   <fieldset>
@@ -340,7 +342,7 @@
                                 </div>
                                 <div class="col-md-12 col-sm-12">
                                   <fieldset>
-                                    <input name="password" type="password" id="password" placeholder="mot de passe" required="">
+                                    <input name="password" type="password" id="phone_password" placeholder="mot de passe" required="">
                                   </fieldset>
                                 </div>
                                 <div class="col-lg-12">
@@ -374,7 +376,7 @@
                             <h2>modifier votre adresse principale</h2>
                           </div>
                           <div class="content">
-                            <form >
+                            <form id="address_form">
                               @csrf
                                 <div class="col-md-12 col-sm-12">
                                   <fieldset>
@@ -383,7 +385,7 @@
                                 </div>
                                 <div class="col-md-12 col-sm-12">
                                   <fieldset>
-                                    <input name="password" type="password" id="password" placeholder="mot de passe" required="">
+                                    <input name="password" type="password" id="address_password" placeholder="mot de passe" required="">
                                   </fieldset>
                                 </div>
                                 <div class="col-lg-12">
@@ -417,7 +419,7 @@
                             <h2>modifier votre email</h2>
                           </div>
                           <div class="content">
-                            <form >
+                            <form id="email_form">
                               @csrf
                                 <div class="col-md-12 col-sm-12">
                                   <fieldset>
@@ -426,7 +428,7 @@
                                 </div>
                                 <div class="col-md-12 col-sm-12">
                                   <fieldset>
-                                    <input name="password" type="password" id="password" placeholder="mot de passe" required="">
+                                    <input name="password" type="password" id="email_password" placeholder="mot de passe" required="">
                                   </fieldset>
                                 </div>
                                 <div class="col-lg-12">
@@ -460,11 +462,11 @@
                             <h2>modifier votre mot de passe</h2>
                           </div>
                           <div class="content">
-                            <form >
+                            <form id="password_form">
                               @csrf
                                 <div class="col-md-12 col-sm-12">
                                   <fieldset>
-                                    <input name="password" type="password" id="password" placeholder="mot de passe" required="">
+                                    <input name="password" type="password" id="pass_password" placeholder="mot de passe" required="">
                                   </fieldset>
                                 </div>
                                 <div class="col-md-12 col-sm-12">
@@ -503,11 +505,20 @@
                             <h2>modifier votre état vers un transporteur</h2>
                           </div>
                           <div class="content">
-                            <form >
+                            <form id="transporteur_form">
                               @csrf
+                              <div class="col-md-12 col-sm-12">
+                                  <fieldset>
+                                    <select class="mul-select" id="wilaya" name="wilaya[]" multiple="true">
+                                      @foreach ($wilayas as $wilaya)
+                                        <option value="{{$wilaya->nom}}" >{{$wilaya->nom}}</option>
+                                      @endforeach
+                                    </select>
+                                  </fieldset>
+                                </div>
                                 <div class="col-md-12 col-sm-12">
                                   <fieldset>
-                                    <input name="password" type="password" id="password" placeholder="mot de passe" required="">
+                                    <input name="password" type="password" id="transporteur_password" placeholder="mot de passe" required="">
                                   </fieldset>
                                 </div>
                                 <div class="col-lg-12">
@@ -541,11 +552,17 @@
                             <h2>modifier votre état vers un transporteur certifié</h2>
                           </div>
                           <div class="content">
-                            <form >
+                            <form id="certifie_form">
                               @csrf
+                              <div class="col-md-12 col-sm-12">
+                                  <fieldset>
+                                    <label for="demande">uploader votre demande</label>
+                                    <input type="file" id="demande" name="demande" accept="image/png, image/jpeg, .doc, .docx, application/pdf">
+                                  </fieldset>
+                                </div>
                                 <div class="col-md-12 col-sm-12">
                                   <fieldset>
-                                    <input name="password" type="password" id="password" placeholder="mot de passe" required="">
+                                    <input name="password" type="password" id="certifie_password" placeholder="mot de passe" required="">
                                   </fieldset>
                                 </div>
                                 <div class="col-lg-12">
@@ -565,7 +582,7 @@
       </div>  
     </div>
 
-    <div id="wilaya" class="modal fade" role="dialog">  
+    <div id="wilaya_modal" class="modal fade" role="dialog">  
       <div class="modal-dialog">  
    <!-- Modal content-->  
         <div class="modal-content">  
@@ -579,33 +596,20 @@
                             <h2>les wilayas que vous comptez desservir</h2>
                           </div>
                           <div class="content">
-                            <form >
+                            <form id="wilaya_form">
                               @csrf
-                                <div class="col-md-12 col-sm-12 transporteur_section">
-                                    <fieldset>
-                                      <div class="multiselect">
-                                        <div class="container-fluid h-100 bg-light text-dark">
-                                        <div class="row justify-content-center align-items-center">
-                                            <h1>Select Multilpe</h1>    
-                                        </div>
-                                        <br>
-                                        <div class="row justify-content-center align-items-center h-100">
-                                            <div class="col col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                                                <div class="form-group">
-                                                    <select class="mul-select" id="wilaya" name="wilaya[]" multiple="true">
-                                                        @foreach ($wilayas as $wilaya)
-                                                        <option value="{{$wilaya->nom}}" >{{$wilaya->nom}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div> 
-                                            </div>
-                                        </div>
-                                      </div>
-                                    </fieldset>
+                                <div class="col-md-12 col-sm-12">
+                                  <fieldset>
+                                    <select class="mul-select" id="wilaya" name="wilaya[]" multiple="true">
+                                      @foreach ($wilayas as $wilaya)
+                                        <option value="{{$wilaya->nom}}" >{{$wilaya->nom}}</option>
+                                      @endforeach
+                                    </select>
+                                  </fieldset>
                                 </div>
                                 <div class="col-md-12 col-sm-12">
                                   <fieldset>
-                                    <input name="password" type="password" id="password" placeholder="votre mot de passe" required="">
+                                    <input name="password" type="password" id="wilaya_password" placeholder="votre mot de passe" required="">
                                   </fieldset>
                                 </div>
                                 <div class="col-lg-12">
@@ -633,45 +637,321 @@
           tokenSeparators: ['/',',',';'," "] 
         });
 
-        $("#search-submit").click(function (e) {
-            
-          $.ajaxSetup({
+        $("#name_submit").click(function (e) {
+            $.ajaxSetup({
               headers: {
                   'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
               }
-          });
-          e.preventDefault();
-          let formData = {
-            ville_depart : $("#ville_depart").val(),
-            ville_arriver : $("#ville_arriver").val(),
-          };
-          let type = "POST";
-          let ajaxurl = "{{route('search')}}";
+            });
+            e.preventDefault();
+            let formData = {
+              password : $("#name_password").val(),
+            };
+            let type = "POST";
+            let ajaxurl = "{{route('check_password')}}";
 
-          $.ajax({
-              type: type,
-              url: ajaxurl,
-              data: formData,
-              dataType: 'json',
-              success: function (response) {
-                  if(response)
-                  {
-                    
+            $.ajax({
+                type: type,
+                url: ajaxurl,
+                data: formData,
+                dataType: 'json',
+                success: function (response) {      
+                  if (response.status == "true"){
+                    $("#name_form").attr("action","{{route('modifier')}}");
+                    $("#name_form").attr("method","post");
+                    $("#name_form").submit();
                   }
                   else{
-                    //no result
+                    $("#name_password").css("border-color", "#d93025");
+                    $("#name_password").css("color", "#d93025");
                   }
-              },
-              error: function (response) {
-                  console.log(response);
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+              });
+        }); 
+
+        $("#familyname_submit").click(function (e) {
+            $.ajaxSetup({
+              headers: {
+                  'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
               }
             });
-       });  
+            e.preventDefault();
+            let formData = {
+              password : $("#familyname_password").val(),
+            };
+            let type = "POST";
+            let ajaxurl = "{{route('check_password')}}";
+
+            $.ajax({
+                type: type,
+                url: ajaxurl,
+                data: formData,
+                dataType: 'json',
+                success: function (response) {      
+                  if (response.status == "true"){
+                    $("#familyname_form").attr("action","{{route('modifier')}}");
+                    $("#familyname_form").attr("method","post");
+                    $("#familyname_form").submit();
+                  }
+                  else{
+                    $("#familyname_password").css("border-color", "#d93025");
+                    $("#familyname_password").css("color", "#d93025");
+                  }
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+              });
+        }); 
+
+        $("#phone_submit").click(function (e) {
+            $.ajaxSetup({
+              headers: {
+                  'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+              }
+            });
+            e.preventDefault();
+            let formData = {
+              password : $("#phone_password").val(),
+            };
+            let type = "POST";
+            let ajaxurl = "{{route('check_password')}}";
+
+            $.ajax({
+                type: type,
+                url: ajaxurl,
+                data: formData,
+                dataType: 'json',
+                success: function (response) {      
+                  if (response.status == "true"){
+                    $("#phone_form").attr("action","{{route('modifier')}}");
+                    $("#phone_form").attr("method","post");
+                    $("#phone_form").submit();
+                  }
+                  else{
+                    $("#phone_password").css("border-color", "#d93025");
+                    $("#phone_password").css("color", "#d93025");
+                  }
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+              });
+        }); 
+
+        $("#email_submit").click(function (e) {
+            $.ajaxSetup({
+              headers: {
+                  'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+              }
+            });
+            e.preventDefault();
+            let formData = {
+              password : $("#email_password").val(),
+            };
+            let type = "POST";
+            let ajaxurl = "{{route('check_password')}}";
+
+            $.ajax({
+                type: type,
+                url: ajaxurl,
+                data: formData,
+                dataType: 'json',
+                success: function (response) {      
+                  if (response.status == "true"){
+                    $("#email_form").attr("action","{{route('modifier')}}");
+                    $("#email_form").attr("method","post");
+                    $("#email_form").submit();
+                  }
+                  else{
+                    $("#email_password").css("border-color", "#d93025");
+                    $("#email_password").css("color", "#d93025");
+                  }
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+              });
+        }); 
+
+        $("#address_submit").click(function (e) {
+            $.ajaxSetup({
+              headers: {
+                  'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+              }
+            });
+            e.preventDefault();
+            let formData = {
+              password : $("#address_password").val(),
+            };
+            let type = "POST";
+            let ajaxurl = "{{route('check_password')}}";
+
+            $.ajax({
+                type: type,
+                url: ajaxurl,
+                data: formData,
+                dataType: 'json',
+                success: function (response) {      
+                  if (response.status == "true"){
+                    $("#address_form").attr("action","{{route('modifier')}}");
+                    $("#address_form").attr("method","post");
+                    $("#address_form").submit();
+                  }
+                  else{
+                    $("#address_password").css("border-color", "#d93025");
+                    $("#address_password").css("color", "#d93025");
+                  }
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+              });
+        }); 
+
+        $("#passworde_submit").click(function (e) {
+            $.ajaxSetup({
+              headers: {
+                  'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+              }
+            });
+            e.preventDefault();
+            let formData = {
+              password : $("#pass_password").val(),
+            };
+            let type = "POST";
+            let ajaxurl = "{{route('check_password')}}";
+
+            $.ajax({
+                type: type,
+                url: ajaxurl,
+                data: formData,
+                dataType: 'json',
+                success: function (response) {      
+                  if (response.status == "true"){
+                    $("#password_form").attr("action","{{route('modifier')}}");
+                    $("#password_form").attr("method","post");
+                    $("#password_form").submit();
+                  }
+                  else{
+                    $("#pass_password").css("border-color", "#d93025");
+                    $("#pass_password").css("color", "#d93025");
+                  }
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+              });
+        }); 
+
+        $("#wilaya_submit").click(function (e) {
+            $.ajaxSetup({
+              headers: {
+                  'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+              }
+            });
+            e.preventDefault();
+            let formData = {
+              password : $("#wilaya_password").val(),
+            };
+            let type = "POST";
+            let ajaxurl = "{{route('check_password')}}";
+
+            $.ajax({
+                type: type,
+                url: ajaxurl,
+                data: formData,
+                dataType: 'json',
+                success: function (response) {      
+                  if (response.status == "true"){
+                    $("#wilaya_form").attr("action","{{route('modifier')}}");
+                    $("#wilaya_form").attr("method","post");
+                    $("#wilaya_form").submit();
+                  }
+                  else{
+                    $("#wilaya_password").css("border-color", "#d93025");
+                    $("#wilaya_password").css("color", "#d93025");
+                  }
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+              });
+        });
+
+        $("#transporteur_submit").click(function (e) {
+            $.ajaxSetup({
+              headers: {
+                  'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+              }
+            });
+            e.preventDefault();
+            let formData = {
+              password : $("#transporteur_password").val(),
+            };
+            let type = "POST";
+            let ajaxurl = "{{route('check_password')}}";
+
+            $.ajax({
+                type: type,
+                url: ajaxurl,
+                data: formData,
+                dataType: 'json',
+                success: function (response) {      
+                  if (response.status == "true"){
+                    $("#transporteur_form").attr("action","{{route('etre_transporteur')}}");
+                    $("#transporteur_form").attr("method","post");
+                    $("#transporteur_form").submit();
+                  }
+                  else{
+                    $("#transporteur_password").css("border-color", "#d93025");
+                    $("#transporteur_password").css("color", "#d93025");
+                  }
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+              });
+        });
+
+        $("#certifie_submit").click(function (e) {
+            $.ajaxSetup({
+              headers: {
+                  'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+              }
+            });
+            e.preventDefault();
+            let formData = {
+              password : $("#certifie_password").val(),
+            };
+            let type = "POST";
+            let ajaxurl = "{{route('check_password')}}";
+
+            $.ajax({
+                type: type,
+                url: ajaxurl,
+                data: formData,
+                dataType: 'json',
+                success: function (response) {      
+                  if (response.status == "true"){
+                    $("#certifie_form").attr("action","{{route('etre_certifie')}}");
+                    $("#certifie_form").attr("method","post");
+                    $("#certifie_form").submit();
+                  }
+                  else{
+                    $("#certifie_password").css("border-color", "#d93025");
+                    $("#certifie_password").css("color", "#d93025");
+                  }
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+              });
+        }); 
 
     </script>
-
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
 
 @endsection

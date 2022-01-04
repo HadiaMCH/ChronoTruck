@@ -13,7 +13,14 @@
         <!-- Additional CSS Files -->
         <link rel="stylesheet" href= "assets/css/app.css">
         <link rel="stylesheet" href="assets/css/owl.css">
-    </head>  
+
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+    </head> 
+    
+    <body>
 
     <!-- Header -->
     <header >
