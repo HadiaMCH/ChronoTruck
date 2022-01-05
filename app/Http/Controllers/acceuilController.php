@@ -32,10 +32,6 @@ class acceuilController extends Controller
         $annonces= annonce::where("status","validée")->where("archiver","0")->orderBy('updated_at', 'desc')->take(8)->get();
         
         if ($annonces->count()){
-
-            foreach ($annonces as $annonce){ 
-                $annonce->created_at= Carbon::parse($annonce->created_at)->format('h:i d/m/Y');
-                }
             return response()->json($annonces);
         }
         else{

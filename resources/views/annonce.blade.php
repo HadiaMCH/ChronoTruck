@@ -28,7 +28,7 @@
                 <div class="col-lg-12">
                   <div class="blog-post">
                     <div class="blog-thumb">
-                      <img src="{{$annonce->img}}" alt="">
+                      <img src="..{{$annonce->img}}" alt="">
                     </div>
                     <div class="down-content">
                       <span>{{$annonce->titre}}</span>
@@ -214,7 +214,7 @@
                               <div class="col-md-12 col-sm-12">
                                 <fieldset> 
                                   <label >modifier votre photo</label>
-                                  <input name="photo" type="text" id="photo" value="{{$annonce->img}}">
+                                  <img src="..{{$annonce->img}}" id="photo" alt="">
                                   <input type="file" id="image" name="image" accept="image/png, image/jpeg" style="display:none;">
                                 </fieldset>
                               </div>

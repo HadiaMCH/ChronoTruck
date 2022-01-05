@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\wilaya;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class authController extends Controller
 {
@@ -93,7 +94,8 @@ class authController extends Controller
             }
             else{ //transporteur certifie
                 $certifie=1;
-                $demande= Storage::disk('local')->put('demandes',$request->demande);
+                $demande= Storage::put('demandes',$request->demande);
+                $dmd= Storage::url($demande);
                 User::create([
                     'name'=>$request->nom,
                     'familyname'=>$request->prenom,
@@ -104,7 +106,7 @@ class authController extends Controller
                     'transporteur'=>$transporteur,
                     'wilaya'=>$wilaya,
                     'certifie'=>$certifie,
-                    'demande'=>$demande,
+                    'demande'=>$dmd,
                 ]); 
             }
         } 

@@ -7,6 +7,7 @@ use App\Models\wilaya;
 use App\Models\annonce;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class profileController extends Controller
 {
@@ -88,10 +89,11 @@ class profileController extends Controller
     public function etre_certifie(Request $request)
     {
         $respense=User::where('id',$request->session()->get('id'))->update(['certifie' => 1]);
-        $demande= Storage::disk('local')->put('demandes',$request->demande);
+        $demande= Storage::put('demandes',$request->demande);
+        $dmd= Storage::url($demande);
         $statut='en attente';
 
-        $respense=User::where('id',$request->session()->get('id'))->update(['demande' => $demande]);
+        $respense=User::where('id',$request->session()->get('id'))->update(['demande' => $dmd]);
         $respense=User::where('id',$request->session()->get('id'))->update(['statut' => $statut]);
 
         return redirect()->route('profile');

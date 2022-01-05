@@ -41,9 +41,10 @@ class annonceController extends Controller
             'moyen_transport'=>'string',
         ]);
         $img= Storage::disk('public')->put('images',$request->image);
+        $image= Storage::url($img);
         $annonce=annonce::create([
             'titre'=>$request->titre,
-            'img'=>$img,
+            'img'=>$image,
             'texte'=>$request->texte,
             'depart'=>$request->depart,
             'arriver'=>$request->arriver,
@@ -93,7 +94,8 @@ class annonceController extends Controller
 
           if($request->image){
             $img= Storage::disk('public')->put('images',$request->image);
-            annonce::where('id',$id)->update(['img'=>$img]);
+            $image= Storage::url($img);
+            annonce::where('id',$id)->update(['img'=>$image]);
           }
 
           if($request->texte != $annonce->texte){
