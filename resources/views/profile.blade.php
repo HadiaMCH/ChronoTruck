@@ -89,7 +89,10 @@
                         <li>
                             <a href="" data-toggle="modal" data-target="#wilaya_modal"><div class="right-content">
                             <h4> les wilayas que vous comptez desservir :</h4>
-                            <p>{{$user->wilaya}}</p></a>
+                            @foreach( $user->wilayas as $wilaya)
+                            <p>{{$wilaya->nom}}</p>
+                            @endforeach
+                          </a>
                           </div>
                         </li>
                       </ul>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\news;
 use App\Models\User;
 use App\Models\wilaya;
+use App\Models\user_wilaya;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Storage;
@@ -81,7 +82,7 @@ class authController extends Controller
             $transporteur=1;
             $wilaya=json_encode($request->wilaya);
             if(!$request->certifie){ //transporteur non certifie
-                User::create([
+                $user=User::create([
                     'name'=>$request->nom,
                     'familyname'=>$request->prenom,
                     'email'=>$request->email,
@@ -89,14 +90,19 @@ class authController extends Controller
                     'address'=>$request->adresse,
                     'phone'=>$request->phone,
                     'transporteur'=>$transporteur,
-                    'wilaya'=>$wilaya,
                 ]);
+                foreach($request->wilaya as $wilaya){
+                    user_wilaya::create([
+                        'user_id'=>$user->id,
+                        'wilaya_id'=>$wilaya,
+                    ]);
+                }
             }
             else{ //transporteur certifie
                 $certifie=1;
                 $demande= Storage::put('demandes',$request->demande);
                 $dmd= Storage::url($demande);
-                User::create([
+                $user=User::create([
                     'name'=>$request->nom,
                     'familyname'=>$request->prenom,
                     'email'=>$request->email,
@@ -104,10 +110,15 @@ class authController extends Controller
                     'address'=>$request->adresse,
                     'phone'=>$request->phone,
                     'transporteur'=>$transporteur,
-                    'wilaya'=>$wilaya,
                     'certifie'=>$certifie,
                     'demande'=>$dmd,
                 ]); 
+                foreach($request->wilaya as $wilaya){
+                    user_wilaya::create([
+                        'user_id'=>$user->id,
+                        'wilaya_id'=>$wilaya,
+                    ]);
+                }
             }
         } 
         $wilayas=wilaya::all();

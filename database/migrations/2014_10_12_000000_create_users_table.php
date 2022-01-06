@@ -24,7 +24,6 @@ class CreateUsersTable extends Migration
             $table->string('phone');
 
             $table->boolean('transporteur')->nullable();
-            $table->json('wilaya')->nullable();
 
             $table->boolean('certifie')->nullable();
             $table->longText('demande')->nullable();

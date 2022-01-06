@@ -61,7 +61,7 @@ class User extends Authenticatable
 
     public function wilayas()
     {
-        return $this->belongsToMany(wilaya::class);
+        return $this->belongsToMany(wilaya::class,'user_wilayas');
     }
 
 }
