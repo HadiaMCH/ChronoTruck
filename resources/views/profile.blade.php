@@ -210,7 +210,7 @@
                 <div class="col-lg-12">
                   <div class="sidebar-item recent-posts">
                     <div class="sidebar-heading">
-                      <h2>annonces récents</h2>
+                      <h2>annonces récents {{$user->annonces->count()}}</h2>
                     </div>
                     <div class="content">
                       <ul>
@@ -510,7 +510,7 @@
                           <div class="content">
                             <form id="transporteur_form">
                               @csrf
-                              <div class="col-md-12 col-sm-12">
+                                <div class="col-md-12 col-sm-12">
                                   <fieldset>
                                     <select class="mul-select" id="wilaya" name="wilaya[]" multiple="true">
                                       @foreach ($wilayas as $wilaya)

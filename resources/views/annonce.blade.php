@@ -64,30 +64,83 @@
                 </div>
                 <div class="col-lg-12">
                   <div class="sidebar-item comments">
-                      <ul>
-                        <li>
+                      <ul class="col-lg-8">
+                        <li class="col-lg-6">
                           <div class="right-content">
                             <h4>le type de transport</h4>
                             <p>{{$annonce->transport_type}}</p>
                           </div>
-                          
+                        </li>  
+                        <li class="col-lg-6"> 
+                          <div class="right-content">
+                            <h4>le moyen de transport</h4>
+                            <p>{{$annonce->moyen_transport}}</p>
+                          </div>
+                        </li>
+                        <li></li>
+                      </ul>
+                      <ul class="col-lg-8">
+                        <li class="col-lg-6">
                           <div class="right-content">
                             <h4>la fourchette de poids</h4>
                             <p>{{$annonce->fourchette_poid_min}}   {{$annonce->fourchette_poid_max}}</p>
                           </div>
                         </li>
-                        <li>
-                          <div class="right-content">
-                            <h4>le moyen de transport</h4>
-                            <p>{{$annonce->moyen_transport}}</p>
-                          </div>
-                       
+                        <li class="col-lg-6">
                           <div class="right-content">
                             <h4>la fourchette de volume</h4>
                             <p>{{$annonce->fourchette_volume_min}}   {{$annonce->fourchette_volume_max}}</p>
                           </div>
                         </li>
+                        <li></li>
                       </ul>
+                      @if ($annonce->status !="validée")
+                        <ul class="col-lg-8">
+                          <li class="col-lg-6">
+                            <div class="right-content">
+                              <h4>les transporteurs disponible pour votre tarjet</h4>
+                              <p> list tranporteurs</p>
+                            </div>
+                          </li>
+                        </ul>
+                        <ul class="col-lg-8">
+                          <li class="col-lg-6">
+                            <div class="right-content">
+                              <h4>le tarif du transport</h4>
+                              <p>{{$annonce->tarif}}</p>
+                            </div>
+                          </li>
+                          <li></li>
+                        </ul>
+                      @elseif($annonce->status !="terminée")
+                        <ul class="col-lg-12">
+                          <li class="col-lg-6">
+                              <div class="right-content">
+                                <h4>le transporteur</h4>
+                                <p> le tranporteur</p>
+                              </div>
+                          </li>
+                          <li class="col-lg-6">
+                            <div class="sidebar-item submit-comment row">
+                              <div class="col-lg-6">
+                                <button class="col-lg-12" class="main-button" data-toggle="modal" data-target="#noter">noter</button>
+                              </div>
+                              <div class="col-lg-6">
+                                <button class="col-lg-12" class="main-button" data-toggle="modal" data-target="#signaler">signaler</button>
+                              </div>  
+                            </div>
+                          </li>
+                          <li></li>
+                        </ul>
+                        <ul>
+                          <li class="col-lg-6">
+                            <div class="right-content">
+                              <h4>le tarif du transport</h4>
+                              <p>{{$annonce->tarif}}</p>
+                            </div>
+                          </li>
+                        </ul>
+                      @endif
                     </div>
                 </div>
                 @if($annonce->User->id == session('id'))

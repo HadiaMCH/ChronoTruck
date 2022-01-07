@@ -17,9 +17,8 @@ class CreateAnnoncesTable extends Migration
             $table->id();
             $table->string('titre');
             $table->longText('img');
-            $table->longText('texte');
-            $table->text('depart');
-            $table->text('arriver');
+            $table->longText('texte');            
+            $table->foreignId('wilaya_wilaya_id')->constrained();
             $table->enum('transport_type', ['lettre', 'colis','meuble','électroménager','déménagement']);
             $table->enum('fourchette_poid_min', ['0','100g','500g','1kg','5kg','10kg','50kg']);
             $table->enum('fourchette_poid_max', ['100g','500g','1kg','5kg','10kg','50kg','100kg']);

@@ -11,6 +11,6 @@ class user_wilaya extends Model
 
     protected $fillable = [
         'user_id',
-        'wilaya_id',
+        'wilaya_wilaya_id',
     ];
 }

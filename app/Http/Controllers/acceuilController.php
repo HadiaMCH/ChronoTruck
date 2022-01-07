@@ -14,7 +14,7 @@ class acceuilController extends Controller
 {
     
     public function index()
-    {
+    {        
         $status= annonceController::getEnumValues('annonces','status');
         $transport_types= annonceController::getEnumValues('annonces','transport_type');
         $fourchette_poid_mins= annonceController::getEnumValues('annonces','fourchette_poid_min');

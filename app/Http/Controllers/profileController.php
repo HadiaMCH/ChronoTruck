@@ -89,7 +89,7 @@ class profileController extends Controller
     public function etre_certifie(Request $request)
     {
         $respense=User::where('id',$request->session()->get('id'))->update(['certifie' => 1]);
-        $demande= Storage::put('demandes',$request->demande);
+        $demande= Storage::disk('public')->put('demandes',$request->demande);
         $dmd= Storage::url($demande);
         $statut='en attente';
 

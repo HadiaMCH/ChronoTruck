@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserWilayasTable extends Migration
+class CreateWilayaWilayasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateUserWilayasTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_wilayas', function (Blueprint $table) {
+        Schema::create('wilaya_wilayas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('wilaya_wilaya_id')->constrained()->onDelete('cascade');
+            $table->foreignId('wilaya_depart_id')->constrained()->onDelete('cascade');
+            $table->foreignId('wilaya_arriver_id')->constrained()->onDelete('cascade');
+            $table->double('tarif')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateUserWilayasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_wilayas');
+        Schema::dropIfExists('wilaya_wilayas');
     }
 }

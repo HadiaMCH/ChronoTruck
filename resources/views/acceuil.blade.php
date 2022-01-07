@@ -168,8 +168,10 @@
                                   <select id="depart" name="depart">
                                     <option value="le point d'arriver">le point de départ</option>
                                     @if ($wilayas->count())
+                                    {{$i=1}}
                                       @foreach ($wilayas as $wilaya)        
-                                        <option value="{{$wilaya->nom}}">{{$wilaya->nom}}</option>
+                                        <option value="{{$i}}">{{$wilaya->nom}}</option>
+                                        {{$i=$i+1}}
                                       @endforeach
                                     @else
                                     
@@ -182,8 +184,10 @@
                                   <select id="arriver" name="arriver">
                                     <option value="le point d'arriver">le point d'arriver</option>
                                     @if ($wilayas->count())
-                                      @foreach ($wilayas as $wilaya)        
-                                        <option value="{{$wilaya->nom}}">{{$wilaya->nom}}</option>
+                                    {{$i=1}}
+                                      @foreach ($wilayas as $wilaya)  
+                                        <option value="{{$i}}">{{$wilaya->nom}}</option>
+                                        {{$i=$i+1}}
                                       @endforeach
                                     @else
                                     

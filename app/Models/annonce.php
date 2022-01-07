@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\wilaya_wilaya;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -14,8 +15,7 @@ class annonce extends Model
         'titre',
         'texte',
         'img',
-        'depart',
-        'arriver',
+        'wilaya_wilaya_id',
         'transport_type',
         'fourchette_poid_min',
         'fourchette_poid_max',
@@ -28,5 +28,10 @@ class annonce extends Model
     public function User()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function tarjet()
+    {
+        return $this->belongsTo(wilaya_wilaya::class);
     }
 }

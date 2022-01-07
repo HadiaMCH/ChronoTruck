@@ -23,9 +23,10 @@ class CreateUsersTable extends Migration
             $table->string('address');
             $table->string('phone');
 
-            $table->boolean('transporteur')->nullable();
+            $table->boolean('transporteur')->default(0);
+            $table->bigInteger('note')->default(0);
 
-            $table->boolean('certifie')->nullable();
+            $table->boolean('certifie')->default(0);
             $table->longText('demande')->nullable();
             $table->enum('statut', ['en attente','en cours de traitement','validee','refusee','certifiee'])->default('en attente');
             

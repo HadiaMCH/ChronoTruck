@@ -16,14 +16,27 @@
         <!-- Additional CSS Files -->
         <link rel="stylesheet" href= "assets/css/app.css">
         <link rel="stylesheet" href="assets/css/owl.css">
+        <link rel="stylesheet" href="assets/css/select2.css">
 
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="assets/js/select2.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+        <!-- Additional Scripts -->
+        <script src="assets/js/custom.js"></script>
+        <script src="assets/js/owl.js"></script>
+        <script src="assets/js/slick.js"></script>
+        <script src="assets/js/isotope.js"></script>
+        <script src="assets/js/accordions.js"></script>
+        
     </head> 
     
     <body>
-
+      <style>
+          .mul-select{
+              width: 100%;
+          }
+      </style>
     <!-- Header -->
     <header >
       <nav class="navbar navbar-expand-lg">
@@ -148,17 +161,6 @@
            </div>  
       </div>  
  </div>  
-
-     <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Additional Scripts -->
-    <script src="assets/js/custom.js"></script>
-    <script src="assets/js/owl.js"></script>
-    <script src="assets/js/slick.js"></script>
-    <script src="assets/js/isotope.js"></script>
-    <script src="assets/js/accordions.js"></script>
     
     <script>
       $("#form_submit").click(function (e) {

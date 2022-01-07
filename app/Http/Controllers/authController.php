@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\wilaya;
 use App\Models\user_wilaya;
 use Illuminate\Http\Request;
+use App\Models\wilaya_wilaya;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Storage;
 
@@ -68,7 +69,7 @@ class authController extends Controller
             'adresse'=>'string',
         ]);
         // client
-        if (!$request->transporteur){
+        if (!$request->transporteur){ 
             User::create([
                 'name'=>$request->nom,
                 'familyname'=>$request->prenom,
@@ -80,7 +81,6 @@ class authController extends Controller
         }
         else{
             $transporteur=1;
-            $wilaya=json_encode($request->wilaya);
             if(!$request->certifie){ //transporteur non certifie
                 $user=User::create([
                     'name'=>$request->nom,
@@ -91,16 +91,19 @@ class authController extends Controller
                     'phone'=>$request->phone,
                     'transporteur'=>$transporteur,
                 ]);
-                foreach($request->wilaya as $wilaya){
-                    user_wilaya::create([
-                        'user_id'=>$user->id,
-                        'wilaya_id'=>$wilaya,
-                    ]);
+                foreach($request->depart as $depart){
+                    foreach($request->arriver as $arriver){
+                        $target= wilaya_wilaya::where("wilaya_depart_id","$depart")->where("wilaya_arriver_id","$arriver")->first();
+                        user_wilaya::create([
+                            'user_id'=>$user->id,
+                            'wilaya_wilaya_id'=>$target->id,
+                        ]);
+                    }
                 }
             }
             else{ //transporteur certifie
                 $certifie=1;
-                $demande= Storage::put('demandes',$request->demande);
+                $demande= Storage::disk('public')->put('demandes',$request->demande);
                 $dmd= Storage::url($demande);
                 $user=User::create([
                     'name'=>$request->nom,
@@ -113,11 +116,14 @@ class authController extends Controller
                     'certifie'=>$certifie,
                     'demande'=>$dmd,
                 ]); 
-                foreach($request->wilaya as $wilaya){
-                    user_wilaya::create([
-                        'user_id'=>$user->id,
-                        'wilaya_id'=>$wilaya,
-                    ]);
+                foreach($request->depart as $depart){
+                    foreach($request->arriver as $arriver){
+                        $target= wilaya_wilaya::where("wilaya_depart_id","$depart")->where("wilaya_arriver_id","$arriver")->first();
+                        user_wilaya::create([
+                            'user_id'=>$user->id,
+                            'wilaya_wilaya_id'=>$target->id,
+                        ]);
+                    }
                 }
             }
         } 

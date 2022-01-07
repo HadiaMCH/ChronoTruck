@@ -1056,23 +1056,148 @@ body {
       color: #f48840!important;
   }
 
-  /* wilaya */
+
+  /*       les forms          */
   
-  .mul-select{
-    width: 100%;
+  
+  .formulaire{
+    margin-bottom: 100px;
+    margin-top: 100px;
+
   }
 
-  .transporteur_section{
-      display:none;
+  .formulaire .sidebar-heading h2 {
+      font-size: 18px;
+      text-transform: uppercase;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      color: #20232e;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 15px;
+      margin-bottom: 25px;
+  }
+
+  .formulaire label {
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+    color: #7a7a7a;
+    margin-bottom: 10px;
+    padding-left: 15px;
+  }
+
+  .formulaire input {
+      width: 100%;
+      height: 46px;
+      border: 1px solid #eee;
+      font-size: 13px;
+      font-weight: 500;
+      color: #7a7a7a;
+      outline: none;
+      padding: 0px 15px;
+      margin-bottom: 30px;
+  }
+
+  .formulaire select {
+    width: 100%;
+    height: 46px;
+    border: 1px solid #eee;
+    font-size: 13px;
+    font-weight: 500;
+    color: #7a7a7a;
+    outline: none;
+    padding: 0px 15px;
+    margin-bottom: 30px;
+}
+  
+  .formulaire textarea {
+      width: 100%;
+      height: 46px;
+      border: 1px solid #eee;
+      font-size: 13px;
+      font-weight: 500;
+      color: #7a7a7a;
+      outline: none;
+      padding: 10px 15px;
+      margin-bottom: 30px;
+      height: 180px;
+      max-height: 220px;
+      max-width: 100%;
+      min-width: 160px;
   }
   
-  .certifie_section{
+  .formulaire input::placeholder,
+  .formulaire textarea::placeholder,
+  .formulaire select::placeholder {
+      color: #aaa;
+  }
+  
+  .formulaire button {
+      display: inline-block;
+      background-color: #f48840;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 12px 20px;
+      text-transform: uppercase;
+      transition: all .3s;
+      border: none;
+      outline: none;
+  }
+  .formulaire .reference:hover { 
+  cursor: pointer;
+  }
+
+  .formulaire button:hover {
+      background-color: #fb9857;
+  }
+  
+  .formulaire .contact-information {
+      margin-left: 30px;
+  }
+  
+  .formulaire .contact-information ul li {
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #eee;
+  }
+  
+  .formulaire .contact-information ul li:last-child {
+      margin-bottom: 0px;
+      padding-bottom: 0px;
+      border-bottom: none;
+  }
+  
+  .formulaire .contact-information ul li h5 {
+      font-size: 19px;
+      font-weight: 900;
+      color: #20232e;
+      line-height: 30px;
+  }
+  
+  .formulaire .contact-information ul li span {
+      display: block;
+      font-size: 14px;
+      color: #aaa;
+      margin-top: 8px;
+  }
+  
+  /* inscription form */
+
+  .transporteur_section{
     display:none;
   }
 
-  /* login form*/
+  .certifie_section{
+  display:none;
+  }
+  .mul-select{
+      width:100%
+  }
 
-  #incorrect_login{
+/* login form*/
+
+#incorrect_login{
     display:none;
   }
 

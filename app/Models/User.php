@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Models\wilaya;
 use App\Models\annonce;
+use App\Models\wilaya_wilaya;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -59,9 +59,9 @@ class User extends Authenticatable
         return $this->hasMany(annonce::class);
     }
 
-    public function wilayas()
+    public function tarjets()
     {
-        return $this->belongsToMany(wilaya::class,'user_wilayas');
+        return $this->belongsToMany(wilaya_wilaya::class,'user_wilayas');
     }
 
 }
