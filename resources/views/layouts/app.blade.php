@@ -32,11 +32,7 @@
     </head> 
     
     <body>
-      <style>
-          .mul-select{
-              width: 100%;
-          }
-      </style>
+
     <!-- Header -->
     <header >
       <nav class="navbar navbar-expand-lg">
@@ -107,63 +103,52 @@
       </div>
     </footer>
      
+  <!-- Modal login-->  
+
  <div id="loginModal" class="modal fade" role="dialog">  
-      <div class="modal-dialog">  
-   <!-- Modal content-->  
-           <div class="modal-content">    
-                <div class="modal-body">  
-                  <section class="contact-us">
-                    <div class="container">
-                      <div class="down-contact">
-                        <div class="row">
-                          <div class="col-lg-12">
-                            <div class="sidebar-item contact-form">
-                              <div class="sidebar-heading">
-                                <h2>connectez-vous sur votre compte</h2>
-                              </div>
-                              <div class="content">
-                                <form >
-                                  @csrf
-                                      <div class="row">
-                                        <div class="col-md-12 col-sm-12">
-                                          <fieldset>
-                                            <input name="email_login" type="text" id="email_login" placeholder="votre email" required="">
-                                          </fieldset>
-                                        </div>
-                                        <div class="col-md-12 col-sm-12">
-                                          <fieldset>
-                                            <input name="password_login" type="password" id="password_login" placeholder="votre mot de passe">
-                                          </fieldset>
-                                        </div>
-                                        <div class="col-md-12 col-sm-12" id="incorrect_login">
-                                          <fieldset>
-                                            <label >email ou mot de passe incorrect. Réessayez</label>
-                                          </fieldset>
-                                        </div>
-                                        <div class="col-lg-12">
-                                          <fieldset>
-                                            <button type="submit" id="form_submit" class="main-button btn btn-warning">se connecter</button>
-                                          </fieldset>
-                                        </div>
-                                        <div class="text-content">
-                                          <a href="{{route('inscription')}}"><h4 style="margin-top: 15px">vous n'avez pas de compte, inscrivez-vous ici</h4></a>  
-                                        </div>
-                                      </div>
-                                    </form>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                      </div>
-                    </div>
-                  </section>
-                </div>  
-           </div>  
+    <div class="modal-dialog">  
+      <div class="modal-content">    
+        <section class="formulaire" id="formulaire-login">
+          <div class="col-lg-12">
+            <div class="sidebar-heading">
+              <h2>connectez-vous sur votre compte</h2>
+            </div>
+            <form >
+            @csrf
+              <div class="row">
+                <div class="col-md-12 col-sm-12">
+                  <fieldset>
+                    <input name="email_login" class="form-control" type="text" id="email_login" placeholder="votre email" required>
+                  </fieldset>
+                </div>
+                <div class="col-md-12 col-sm-12">
+                  <fieldset>
+                    <input name="password_login" class="form-control" type="password" id="password_login" placeholder="votre mot de passe" required>
+                  </fieldset>
+                </div>
+                <div class="col-md-12 col-sm-12" id="incorrect_login">
+                  <fieldset>
+                    <label >email ou mot de passe incorrect. Réessayez</label>
+                  </fieldset>
+                </div>
+                <div class="col-lg-12 col-sm-12">
+                  <fieldset>
+                    <button type="submit" id="login_submit" class="main-button btn btn-warning">se connecter</button>
+                  </fieldset>
+                </div>
+                <div class="text-content">
+                  <a href="{{route('inscription')}}"><h4>vous n'avez pas de compte, inscrivez-vous ici</h4></a>  
+                </div>
+              </div>
+            </form>
+          </div>
+        </section>
       </div>  
- </div>  
+    </div>  
+  </div>  
     
     <script>
-      $("#form_submit").click(function (e) {
+      $("#login_submit").click(function (e) {
           $.ajaxSetup({
               headers: {
                   'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
@@ -184,14 +169,14 @@
               dataType: 'json',
               success: function (response) {
                 if (response['status_code']==500){
-                  $("#email").css("border-color", "#d93025");
-                  $("#email").css("color", "#d93025");
-                  $("#password").css("border-color", "#d93025");
-                  $("#password").css("color", "#d93025");
-                  $("#email").attr("placeholder","votre email");
-                  $("#password").attr("placeholder","votre mot de passe");
+                  $("#email_login").css("border-color", "#d93025");
+                  $("#email_login").css("color", "#d93025");
+                  $("#password_login").css("border-color", "#d93025");
+                  $("#password_login").css("color", "#d93025");
+                  $("#email_login").attr("placeholder","votre email");
+                  $("#password_login").attr("placeholder","votre mot de passe");
                   $("#incorrect_login").css("display","block");
-                  $("#password").css("margin-bottom","5px");
+                  $("#password_login").css("margin-bottom","5px");
                 }
                 else{
                   window.location.replace("http://localhost/chronotruck/public/acceuil");

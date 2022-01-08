@@ -27,7 +27,10 @@ class CreateAnnoncesTable extends Migration
             $table->enum('moyen_transport', ['camion', 'bus', 'voiture', 'moto']);
             $table->enum('status',['validée', 'en attente', 'terminée'])->default('en attente');
             $table->double('tarif')->nullable();
+
             $table->foreignId('user_id')->constrained();
+            $table->foreignId('tranporteur_id')->constrained()->nullable();
+
             $table->boolean('archiver')->default(0);
             $table->timestamps();
         });

@@ -14,32 +14,39 @@ use Illuminate\Support\Facades\Storage;
 class authController extends Controller
 {
     public function login(Request $request)
-    {      
-        $request->validate([
-            'email'=>'string',
-            'password'=>'string',
-        ]);
+    {   if($request->email !="" && $request->password !=""){  
+            $request->validate([
+                'email'=>'string',
+                'password'=>'string',
+            ]);
 
-        $email=$request->email;
-        $password=$request->password;
+            $email=$request->email;
+            $password=$request->password;
 
-        $user= User::where('email',$email)->where('password',$password)->first();
-        if($user){
-            $request->session()->put('id',$user->id);
-            $request->session()->put('name',$user->name);
-            $request->session()->put('familyname',$user->familyname);
-            $request->session()->put('password',$user->password);
-            
-            return response()->json([
-                'status_code' => 501,
-                'message' => 'Login',
-              ]);
+            $user= User::where('email',$email)->where('password',$password)->first();
+            if($user){
+                $request->session()->put('id',$user->id);
+                $request->session()->put('name',$user->name);
+                $request->session()->put('familyname',$user->familyname);
+                $request->session()->put('password',$user->password);
+                
+                return response()->json([
+                    'status_code' => 501,
+                    'message' => 'Login',
+                ]);
+            }
+            else{
+                return response()->json([
+                    'status_code' => 500,
+                    'message' => 'Error in Login',
+                ]);
+            }
         }
         else{
             return response()->json([
                 'status_code' => 500,
                 'message' => 'Error in Login',
-              ]);
+            ]);
         }
     }
 

@@ -22,12 +22,18 @@ class annonce extends Model
         'fourchette_volume_min',
         'fourchette_volume_max',
         'moyen_transport',
-        'user_id'
+        'user_id',
+        'tranporteur_id'
     ];
 
-    public function User()
+    public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'user_id');
+    }
+
+    public function tranporteur()
+    {
+        return $this->belongsTo(User::class,'tranporteur_id');
     }
 
     public function tarjet()

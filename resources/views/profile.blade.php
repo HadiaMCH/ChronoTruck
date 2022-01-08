@@ -5,14 +5,14 @@
         
     <!-- Page Content -->
     
-    <div class="heading-page header-text">
+    <div class="heading-page">
       <section class="page-heading">
         <div class="container">
           <div class="row">
             <div class="col-lg-12">
               <div class="text-content">
                 <h2>Gestion du profile</h2>
-                <h4></h4>
+                <h4>{{$user->familyname}} {{$user->name}}</h4>
               </div>
             </div>
           </div>
@@ -20,65 +20,60 @@
       </section>
     </div>
     
-
-
-    <section class="blog-posts grid-system">
+    <section class="posts grid-system">
       <div class="container">
         <div class="row">
-
           <div class="col-lg-8">
-            <div class="all-blog-posts">
-              <div class="row">
-                
-                <div class="col-lg-12">
-                  <div class="sidebar-item comments">
-                    <div class="sidebar-heading">
-                      <h2>informations personnelles</h2>
-                    </div>
-                    <div class="content">
-                      <ul>
-                        <li>
-                          <div class="right-content">
-                            <a href="" data-toggle="modal" data-target="#name"><h4>nom :</h4>
-                            <p>{{$user->name}}</p></a>
-                          </div>
-                        </li>
-                        <li>
-                          <div class="right-content">
-                            <a href="" data-toggle="modal" data-target="#familyname"><h4>prénom :</h4>
-                            <p>{{$user->familyname}}</p></a>
-                          </div>
-                        </li>
-                        <li>
-                          <div class="right-content">
-                            <a href="" data-toggle="modal" data-target="#phone"><h4>numéro de téléphone :</h4>
-                            <p>{{$user->phone}}</p></a>
-                          </div>
-                        </li>
-                        <li>
-                          <div class="right-content">
-                            <a href="" data-toggle="modal" data-target="#email"><h4>email :</h4>
-                            <p>{{$user->email}}</p></a>
-                          </div>
-                        </li>
-                        <li>
-                          <div class="right-content">
-                            <a href="" data-toggle="modal" data-target="#mot_passe">
-                            <h4> mot de passe :</h4>
-                            <p>{{$user->password}}</p></a>
-                          </div>
-                        </li>
-                        <li>
-                            <a href="" data-toggle="modal" data-target="#address"><div class="right-content">
-                            <h4>adresse principale :</h4>
-                            <p>{{$user->address}}</p></a>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="sidebar-item comments">
+                  <div class="sidebar-heading">
+                    <h2>informations personnelles</h2>
+                  </div>
+                  <div>
+                    <ul>
+                      <li>
+                        <div class="right-content">
+                          <a href="" data-toggle="modal" data-target="#name"><h4>nom :</h4>
+                          <p>{{$user->name}}</p></a>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="right-content">
+                          <a href="" data-toggle="modal" data-target="#familyname"><h4>prénom :</h4>
+                          <p>{{$user->familyname}}</p></a>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="right-content">
+                          <a href="" data-toggle="modal" data-target="#phone"><h4>numéro de téléphone :</h4>
+                          <p>{{$user->phone}}</p></a>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="right-content">
+                          <a href="" data-toggle="modal" data-target="#email"><h4>email :</h4>
+                          <p>{{$user->email}}</p></a>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="right-content">
+                          <a href="" data-toggle="modal" data-target="#mot_passe">
+                          <h4> mot de passe :</h4>
+                          <p>{{$user->password}}</p></a>
+                        </div>
+                      </li>
+                      <li>
+                          <a href="" data-toggle="modal" data-target="#address"><div class="right-content">
+                          <h4>adresse principale :</h4>
+                          <p>{{$user->address}}</p></a>
+                        </div>
+                      </li>
+                    </ul>
                   </div>
                 </div>
-                @if($user->transporteur)
+              </div>
+              @if($user->transporteur)
                 <div class="col-lg-12">
                   <div class="sidebar-item comments">
                     <div class="sidebar-heading">
@@ -87,54 +82,52 @@
                     <div class="content">
                       <ul>
                         <li>
-                            <a href="" data-toggle="modal" data-target="#wilaya_modal"><div class="right-content">
-                            <h4> les wilayas que vous comptez desservir :</h4>
-                            @foreach( $user->wilayas as $wilaya)
-                            <p>{{$wilaya->nom}}</p>
-                            @endforeach
+                          <a href="" data-toggle="modal" data-target="#wilaya_modal"><div class="right-content">
+                          <h4> les wilayas que vous comptez desservir :</h4>
+
+                            <p>{{$user->tarjets[0]}} {{$user->id}}</p>
                           </a>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
+                        </div>
+                      </li>
+                    </ul>
                   </div>
                 </div>
                 @if($user->certifie)
-                <div class="col-lg-12">
-                  <div class="sidebar-item comments">
-                    <div class="sidebar-heading">
-                      <h2>informations de la certification du transporteur</h2>
-                    </div>
-                    <div class="content">
-                      <ul>
-                        <li>
-                          <div class="right-content">
-                            <h4>le status Le statut de votre demande  :</h4>
-                            <p>{{$user->statut}}</p>
-                          </div>
-                        </li>
-                        @if($user->certifie="refusee")
-                        <li>
-                          <div class="right-content">
-                            <h4>justificatif  :</h4>
-                            <p>{{$user->justificatif}}</p>
-                          </div>
-                        </li>
-                        @endif
-                      </ul>
+                  <div class="col-lg-12">
+                    <div class="sidebar-item comments">
+                      <div class="sidebar-heading">
+                        <h2>informations de la certification du transporteur</h2>
+                      </div>
+                      <div class="content">
+                        <ul>
+                          <li>
+                            <div class="right-content">
+                              <h4>le status Le statut de votre demande  :</h4>
+                              <p>{{$user->statut}}</p>
+                            </div>
+                          </li>
+                          @if($user->certifie="refusee")
+                          <li>
+                            <div class="right-content">
+                              <h4>justificatif  :</h4>
+                              <p>{{$user->justificatif}}</p>
+                            </div>
+                          </li>
+                          @endif
+                        </ul>
+                      </div>
                     </div>
                   </div>
-                </div>
                 @else
-                <div class="col-lg-12">
-                  <div class="sidebar-item comments">
-                    <div class="sidebar-heading">
-                      <h2><a href="" data-toggle="modal" data-target="#certifie">voulez vous etre un transporteur certifié ?</a></h2>
+                  <div class="col-lg-12">
+                    <div class="sidebar-item comments">
+                      <div class="sidebar-heading">
+                        <h2><a href="" data-toggle="modal" data-target="#certifie">voulez vous etre un transporteur certifié ?</a></h2>
+                      </div>
                     </div>
                   </div>
-                </div>
                 @endif
-                @else
+              @else
                 <div class="col-lg-12">
                   <div class="sidebar-item comments">
                   <div class="sidebar-heading">
@@ -142,7 +135,7 @@
                     </div>
                   </div>
                 </div>
-                @endif
+              @endif
 
                 <div class="col-lg-12">
                   <div class="sidebar-item comments">
@@ -210,11 +203,11 @@
                 <div class="col-lg-12">
                   <div class="sidebar-item recent-posts">
                     <div class="sidebar-heading">
-                      <h2>annonces récents {{$user->annonces->count()}}</h2>
+                      <h2>annonces récents</h2>
                     </div>
                     <div class="content">
                       <ul>
-                        @if($user->annonces->count()) 
+                        @if($user->annonces) 
                             @foreach ($user->annonces as $annonce) 
                               @if(!$annonce->archiver)  
                                 <li><a href="annonce/{{$annonce->id}}">
@@ -233,7 +226,6 @@
             </div>
           </div>
         </div>
-      </div>
     </section>
 
     <div id="name" class="modal fade" role="dialog">  

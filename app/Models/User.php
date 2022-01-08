@@ -54,9 +54,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function annonces()
+    public function annonces_user() // les annonces postees par le user
     {
-        return $this->hasMany(annonce::class);
+        return $this->hasMany(annonce::class,'user_id');
+    }
+
+    public function annonces_tranporteur() // les annonces transporter par le transporteur
+    {
+        return $this->hasMany(annonce::class,'tranporteur_id');
     }
 
     public function tarjets()

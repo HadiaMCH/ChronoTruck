@@ -24,9 +24,7 @@
             @endforeach
           @else
 
-
-          @endif
-          
+          @endif          
         </div>
       </div>
     </div>
@@ -36,62 +34,57 @@
     <section id="recherche">
       <div class="container">
         <div class="main-content">
-            <span>Véhicule de Transport avec Chauffeur</span>
-            <h4>la meilleure façon de transporter de marchandises et colis!</h4>
+            <h4>Véhicule de Transport avec Chauffeur</h4>
+            <span>la meilleure façon de transporter de marchandises et colis!</span>
         </div>
-        <section class="contact-us">
-            <div class="container">
-                    <div class="row"> 
-                        <div class="col-lg-12">
-                            <div class="down-contact">
-                                <div class="row">
-                                    <div class="col-lg-8">
-                                        <div class="sidebar-item contact-form">
-                                            <div class="sidebar-heading">
-                                            <h2>Trouver un target</h2>
-                                            </div>
-                                            <div class="content">
-                                                <form id="search">
-                                                  @csrf
-                                                        <div class="row">
-                                                        <div class="col-md-6 col-sm-12">
-                                                            <fieldset>
-                                                            <input name="ville_depart" type="text" id="ville_depart" placeholder="Ville de départ" required="">
-                                                            </fieldset>
-                                                        </div>
-                                                        <div class="col-md-6 col-sm-12">
-                                                            <fieldset>
-                                                            <input name="ville_arriver" type="text" id="ville_arriver" placeholder="Ville d'arriver" required="">
-                                                            </fieldset>
-                                                        </div>
-                                                        <div class="col-lg-12">
-                                                            <fieldset>
-                                                            <button type="submit" id="search-submit" class="main-button">Rechercher</button>
-                                                            </fieldset>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--
-                                    <div class="col-lg-4 "> 
-                                      <div id="map">
-                                        <iframe src="https://maps.google.com/maps?q=Av.+L%C3%BAcio+Costa,+Rio+de+Janeiro+-+RJ,+Brazil&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="450px" frameborder="0" style="border:0" allowfullscreen></iframe>
-                                      </div>
-                                    </div>    -->
-                                </div>
-                            </div>
-                        </div>
+        <section class="formulaire">
+          <div class="container">
+            <div class="row"> 
+              <div class="col-lg-12">
+                <div class="row">
+                  <div class="col-lg-8">
+                    <div class="sidebar-heading">
+                      <h2>Trouver un target</h2>
                     </div>
+                    <form id="search">
+                    @csrf
+                      <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                          <fieldset>
+                            <input name="ville_depart" type="text" id="ville_depart" placeholder="Ville de départ" required="">
+                          </fieldset>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                          <fieldset>
+                            <input name="ville_arriver" type="text" id="ville_arriver" placeholder="Ville d'arriver" required="">
+                          </fieldset>
+                        </div>
+                        <div class="col-lg-12">
+                          <fieldset>
+                            <button type="submit" id="search-submit" class="main-button">Rechercher</button>
+                        </fieldset>
+                      </div>
+                    </form>
+                  </div>
+                  <!--
+                  <div class="col-lg-4 "> 
+                    <div id="map">
+                      <iframe src="https://maps.google.com/maps?q=Av.+L%C3%BAcio+Costa,+Rio+de+Janeiro+-+RJ,+Brazil&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="450px" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    </div>
+                  </div>    -->
                 </div>
-            </section>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </section>
 
     <!-- Resultat du recherche -->
-    <section class="blog-posts">
+
+    <section class="posts">
       <div class="container">
+
       @if(session('name')) <!-- Resultat du recherche       connected -->
         <div class="row" id="search_result_connected">  
 
@@ -99,15 +92,16 @@
       </div>
     </section>
 
-    <section class="blog-posts">
+    <section class="posts">
       <div class="container">
         <div class="col-lg-4">
           <div class="main-button">
-            <a href="" data-toggle="modal" data-target="#addAnonceModal">ajouter une annonce de transport</a>
+            <a data-toggle="modal" data-target="#addAnonceModal">ajouter une annonce de transport</a>
           </div>
         </div>
       </div>  
-    </section> 
+    </section>
+
       @else <!-- Resultat du recherche       not connected -->
         <div class="row" id="search_result_not_connected">                        
 
@@ -115,14 +109,14 @@
       </div>
     </section>
 
-    <section class="blog-posts">
+    <section class="posts">
       <div class="container">
         <div class="col-lg-4">
           <div class="main-button">
             <a href="{{ route('presentation') }}">Comment cela fonctionne</a>
           </div>
         </div>
-      </div>  
+       </div>  
     </section>  
       @endif         
     
@@ -298,9 +292,6 @@
       </div>  
     </div>  
 
-     <!-- Jquery definition -->
-     <script src="vendor/jquery/jquery.min.js"></script>
-
     <script>
       $( document ).ready(function() {
         $.ajaxSetup({
@@ -315,7 +306,7 @@
               url: ajaxurl,
               dataType: 'json',
               success: function (response) {
-                  if(response != null && response.length > 0)
+                  if(!response['status_code'])
                   {
                     let j=0;
                     for (let i=0; i < response.length ;i++)
@@ -327,8 +318,8 @@
                         j++;
                       }
                       let d = new Date(response[i].created_at);
-                      $("#search_result_not_connected").prepend('<div class="col-lg-3"><div class="all-blog-posts"><div class="blog-post"><div class="blog-thumb"><img src="..'+response[i].img+'" alt=""></div><div class="down-content"><span>'+response[i].titre+'</span><ul class="post-info"><li>'+d.getHours() + ":" + d.getMinutes() + " " + d.getDate()+'-'+ d.getMonth()+'-'+d.getFullYear()+'</li></ul><p>'+text+'<a href="" data-toggle="modal" data-target="#loginModal" >...lire la suite</a></p><ul class="post-info"><li>de '+response[i].depart+' vers '+response[i].arriver+'</li></ul></div></div></div></div>');                
-                      $("#search_result_connected").prepend('<div class="col-lg-3"><div class="all-blog-posts"><div class="blog-post"><div class="blog-thumb"><img src="..'+response[i].img+'" alt=""></div><div class="down-content"><span>'+response[i].titre+'</span><ul class="post-info"><li>'+d.getHours() + ":" + d.getMinutes() + " " + d.getDate()+'-'+ d.getMonth()+'-'+d.getFullYear()+'</li></ul><p>'+text+'<a href="annonce/'+response[i].id+'" >...lire la suite</a></p><ul class="post-info"><li>de '+response[i].depart+' vers '+response[i].arriver+'</li></ul></div></div></div></div>');                   
+                      $("#search_result_not_connected").prepend('<div class="col-lg-3"><div><div class="post"><div class="thumb"><img src="..'+response[i].img+'" alt=""></div><div class="down-content"><span>'+response[i].titre+'</span><ul class="post-info"><li>'+d.getHours() + ":" + d.getMinutes() + " " + d.getDate()+'-'+ d.getMonth()+'-'+d.getFullYear()+'</li></ul><p>'+text+'<a href="" data-toggle="modal" data-target="#loginModal" >...lire la suite</a></p><ul class="post-info"><li>de '+response[i].depart+' vers '+response[i].arriver+'</li></ul></div></div></div></div>');                
+                      $("#search_result_connected").prepend('<div class="col-lg-3"><div><div class="post"><div class="thumb"><img src="..'+response[i].img+'" alt=""></div><div class="down-content"><span>'+response[i].titre+'</span><ul class="post-info"><li>'+d.getHours() + ":" + d.getMinutes() + " " + d.getDate()+'-'+ d.getMonth()+'-'+d.getFullYear()+'</li></ul><p>'+text+'<a href="annonce/'+response[i].id+'" >...lire la suite</a></p><ul class="post-info"><li>de '+response[i].depart+' vers '+response[i].arriver+'</li></ul></div></div></div></div>');                   
                     }
                   }
                   else{
@@ -361,7 +352,7 @@
               data: formData,
               dataType: 'json',
               success: function (response) {
-                  if(response != null && response.length > 0)
+                  if(!response['status_code'])
                   {
                     $("#search_result_not_connected").empty();
                     for (let i=0; i < response.length ;i++)
@@ -373,12 +364,22 @@
                         j++;
                       }
                       let d = new Date(response[i].created_at);
-                      $("#search_result_not_connected").prepend('<div class="col-lg-3"><div class="all-blog-posts"><div class="blog-post"><div class="blog-thumb"><img src="..'+response[i].img+'" alt=""></div><div class="down-content"><span>'+response[i].titre+'</span><ul class="post-info"><li>'+d.getHours() + ":" + d.getMinutes() + " " + d.getDate()+'-'+ d.getMonth()+'-'+d.getFullYear()+'</li></ul><p>'+text+'<a href="" data-toggle="modal" data-target="#loginModal" >...lire la suite</a></p><ul class="post-info"><li>de '+response[i].depart+' vers '+response[i].arriver+'</li></ul><ul class="post-info"><li>'+response[i].transport_type+'</li></ul><ul class="post-info"><li>entre '+response[i].fourchette_poid_min+'et'+response[i].fourchette_poid_max+'</li></ul><ul class="post-info"><li>entre '+response[i].fourchette_volume_min+'et'+response[i].fourchette_volume_max+'</li></ul></div></div></div></div>');                     
-                      $("#search_result_connected").prepend('<div class="col-lg-3"><div class="all-blog-posts"><div class="blog-post"><div class="blog-thumb"><img src="..'+response[i].img+'" alt=""></div><div class="down-content"><span>'+response[i].titre+'</span><ul class="post-info"><li>'+d.getHours() + ":" + d.getMinutes() + " " + d.getDate()+'-'+ d.getMonth()+'-'+d.getFullYear()+'</li></ul><p>'+text+'<a href="annonce/'+response[i].id+'" >...lire la suite</a></p><ul class="post-info"><li>de '+response[i].depart+' vers '+response[i].arriver+'</li></ul><ul class="post-info"><li>'+response[i].transport_type+'</li></ul><ul class="post-info"><li>entre '+response[i].fourchette_poid_min+'et'+response[i].fourchette_poid_max+'</li></ul><ul class="post-info"><li>entre '+response[i].fourchette_volume_min+'et'+response[i].fourchette_volume_max+'</li></ul></div></div></div></div>');                     
+                      $("#search_result_not_connected").prepend('<div class="col-lg-3"><div><div class="post"><div class="thumb"><img src="..'+response[i].img+'" alt=""></div><div class="down-content"><span>'+response[i].titre+'</span><ul class="post-info"><li>'+d.getHours() + ":" + d.getMinutes() + " " + d.getDate()+'-'+ d.getMonth()+'-'+d.getFullYear()+'</li></ul><p>'+text+'<a href="" data-toggle="modal" data-target="#loginModal" >...lire la suite</a></p><ul class="post-info"><li>de '+response[i].depart+' vers '+response[i].arriver+'</li></ul><ul class="post-info"><li>'+response[i].transport_type+'</li></ul><ul class="post-info"><li>entre '+response[i].fourchette_poid_min+'et'+response[i].fourchette_poid_max+'</li></ul><ul class="post-info"><li>entre '+response[i].fourchette_volume_min+'et'+response[i].fourchette_volume_max+'</li></ul></div></div></div></div>');                     
+                      $("#search_result_connected").prepend('<div class="col-lg-3"><div"><div class="post"><div class="thumb"><img src="..'+response[i].img+'" alt=""></div><div class="down-content"><span>'+response[i].titre+'</span><ul class="post-info"><li>'+d.getHours() + ":" + d.getMinutes() + " " + d.getDate()+'-'+ d.getMonth()+'-'+d.getFullYear()+'</li></ul><p>'+text+'<a href="annonce/'+response[i].id+'" >...lire la suite</a></p><ul class="post-info"><li>de '+response[i].depart+' vers '+response[i].arriver+'</li></ul><ul class="post-info"><li>'+response[i].transport_type+'</li></ul><ul class="post-info"><li>entre '+response[i].fourchette_poid_min+'et'+response[i].fourchette_poid_max+'</li></ul><ul class="post-info"><li>entre '+response[i].fourchette_volume_min+'et'+response[i].fourchette_volume_max+'</li></ul></div></div></div></div>');                     
                     }
                   }
                   else{
-                    //no annonce search result
+                    if(response['status_code']==503){
+                      $("#ville_depart").css("border-color", "#d93025");
+                      $("#ville_depart").css("color", "#d93025");
+                      $("#ville_arriver").css("border-color", "#d93025");
+                      $("#ville_arriver").css("color", "#d93025");
+                      $("#ville_depart").attr("placeholder","Ville de départ");
+                      $("#ville_arriver").attr("placeholder","Ville d'arriver");
+                    }
+                    else{
+                      //no annonce dans la bdd
+                    }
                   }
               },
               error: function (response) {

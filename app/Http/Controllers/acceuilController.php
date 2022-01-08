@@ -30,36 +30,45 @@ class acceuilController extends Controller
     public function show()
     {
         $annonces= annonce::where("status","validée")->where("archiver","0")->orderBy('updated_at', 'desc')->take(8)->get();
-        
         if ($annonces->count()){
             return response()->json($annonces);
         }
         else{
             return response()->json([
-                //no annonce dans la bdd
-              ]);
+                'status_code' => 502,
+                'message' => 'Error in finding result dans la bdd',
+            ]);
         }    
     }
 
     public function search(Request $request)
     {
-            $request->validate(['ville_depart'=>'string',
-            'ville_arriver'=>'string',
-        ]);
-        $ville_depart=$request->input('ville_depart');
-        $ville_arriver=$request->input('ville_arriver');
-        $annonces= annonce::where("depart","$ville_depart")->where("arriver","$ville_arriver")->where("archiver","0")->take(8)->get();
-        if ($annonces->count()){
-            foreach ($annonces as $annonce){ 
-                $annonce->created_at= Carbon::parse($annonce->created_at)->format('h:i d/m/Y');
-                }
-                
-            return response()->json($annonces);
+        if($request->ville_depart!="" && $request->ville_arriver!="" ){
+                $request->validate(['ville_depart'=>'string',
+                'ville_arriver'=>'string',
+            ]);
+            $ville_depart=$request->input('ville_depart');
+            $ville_arriver=$request->input('ville_arriver');
+            $annonces= annonce::where("depart","$ville_depart")->where("arriver","$ville_arriver")->where("archiver","0")->take(8)->get();
+            if ($annonces->count()){
+                foreach ($annonces as $annonce){ 
+                    $annonce->created_at= Carbon::parse($annonce->created_at)->format('h:i d/m/Y');
+                    }
+                    
+                return response()->json($annonces);
+            }
+            else{
+                return response()->json([
+                    'status_code' => 502,
+                    'message' => 'Error in finding result dans la bdd',
+                ]);
+            }
         }
         else{
             return response()->json([
-                //no result de recherche
-              ]);
+                'status_code' => 503,
+                'message' => 'des champs vide',
+            ]);
         }
     }
 
