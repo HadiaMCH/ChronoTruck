@@ -14,11 +14,12 @@ use Illuminate\Support\Facades\Storage;
 class authController extends Controller
 {
     public function login(Request $request)
-    {        
+    {      
         $request->validate([
             'email'=>'string',
             'password'=>'string',
         ]);
+
         $email=$request->email;
         $password=$request->password;
 

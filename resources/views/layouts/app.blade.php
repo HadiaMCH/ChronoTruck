@@ -127,12 +127,12 @@
                                       <div class="row">
                                         <div class="col-md-12 col-sm-12">
                                           <fieldset>
-                                            <input name="email" type="text" id="email" placeholder="votre email" required="">
+                                            <input name="email_login" type="text" id="email_login" placeholder="votre email" required="">
                                           </fieldset>
                                         </div>
                                         <div class="col-md-12 col-sm-12">
                                           <fieldset>
-                                            <input name="password" type="password" id="password" placeholder="votre mot de passe">
+                                            <input name="password_login" type="password" id="password_login" placeholder="votre mot de passe">
                                           </fieldset>
                                         </div>
                                         <div class="col-md-12 col-sm-12" id="incorrect_login">
@@ -171,8 +171,8 @@
           });
           e.preventDefault();
           let formData = {
-            email : $("#email").val(),
-            password : $("#password").val(),
+            email : $("#email_login").val(),
+            password : $("#password_login").val(),
           };
           let type = "POST";
           let ajaxurl = "{{route('login')}}";
@@ -183,7 +183,7 @@
               data: formData,
               dataType: 'json',
               success: function (response) {
-                if (response['status_code']!=501){
+                if (response['status_code']==500){
                   $("#email").css("border-color", "#d93025");
                   $("#email").css("color", "#d93025");
                   $("#password").css("border-color", "#d93025");
