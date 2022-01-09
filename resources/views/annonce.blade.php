@@ -12,6 +12,7 @@
               <div class="text-content">
                 <h4>plus d'informations sur cette annonce</h4>
                 <h2>{{$annonce->titre}}</h2>
+                <h2 id="annonce_id" style="display:none;">{{$annonce->id}}</h2>
               </div>
             </div>
           </div>
@@ -19,131 +20,127 @@
       </section>
     </div>            
 
-    <section class="blog-posts grid-system">
+    <section class="posts grid-system">
       <div class="container">
         <div class="row">
           <div class="col-lg-12">
-            <div class="all-blog-posts">
-              <div class="row">
-                <div class="col-lg-12">
-                  <div class="blog-post">
-                    <div class="blog-thumb">
-                      <img src="..{{$annonce->img}}" alt="">
-                    </div>
-                    <div class="down-content">
-                      <span>{{$annonce->titre}}</span>
-                      @if($annonce->status =="validée")
-                      <h4>{{$annonce->tarif}}</h4>
-                      @endif
-                      <ul class="post-info">
-                        <li>{{$annonce->User->name}} {{$annonce->User->familyname}}</li>
-                        <li>{{$annonce->created_at}}</li>
-                        <li>{{$annonce->status}}</li>
+            <div class="post">
+              <div class="thumb">
+                <img src="..{{$annonce->img}}" alt="">
+              </div>
+              <div class="down-content">
+                <span>{{$annonce->titre}}</span>
+                <ul class="post-info">
+                  <li>{{$annonce->user->name}} {{$annonce->user->familyname}}</li>
+                  <li>{{Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $annonce->created_at)->format('H:i:s d-m-Y');}}</li>
+                  <li>{{$annonce->status}}</li>
+                </ul>
+                <p>{{$annonce->texte}}</p>
+                <div class="post-options">
+                  <div class="row">
+                    <div class="col-6">
+                      <ul class="post-tags">
+                        <li>le point de départ: </li>
+                        <li>{{$wilayas[$annonce->tarjet->wilaya_depart_id-1]->nom}}</li>
                       </ul>
-                      <p>{{$annonce->texte}}</p>
-                      <div class="post-options">
-                        <div class="row">
-                          <div class="col-6">
-                            <ul class="post-tags">
-                              <li><i class="fa fa-tags"></i></li>
-                              <li>le point de départ: </li>
-                              <li> {{$annonce->depart}}</li>
-                            </ul>
-                          </div>
-                          <div class="col-6">
-                            <ul class="post-share">
-                              <li><i class="fa fa-share-alt"></i></li>
-                              <li>le point d'arrivée: </li>
-                              <li> {{$annonce->arriver}}</li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
+                    </div>
+                    <div class="col-6">
+                      <ul class="post-share">
+                        <li>le point d'arrivée: </li>
+                        <li>{{$wilayas[$annonce->tarjet->wilaya_arriver_id-1]->nom}}</li>
+                      </ul>
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-12">
-                  <div class="sidebar-item comments">
-                      <ul class="col-lg-8">
-                        <li class="col-lg-6">
-                          <div class="right-content">
-                            <h4>le type de transport</h4>
-                            <p>{{$annonce->transport_type}}</p>
-                          </div>
-                        </li>  
-                        <li class="col-lg-6"> 
-                          <div class="right-content">
-                            <h4>le moyen de transport</h4>
-                            <p>{{$annonce->moyen_transport}}</p>
-                          </div>
-                        </li>
-                        <li></li>
-                      </ul>
-                      <ul class="col-lg-8">
-                        <li class="col-lg-6">
-                          <div class="right-content">
-                            <h4>la fourchette de poids</h4>
-                            <p>{{$annonce->fourchette_poid_min}}   {{$annonce->fourchette_poid_max}}</p>
-                          </div>
-                        </li>
-                        <li class="col-lg-6">
-                          <div class="right-content">
-                            <h4>la fourchette de volume</h4>
-                            <p>{{$annonce->fourchette_volume_min}}   {{$annonce->fourchette_volume_max}}</p>
-                          </div>
-                        </li>
-                        <li></li>
-                      </ul>
-                      @if ($annonce->status !="validée")
-                        <ul class="col-lg-8">
-                          <li class="col-lg-6">
-                            <div class="right-content">
-                              <h4>les transporteurs disponible pour votre tarjet</h4>
-                              <p> list tranporteurs</p>
-                            </div>
-                          </li>
-                        </ul>
-                        <ul class="col-lg-8">
-                          <li class="col-lg-6">
-                            <div class="right-content">
-                              <h4>le tarif du transport</h4>
-                              <p>{{$annonce->tarif}}</p>
-                            </div>
-                          </li>
-                          <li></li>
-                        </ul>
-                      @elseif($annonce->status !="terminée")
-                        <ul class="col-lg-12">
-                          <li class="col-lg-6">
-                              <div class="right-content">
-                                <h4>le transporteur</h4>
-                                <p> le tranporteur</p>
-                              </div>
-                          </li>
-                          <li class="col-lg-6">
-                            <div class="sidebar-item submit-comment row">
-                              <div class="col-lg-6">
-                                <button class="col-lg-12" class="main-button" data-toggle="modal" data-target="#noter">noter</button>
-                              </div>
-                              <div class="col-lg-6">
-                                <button class="col-lg-12" class="main-button" data-toggle="modal" data-target="#signaler">signaler</button>
-                              </div>  
-                            </div>
-                          </li>
-                          <li></li>
-                        </ul>
-                        <ul>
-                          <li class="col-lg-6">
-                            <div class="right-content">
-                              <h4>le tarif du transport</h4>
-                              <p>{{$annonce->tarif}}</p>
-                            </div>
-                          </li>
-                        </ul>
-                      @endif
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-12">
+            <div class="plus">
+              <ul class="col-lg-12">
+                <li class="col-lg-6">
+                  <div class="right-content">
+                    <h4>le type de transport</h4>
+                    <p>{{$annonce->transport_type}}</p>
+                  </div>
+                </li>  
+                <li class="col-lg-6"> 
+                  <div class="right-content">
+                    <h4>le moyen de transport</h4>
+                    <p>{{$annonce->moyen_transport}}</p>
+                  </div>
+                </li>
+              </ul>
+              <ul class="col-lg-12">
+                <li class="col-lg-6">
+                  <div class="right-content">
+                    <h4>la fourchette de poids</h4>
+                    <p>{{$annonce->fourchette_poid_min}} {{$annonce->fourchette_poid_max}}</p>
+                  </div>
+                </li>
+                <li class="col-lg-6">
+                  <div class="right-content">
+                    <h4>la fourchette de volume</h4>
+                    <p>{{$annonce->fourchette_volume_min}} {{$annonce->fourchette_volume_max}}</p>
+                  </div>
+                </li>
+              </ul>
+              @if ($annonce->status =="validée")
+                <ul class="col-lg-12">
+                  <li class="col-lg-12">
+                    <div class="right-content">
+                      <h4>les transporteurs disponible pour votre tarjet</h4>
+                      <div class="post-info">
+                        @foreach ($annonce->tarjet->users as $transporteur)
+                          <a href="">{{$transporteur->name}} {{$transporteur->familyname}}</a>
+                        @endforeach
+                      </div>
                     </div>
-                </div>
-                @if($annonce->User->id == session('id'))
+                  </li>
+                </ul>
+                <ul class="col-lg-12">
+                  <li class="col-lg-12">
+                    <div class="right-content">
+                      <h4>le tarif du transport</h4>
+                      <p>{{$annonce->tarif}}</p>
+                    </div>
+                  </li>
+                </ul>
+              @elseif($annonce->status =="terminée")
+                <ul class="col-lg-12">
+                  <li class="col-lg-6">
+                    <div class="right-content">
+                      <h4>le transporteur</h4>
+                      <p>{{$annonce->tranporteur->name}} {{$annonce->tranporteur->familyname}}</p>
+                      <p id="tranporteur_id" style="display:none;">{{$annonce->tranporteur->id}}</p>
+                    </div>
+                  </li>
+
+                  @if($annonce->user->id == session('id'))
+                    <li class="col-lg-6">
+                      <div class="col-lg-12 submit-transporteur row">
+                        <div class="col-lg-6">
+                          <button class="col-lg-12" class="main-button" data-toggle="modal" data-target="#noter">noter</button>
+                        </div>
+                        <div class="col-lg-6">
+                          <button class="col-lg-12" class="main-button" data-toggle="modal" data-target="#signaler">signaler</button>
+                        </div>  
+                      </div>
+                    </li>
+                  @endif
+                </ul>
+                <ul class="col-lg-12">
+                  <li class="col-lg-12">
+                    <div class="right-content">
+                      <h4>le tarif du transport</h4>
+                      <p>{{$annonce->tarif}}</p>
+                    </div>
+                  </li>
+                </ul>
+              @endif
+            </div>
+          </div>
+          @if($annonce->user->id == session('id'))
                 <div class="col-lg-12">
                   <div class="sidebar-item submit-comment">
                     <div class="content">
@@ -172,43 +169,86 @@
                 @endif
               </div>
             </div>
-          </div>
           
-        </div>
-      </div>
     </section>
 
-    <div id="supprimer" class="modal fade" role="dialog">  
-      <div class="modal-dialog">  
-   <!-- Modal content-->  
-        <div class="modal-content">  
-          <div class="modal-body">  
-            <section class="contact-us">
-              <div class="container">
-                <div class="down-contact">
-                  <div class="col-lg-12">
-                    <div class="sidebar-item contact-form">
-                      <div class="sidebar-heading">
-                        <h2>vous voulez supprimer cette annonce ?</h2>
-                      </div>
-                      <div class="content">
-                        <fieldset>
-                          <button type="submit" id="supprimer_btn" class="main-button btn btn-warning">supprimer</button>
-                        </fieldset>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+    <!-- Modal noter-->
+
+  <div id="noter" class="modal fade" role="dialog">  
+    <div class="modal-dialog">  
+      <div class="modal-content">    
+        <section class="formulaire formulaire-modal">
+          <div class="col-lg-12">
+            <div class="sidebar-heading">
+              
+              @if($annonce->note == 0)
+              <h2>évaluer ce transporteur</h2>
+            </div>
+            <div class="col-lg-12">
+              <div class="rate">
+
+                <span onmouseover="starmark(this)" onclick="starmark(this)" id="1one" class="fa fa-star checked"></span>
+                <span onmouseover="starmark(this)" onclick="starmark(this)" id="2one" class="fa fa-star "></span>
+                <span onmouseover="starmark(this)" onclick="starmark(this)" id="3one" class="fa fa-star "></span>
+                <span onmouseover="starmark(this)" onclick="starmark(this)" id="4one" class="fa fa-star"></span>
+                <span onmouseover="starmark(this)" onclick="starmark(this)" id="5one" class="fa fa-star"></span>
               </div>
-            </section>
-          </div>  
-        </div>  
+            </div>
+            <button id="noter_submit" type="button" class="btn btn-lg btn-success">Soumettre</button>
+            @else
+              <p> vous avez donner une note de {{$annonce->note}} a {{$annonce->tranporteur->name}} {{$annonce->tranporteur->familyname}}</p>
+            @endif
+          </div>
+        </section>
       </div>  
-    </div>
+    </div>  
+  </div>
+
+    <!-- Modal signaler-->
+  <div id="signaler" class="modal fade" role="dialog">  
+    <div class="modal-dialog">  
+      <div class="modal-content">    
+        <section class="formulaire formulaire-modal">
+          <div class="col-lg-12">
+            <div class="sidebar-heading">
+              
+              @if(!$annonce->signale)
+              <h2>évaluer ce transporteur</h2>
+            </div>
+            <div class="col-lg-12">
+                <input type="textarea" id="signale_texte" placeholder="pourquoi voulez_vous signaler ce transporteur ?!" required="">
+            </div>
+            <button id="signaler_submit" type="button" class="btn btn-lg btn-success">Soumettre</button>
+            @else
+              <p> vous avez deja signaler {{$annonce->tranporteur->name}} {{$annonce->tranporteur->familyname}}</p>
+            @endif
+          </div>
+        </section>
+      </div>  
+    </div>  
+  </div>
+
+    <!-- Modal supprimer-->
+
+  <div id="supprimer" class="modal fade" role="dialog">  
+    <div class="modal-dialog">  
+      <div class="modal-content">    
+        <section class="formulaire formulaire-modal">
+          <div class="col-lg-12">
+            <div class="sidebar-heading">
+              <h2>vous voulez supprimer cette annonce ?</h2>
+            </div>
+            <fieldset>
+              <button type="submit" id="supprimer_btn" class="main-button btn btn-warning">supprimer</button>
+            </fieldset>
+          </div>
+        </section>
+      </div>  
+    </div>  
+  </div>
 
     <div id="annuler" class="modal fade" role="dialog">  
       <div class="modal-dialog">  
-   <!-- Modal content-->  
         <div class="modal-content">  
           <div class="modal-body">  
             <section class="contact-us">
@@ -236,7 +276,6 @@
 
     <div id="modifier" class="modal fade" role="dialog">  
       <div class="modal-dialog">  
-        <!-- Modal content-->  
         <div class="modal-content">   
           <div class="modal-body">  
             <section class="contact-us">
@@ -423,6 +462,87 @@
         $("#image").css("display","block");
         $("#image").attr("required","");
         $("#photo").css("display","none");
+      });
+    </script>
+
+    <script>
+      let count=0;
+
+      function starmark(item){
+        count=item.id[0];
+        sessionStorage.starRating = count;
+        let subid= item.id.substring(1);
+        for(let i=0;i<5;i++){
+            if(i<count){
+              document.getElementById((i+1)+subid).style.color="orange";
+            }
+            else{
+              document.getElementById((i+1)+subid).style.color="black";
+            }
+        }
+      }
+
+      $("#noter_submit").click(function (e) {
+        $.ajaxSetup({
+          headers: {
+          'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+          }
+        });
+        e.preventDefault();
+        let formData = {
+          id_tranporteur: $("#tranporteur_id").html(),
+          id_annonce:$("#annonce_id").html(), 
+          note : count,
+        };
+
+        let type = "POST";
+        let ajaxurl = "{{route('noter_transporteur')}}";
+
+        $.ajax({
+          type: type,
+          url: ajaxurl,
+          data: formData,
+          dataType: 'json',
+          success: function (response) {    
+            if (response.status == "rated"){
+              location.reload();
+            }
+          },
+          error: function (response) {
+            console.log(response);
+          }
+        });
+      });
+
+      $("#signaler_submit").click(function (e) {
+        $.ajaxSetup({
+          headers: {
+          'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+          }
+        });
+        e.preventDefault();
+        let formData = {
+          id_annonce:$("#annonce_id").html(), 
+          texte:$("#signale_texte").val(),
+        };
+
+        let type = "POST";
+        let ajaxurl = "{{route('signaler_transporteur')}}";
+
+        $.ajax({
+          type: type,
+          url: ajaxurl,
+          data: formData,
+          dataType: 'json',
+          success: function (response) {    
+            if (response.status == "signaled"){
+              location.reload();
+            }
+          },
+          error: function (response) {
+            console.log(response);
+          }
+        });
       });
     </script>
 

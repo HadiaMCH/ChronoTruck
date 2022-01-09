@@ -15,9 +15,20 @@
         <!-- Additional CSS Files -->
         <link rel="stylesheet" href= "../assets/css/app.css">
         <link rel="stylesheet" href="../assets/css/owl.css">
+        <link rel="stylesheet" href="../assets/css/select2.css">
+        <link rel="stylesheet" href="../assets/css/fontawsome.css">
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+        <script src="../vendor/jquery/jquery.min.js"></script>
+        <script src="../assets/js/select2.js"></script>
+        <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Additional Scripts -->
+        <script src="../assets/js/custom.js"></script>
+        <script src="../assets/js/owl.js"></script>
+        <script src="../assets/js/slick.js"></script>
+        <script src="../assets/js/isotope.js"></script>
+        <script src="../assets/js/accordions.js"></script>
+
     </head>
     <body>
         

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\wilaya;
 use App\Models\annonce;
 use Illuminate\Http\Request;
+use App\Models\wilaya_wilaya;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -46,8 +47,6 @@ class annonceController extends Controller
             'titre'=>$request->titre,
             'img'=>$image,
             'texte'=>$request->texte,
-            'depart'=>$request->depart,
-            'arriver'=>$request->arriver,
             'transport_type'=>$request->transport_type,
             'fourchette_poid_min'=>$request->fourchette_poid_min,
             'fourchette_poid_max'=>$request->fourchette_poid_max,
@@ -56,6 +55,10 @@ class annonceController extends Controller
             'tarif'=>null,
             'user_id'=>$request->session()->get('id'),
         ]); 
+
+        $target= wilaya_wilaya::where("wilaya_depart_id","$request->depart")->where("wilaya_arriver_id","$request->arriver")->first();
+        annonce::where('id',$annonce->id)->update(['wilaya_wilaya_id'=>$target->id]);
+        
         return redirect()->route('annonce', ['id' => $annonce->id]);        
     }
 
@@ -136,5 +139,4 @@ class annonceController extends Controller
 
           return redirect()->route('annonce', ['id' => $id]);        
       }
-
 }

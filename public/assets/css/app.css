@@ -54,6 +54,7 @@ body {
       -o-transition: all 0.3s ease-in-out 0s;
       transition: all 0.3s ease-in-out 0s;
   }
+  
   header .navbar {
       padding: 25px 0px;
   }
@@ -775,12 +776,12 @@ body {
     margin-top: 100px;
   }
 
-  #formulaire-login{
+  .formulaire-modal{
     margin: 40px 1rem;
     padding:1rem;
   }
 
-  #formulaire-login button{
+  .formulaire-modal button{
     width :100%;
   }
 
@@ -1039,7 +1040,7 @@ body {
         font-weight: 400;
         transition: all .3s;
     }
-
+    
     .posts .down-content ul.post-info li:after {
         content: '|';
         color: #aaa;
@@ -1096,36 +1097,8 @@ body {
         cursor: pointer;
     }
 
-    ul.page-numbers {
-        text-align: center;
-    }
-
-    ul.page-numbers li {
-        display: inline-block;
-        margin: 0px 5px;
-    }
-
-    ul.page-numbers li a {
-        width: 50px;
-        height: 50px;
-        display: inline-block;
-        text-align: center;
-        line-height: 50px;
-        font-size: 15px;
-        color: #7a7a7a;
-        border: 1px solid #eee;
-        font-weight: 500;
-        transition: all 0.3s;
-    }
-
-    ul.page-numbers li.active a {
-        background-color: #f48840;
-        border-color: #f48840;
+    .posts .main-button a:hover{
         color: #fff;
-    }
-
-    ul.page-numbers li a:hover {
-        color: #f48840;
     }
 
     .posts .sidebar-heading h2 {
@@ -1139,54 +1112,76 @@ body {
         margin-bottom: 25px;
     }
 
-    .posts .comments {
-        margin-top: 30px;
+    .posts .plus {
+        margin-top: 0px;
     }
 
-    .posts .comments ul li {
-        display: inline-block;
+    .posts .plus ul li {
+        display: inline-flex;
+    }
+
+    .posts .plus ul{
+        display: inline-flex;
         margin-bottom: 20px;
         padding-bottom: 20px;
         border-bottom: 1px solid #eee;
+        width:100%;
     }
 
-    .posts .comments ul li.replied {
-        padding-left: 130px;
-    }
-
-    .posts .comments ul li:last-child {
+    .posts .plus ul:last-child {
         margin-bottom: 0px;
         padding-bottom: 0px;
         border-bottom: none;
     }
 
-    .posts .comments ul li .author-thumb {
-        display: inline;
-        float: left;
+    .posts .plus ul li .right-content {
+        margin: 0px auto;
     }
 
-    .posts .comments ul li .author-thumb img {
-        max-width: 100px;
-        display: inline;
-    }
-
-    .posts .comments ul li .right-content {
-        margin-left: 130px;
-    }
-
-    .posts .comments ul li .right-content h4 {
+    .posts .plus ul li .right-content h4 {
         color: #20232e;
         font-size: 19px;
         font-weight: 900;
         letter-spacing: 0.5px;
     }
 
-    .posts .comments ul li .right-content h4 span {
-        font-size: 14px;
-        color: #aaa;
+    .post-info a{
+        margin-bottom: 0px;
+        font-size: 15px;
         font-weight: 400;
-        letter-spacing: 0.25px;
-        margin-left: 20px;
+        color: #7a7a7a;
+        line-height: 30px;
+    }
+    .post-info a:after {
+        content: '|';
+        color: #aaa;
+        margin-left: 8px;
+    }
+
+    .post-info a:last-child::after {
+        display: none;
+    }  
+
+    .posts .submit-transporteur {
+        margin-top: 0px;
+    }
+
+    .posts .submit-transporteur button {
+        display: inline-block;
+        background-color: #f48840;
+        color: #fff;
+        font-size: 13px;
+        font-weight: 500;
+        padding: 12px 20px;
+        text-transform: uppercase;
+        transition: all .3s;
+        border: none;
+        outline: none;
+        width:100%;
+    }
+
+    .posts .submit-transporteur button:hover {
+        background-color: #fb9857;
     }
 
     .posts .submit-comment {
@@ -1239,10 +1234,30 @@ body {
         transition: all .3s;
         border: none;
         outline: none;
+
     }
 
     .posts .submit-comment button:hover {
         background-color: #fb9857;
     }
 
+    /*       rating       */
+    .checked {
+        color: #f48840;   
+    } 
+
+    .formulaire-modal .rate{
+        padding:1rem;
+        margin:0px 15px;
+      }
+
+    .formulaire-modal .rate span{
+        font-size:40px;
+        cursor:pointer;
+        padding: 0px 10px;
+    }
+    .formulaire-modal button{    
+        margin-top:10px;
+        margin-left:5px;
+    }
     

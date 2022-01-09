@@ -32,8 +32,7 @@ class profileController extends Controller
             return response()->json([
                 'status' => "true",
               ]); 
-        }
-            
+        }      
     }
 
     public function modifier(Request $request)
@@ -97,6 +96,21 @@ class profileController extends Controller
         $respense=User::where('id',$request->session()->get('id'))->update(['statut' => $statut]);
 
         return redirect()->route('profile');
+    }
+
+    public function noter_transporteur(Request $request){
+        User::where('id',$request->id_tranporteur)->increment('note' , $request->note);
+        annonce::where('id',$request->id_annonce)->update(['note' => $request->note]);
+        return response()->json([
+            'status' => "rated",
+          ]); 
+    }
+
+    public function signaler_transporteur(Request $request){
+        annonce::where('id',$request->id_annonce)->update(['signale' => $request->texte]);
+        return response()->json([
+            'status' => "signaled",
+          ]); 
     }
 }
 

@@ -57,5 +57,8 @@ Route::post('/profile', [profileController::class,'check_password'])->name('chec
 Route::post('/modifier', [profileController::class,'modifier'])->name('modifier');
 Route::post('/etre_transporteur', [profileController::class,'etre_transporteur'])->name('etre_transporteur');
 Route::post('/etre_certifie', [profileController::class,'etre_certifie'])->name('etre_certifie');
+Route::post('/noter_transporteur', [profileController::class,'noter_transporteur'])->name('noter_transporteur');
+Route::post('/signaler_transporteur', [profileController::class,'signaler_transporteur'])->name('signaler_transporteur');
+
 
 

@@ -108,7 +108,7 @@
  <div id="loginModal" class="modal fade" role="dialog">  
     <div class="modal-dialog">  
       <div class="modal-content">    
-        <section class="formulaire" id="formulaire-login">
+        <section class="formulaire formulaire-modal">
           <div class="col-lg-12">
             <div class="sidebar-heading">
               <h2>connectez-vous sur votre compte</h2>

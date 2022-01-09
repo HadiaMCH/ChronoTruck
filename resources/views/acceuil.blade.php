@@ -51,12 +51,12 @@
                       <div class="row">
                         <div class="col-md-6 col-sm-12">
                           <fieldset>
-                            <input name="ville_depart" type="text" id="ville_depart" placeholder="Ville de départ" required="">
+                            <input name="ville_depart" type="text" id="ville_depart" placeholder="ville de départ" required="">
                           </fieldset>
                         </div>
                         <div class="col-md-6 col-sm-12">
                           <fieldset>
-                            <input name="ville_arriver" type="text" id="ville_arriver" placeholder="Ville d'arriver" required="">
+                            <input name="ville_arriver" type="text" id="ville_arriver" placeholder="ville d'arriver" required="">
                           </fieldset>
                         </div>
                         <div class="col-lg-12">
@@ -122,175 +122,145 @@
     
     <!-- Modal add annonce -->
 
-    <div id="addAnonceModal" class="modal fade" role="dialog">  
-      <div class="modal-dialog">  
-        <!-- Modal content-->  
-
-        <div class="modal-content">  
-          <div class="modal-body">  
-            <section class="contact-us">
-              <div class="container">
-                <div class="down-contact">
-                  <div class="row">
-                    <div class="col-lg-12">
-                      <div class="sidebar-item contact-form">
-                        <div class="sidebar-heading">
-                          <h2>connectez-vous sur votre compte</h2>
-                        </div>
-                        <div class="content">
-                          <form action="{{route('add_annonce')}}" method="post" enctype="multipart/form-data">
-                            @csrf
-                            <div class="row">
-                              <div class="col-md-12 col-sm-12">
-                                <fieldset>
-                                  <input name="titre" type="text" id="titre" placeholder="le titre de l'annonce" required="">
-                                </fieldset>
-                              </div>
-                              <div class="col-md-12 col-sm-12">
-                                <fieldset>
-                                  <input name="texte" type="textarea" id="texte" placeholder="le contenu de l'annonce" required="">
-                                </fieldset>
-                              </div>
-                              <div class="col-md-12 col-sm-12">
-                                <fieldset>                       
-                                  <label for="image">Choisir une photo</label>
-                                  <input type="file" id="image" name="image" accept="image/png, image/jpeg" required="">
-                                </fieldset>
-                              </div>
-                              <div class="col-md-12 col-sm-12">
-                                <fieldset>                       
-                                  <select id="depart" name="depart">
-                                    <option value="le point d'arriver">le point de départ</option>
-                                    @if ($wilayas->count())
-                                    {{$i=1}}
-                                      @foreach ($wilayas as $wilaya)        
-                                        <option value="{{$i}}">{{$wilaya->nom}}</option>
-                                        {{$i=$i+1}}
-                                      @endforeach
-                                    @else
-                                    
-                                    @endif
-                                  </select>
-                                </fieldset>
-                              </div>
-                              <div class="col-md-12 col-sm-12">
-                                <fieldset>                       
-                                  <select id="arriver" name="arriver">
-                                    <option value="le point d'arriver">le point d'arriver</option>
-                                    @if ($wilayas->count())
-                                    {{$i=1}}
-                                      @foreach ($wilayas as $wilaya)  
-                                        <option value="{{$i}}">{{$wilaya->nom}}</option>
-                                        {{$i=$i+1}}
-                                      @endforeach
-                                    @else
-                                    
-                                    @endif
-                                  </select>
-                                </fieldset>
-                              </div>
-                              <div class="col-md-12 col-sm-12">
-                                <fieldset>                       
-                                  <select id="transport_type" name="transport_type">
-                                    <option value="le type de transport">le type de transport</option>
-                                    @if ($transport_types)
-                                      @foreach ($transport_types as $transport_type)        
-                                        <option value="{{$transport_type}}">{{$transport_type}}</option>
-                                      @endforeach
-                                    @else
-                                    
-                                    @endif
-                                  </select>
-                                </fieldset>
-                              </div>
-                              <div class="col-md-6 col-sm-12">
-                                <fieldset>                       
-                                  <select id="fourchette_poid_min" name="fourchette_poid_min">
-                                  <option value="le poids minimum">le poids minimum</option>
-                                    @if ($fourchette_poid_mins)
-                                      @foreach ($fourchette_poid_mins as $fourchette_poid_min)        
-                                      <option value="{{$fourchette_poid_min}}">{{$fourchette_poid_min}}</option>
-                                      @endforeach
-                                    @else
-                                    
-                                    @endif
-                                  </select>
-                                </fieldset>
-                              </div>
-                              <div class="col-md-6 col-sm-12">
-                                <fieldset>                       
-                                  <select id="fourchette_poid_max" name="fourchette_poid_max">
-                                    <option value="le poids maximum">le poids maximum</option>
-                                    @if ($fourchette_poid_maxs)
-                                      @foreach ($fourchette_poid_maxs as $fourchette_poid_max)        
-                                      <option value="{{$fourchette_poid_max}}">{{$fourchette_poid_max}}</option>
-                                      @endforeach
-                                    @else
-                                    
-                                    @endif
-                                  </select>
-                                </fieldset>
-                              </div>
-                              <div class="col-md-6 col-sm-12">
-                                <fieldset>                       
-                                  <select id="fourchette_volume_min" name="fourchette_volume_min">
-                                    <option value="le volume minimum">le volume minimum</option>
-                                    @if ($fourchette_volume_mins)
-                                      @foreach ($fourchette_volume_mins as $fourchette_volume_min)        
-                                      <option value="{{$fourchette_volume_min}}">{{$fourchette_volume_min}}</option>
-                                      @endforeach
-                                    @else
-                                    
-                                    @endif
-                                  </select>
-                                </fieldset>
-                              </div>
-                              <div class="col-md-6 col-sm-12">
-                                <fieldset>                       
-                                  <select id="fourchette_volume_max" name="fourchette_volume_max">
-                                    <option value="le volume maximum">le volume maximum</option>
-                                    @if ($fourchette_volume_maxs)
-                                      @foreach ($fourchette_volume_maxs as $fourchette_volume_max)        
-                                      <option value="{{$fourchette_volume_max}}">{{$fourchette_volume_max}}</option>
-                                      @endforeach
-                                    @else
-                                    
-                                    @endif
-                                  </select>
-                                </fieldset>
-                              </div>
-                              <div class="col-md-6 col-sm-12">
-                                <fieldset>                       
-                                  <select id="moyen_transport" name="moyen_transport">
-                                    <option value="le type de transport">le type de transport</option>
-                                    @if ($moyen_transports)
-                                      @foreach ($moyen_transports as $moyen_transport)        
-                                      <option value="{{$moyen_transport}}">{{$moyen_transport}}</option>
-                                      @endforeach
-                                    @else
-                                    
-                                    @endif
-                                  </select>
-                                </fieldset>
-                              </div>
-                              <div class="col-lg-12">
-                                <fieldset>
-                                  <button type="submit" id="add_annonce_submit" class="main-button btn btn-warning">ajouter</button>
-                                </fieldset>
-                              </div>
-                            </div>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
+  <div id="addAnonceModal" class="modal fade" role="dialog">  
+    <div class="modal-dialog">  
+      <div class="modal-content">    
+        <section class="formulaire formulaire-modal">
+          <div class="col-lg-12">
+            <div class="sidebar-heading">
+              <h2>connectez-vous sur votre compte</h2>
+            </div>
+            <form action="{{route('add_annonce')}}" method="post" enctype="multipart/form-data">
+              @csrf
+                <div class="row">
+                  <div class="col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="titre" type="text" id="titre" placeholder="titre de l'annonce" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="texte" type="textarea" id="texte" placeholder="contenu de l'annonce" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-md-11 col-sm-12" style="margin-left: 18px;">
+                    <fieldset>                       
+                      <label for="image" class="custom-file-label">Choisir une photo</label>
+                      <input type="file" id="image" name="image" class="custom-file-input col-md-12" accept="image/png, image/jpeg" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-md-12 col-sm-12">
+                    <fieldset>                       
+                      <select id="depart" name="depart">
+                        <option value="point d'arriver">point de départ</option>
+                        @if ($wilayas->count())
+                          {{$i=1}}
+                          @foreach ($wilayas as $wilaya)        
+                            <option value="{{$i}}">{{$wilaya->nom}}</option>
+                            {{$i=$i+1}}
+                          @endforeach
+                        @endif  
+                      </select>
+                    </fieldset>
+                  </div>
+                  <div class="col-md-12 col-sm-12">
+                    <fieldset>                       
+                      <select id="arriver" name="arriver">
+                        <option value="point d'arriver">point d'arriver</option>
+                        @if ($wilayas->count())
+                          {{$i=1}}
+                          @foreach ($wilayas as $wilaya)  
+                            <option value="{{$i}}">{{$wilaya->nom}}</option>
+                            {{$i=$i+1}}
+                           @endforeach
+                        @endif  
+                      </select>
+                    </fieldset>
+                  </div>
+                  <div class="col-md-12 col-sm-12">
+                    <fieldset>                       
+                      <select id="transport_type" name="transport_type">
+                        <option value="type de transport">type de transport</option>
+                        @if ($transport_types)
+                          @foreach ($transport_types as $transport_type)        
+                            <option value="{{$transport_type}}">{{$transport_type}}</option>
+                          @endforeach
+                        @endif  
+                      </select>
+                    </fieldset>
+                  </div>
+                  <div class="col-md-6 col-sm-12">
+                    <fieldset>                       
+                      <select id="fourchette_poid_min" name="fourchette_poid_min">
+                        <option value="poids minimum">poids minimum</option>
+                        @if ($fourchette_poid_mins)
+                          @foreach ($fourchette_poid_mins as $fourchette_poid_min)        
+                            <option value="{{$fourchette_poid_min}}">{{$fourchette_poid_min}}</option>
+                          @endforeach
+                        @endif  
+                      </select>
+                    </fieldset>
+                  </div>
+                  <div class="col-md-6 col-sm-12">
+                    <fieldset>                       
+                      <select id="fourchette_poid_max" name="fourchette_poid_max">
+                        <option value="poids maximum">poids maximum</option>
+                        @if ($fourchette_poid_maxs)
+                          @foreach ($fourchette_poid_maxs as $fourchette_poid_max)        
+                            <option value="{{$fourchette_poid_max}}">{{$fourchette_poid_max}}</option>
+                          @endforeach
+                        @endif  
+                      </select>
+                    </fieldset>
+                  </div>
+                  <div class="col-md-6 col-sm-12">
+                    <fieldset>                       
+                      <select id="fourchette_volume_min" name="fourchette_volume_min">
+                        <option value="volume minimum">volume minimum</option>
+                        @if ($fourchette_volume_mins)
+                          @foreach ($fourchette_volume_mins as $fourchette_volume_min)        
+                            <option value="{{$fourchette_volume_min}}">{{$fourchette_volume_min}}</option>
+                          @endforeach
+                        @endif
+                      </select>
+                    </fieldset>
+                  </div>
+                  <div class="col-md-6 col-sm-12">
+                    <fieldset>                       
+                      <select id="fourchette_volume_max" name="fourchette_volume_max">
+                        <option value="volume maximum">volume maximum</option>
+                        @if ($fourchette_volume_maxs)
+                          @foreach ($fourchette_volume_maxs as $fourchette_volume_max)        
+                            <option value="{{$fourchette_volume_max}}">{{$fourchette_volume_max}}</option>
+                          @endforeach
+                        @endif
+                      </select>
+                    </fieldset>
+                  </div>
+                  <div class="col-md-12 col-sm-12">
+                    <fieldset>                       
+                      <select id="moyen_transport" name="moyen_transport">
+                        <option value="moyen de transport">moyen de transport</option>
+                        @if ($moyen_transports)
+                          @foreach ($moyen_transports as $moyen_transport)        
+                            <option value="{{$moyen_transport}}">{{$moyen_transport}}</option>
+                          @endforeach
+                        @endif
+                      </select>
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12">
+                    <fieldset>
+                      <button type="submit" class="main-button btn btn-warning">ajouter</button>
+                    </fieldset>
                   </div>
                 </div>
-              </div>
-            </section>
-          </div>  
-        </div>  
+            </form>
+          </div>
+        </section>
       </div>  
     </div>  
+  </div>  
 
     <script>
       $( document ).ready(function() {

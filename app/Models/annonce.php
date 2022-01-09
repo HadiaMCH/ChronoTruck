@@ -38,6 +38,6 @@ class annonce extends Model
 
     public function tarjet()
     {
-        return $this->belongsTo(wilaya_wilaya::class);
+        return $this->belongsTo(wilaya_wilaya::class,'wilaya_wilaya_id');
     }
 }

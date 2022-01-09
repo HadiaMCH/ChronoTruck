@@ -104,7 +104,6 @@
                 <fieldset>                       
                   <label for="demande" class="custom-file-label">uploader votre demande</label>
                   <input type="file" class="custom-file-input" id="demande" name="demande" accept="image/png, image/jpeg, .doc, .docx, application/pdf" >
-                  <label for="demande" class="custom-file-label">uploader votre demande</label>
                 </fieldset>
               </div>
             </div>

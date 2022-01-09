@@ -85,7 +85,7 @@ class authController extends Controller
                 'password'=>$request->password,
                 'address'=>$request->adresse,
                 'phone'=>$request->phone,
-            ]); 
+            ]);  
         }
         else{
             $transporteur=1;
