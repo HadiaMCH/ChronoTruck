@@ -3,13 +3,18 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\authController;
 use App\Http\Controllers\newsController;
+use App\Http\Controllers\adminController;
 use App\Http\Controllers\acceuilController;
 use App\Http\Controllers\annonceController;
 use App\Http\Controllers\contactController;
 use App\Http\Controllers\profileController;
+use App\Http\Controllers\gestion_newsController;
 use App\Http\Controllers\news_detailsController;
 use App\Http\Controllers\presentationController;
 use App\Http\Controllers\statistiquesController;
+use App\Http\Controllers\gestion_usersController;
+use App\Http\Controllers\gestion_contenuController;
+use App\Http\Controllers\gestion_annoncesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,6 +64,17 @@ Route::post('/etre_transporteur', [profileController::class,'etre_transporteur']
 Route::post('/etre_certifie', [profileController::class,'etre_certifie'])->name('etre_certifie');
 Route::post('/noter_transporteur', [profileController::class,'noter_transporteur'])->name('noter_transporteur');
 Route::post('/signaler_transporteur', [profileController::class,'signaler_transporteur'])->name('signaler_transporteur');
+
+Route::get('/admin', [adminController::class,'index'])->name('admin');
+
+Route::get('/gestion_annonces', [gestion_annoncesController::class,'index'])->name('gestion_annonces');
+
+Route::get('/gestion_contenu', [gestion_contenuController::class,'index'])->name('gestion_contenu');
+
+Route::get('/gestion_news', [gestion_newsController::class,'index'])->name('gestion_news');
+
+Route::get('/gestion_users', [gestion_usersController::class,'index'])->name('gestion_users');
+
 
 
 

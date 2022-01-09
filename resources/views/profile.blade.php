@@ -142,7 +142,7 @@
                     <div class="sidebar-heading">
                       <h2>transactions recente</h2>
                     </div>
-                    <div class="content">
+                    <!-- <div class="content">
                       <ul>
                         <li>
                           <div class="author-thumb">
@@ -181,7 +181,7 @@
                           </div>
                         </li>
                       </ul>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
                 
