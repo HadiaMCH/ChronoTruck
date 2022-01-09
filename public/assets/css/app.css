@@ -1184,6 +1184,15 @@ body {
         background-color: #fb9857;
     }
 
+    .posts .annonce_opps {
+        margin-top:100px;
+    }
+
+
+
+
+
+
     .posts .submit-comment {
         margin-top: 60px;
     }
@@ -1240,6 +1249,7 @@ body {
     .posts .submit-comment button:hover {
         background-color: #fb9857;
     }
+
 
     /*       rating       */
     .checked {

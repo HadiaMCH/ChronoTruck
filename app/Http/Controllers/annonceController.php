@@ -101,16 +101,16 @@ class annonceController extends Controller
             annonce::where('id',$id)->update(['img'=>$image]);
           }
 
-          if($request->texte != $annonce->texte){
-            annonce::where('id',$id)->update(['texte'=>$request->texte]);
+          if($request->depart != $annonce->tarjet->wilaya_depart_id){
+            $id_arriver=$annonce->tarjet->wilaya_arriver_id;
+            $tarjet= wilaya_wilaya::where("wilaya_depart_id","$request->depart")->where("wilaya_arriver_id","$id_arriver")->first();
+            annonce::where('id',$id)->update(['wilaya_wilaya_id'=>$tarjet->id]);
           }
 
-          if($request->depart != $annonce->depart){
-            annonce::where('id',$id)->update(['depart'=>$request->depart]);
-          }
-
-          if($request->arriver != $annonce->arriver){
-            annonce::where('id',$id)->update(['arriver'=>$request->arriver]);
+          if($request->arriver != $annonce->tarjet->wilaya_arriver_id){
+            $id_depart=$annonce->tarjet->wilaya_depart_id;
+            $tarjet= wilaya_wilaya::where("wilaya_depart_id","$id_depart")->where("wilaya_arriver_id","$request->arriver")->first();              
+            annonce::where('id',$id)->update(['wilaya_wilaya_id'=>$tarjet->id]);
           }
 
           if($request->transport_type != $annonce->transport_type){
