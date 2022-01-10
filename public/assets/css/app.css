@@ -1145,6 +1145,33 @@ body {
         letter-spacing: 0.5px;
     }
 
+    .posts .profile {
+        margin-top: 0px;
+    }
+
+    .posts .profile ul li {
+        display: inline;
+        padding:10px 50px;
+    }
+
+    .posts .profile ul{
+        display: inline-grid;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        width:100%;
+    }
+
+    .posts .profile ul li .right-content {
+        margin: 0px auto;
+    }
+
+    .posts .profile ul li .right-content h4 {
+        color: #20232e;
+        font-size: 19px;
+        font-weight: 900;
+        letter-spacing: 0.5px;
+    }
+
     .post-info a{
         margin-bottom: 0px;
         font-size: 15px;

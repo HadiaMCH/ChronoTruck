@@ -8,7 +8,8 @@ use Illuminate\Routing\Controller;
 class gestion_usersController extends Controller
 {
     public function index()
-    {        
+    {       
+         
         return view('gestion_users');
     }
 }

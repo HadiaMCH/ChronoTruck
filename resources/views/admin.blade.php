@@ -7,46 +7,45 @@
       <div class="container-fluid">
         <div class="owl-banner owl-carousel">
           
-          <!-- Diaporama -->
               <div class="item">
-                <img src="" >
+                <img src="assets/images/users_management.jpg" >
                 <div class="item-content">
                   <div class="main-content">
                     <div class="meta-category">
-                    <a href=""><span style="color:#804721"></span></a>
+                    <a href="{{ route('gestion_users') }}"><span style="color:#804721">Gestion des utilisateurs</span></a>
                     </div>
                   </div>
                 </div>
               </div>
 
               <div class="item">
-                <img src="" >
+                <img src="assets/images/annonces_management.jpg" >
                 <div class="item-content">
                   <div class="main-content">
                     <div class="meta-category">
-                    <a href=""><span style="color:#804721"></span></a>
+                    <a href="{{ route('gestion_annonces') }}"><span style="color:#804721">Gestion des annonces</span></a>
                     </div>
                   </div>
                 </div>
               </div>
 
               <div class="item">
-                <img src="" >
+                <img src="assets/images/news_management.jpg" >
                 <div class="item-content">
                   <div class="main-content">
                     <div class="meta-category">
-                    <a href=""><span style="color:#804721"></span></a>
+                    <a href="{{ route('gestion_news') }}"><span style="color:#804721">Gestion des news</span></a>
                     </div>
                   </div>
                 </div>
               </div>
 
               <div class="item">
-                <img src="" >
+                <img src="assets/images/contenu_management.jpg" >
                 <div class="item-content">
                   <div class="main-content">
                     <div class="meta-category">
-                    <a href=""><span style="color:#804721"></span></a>
+                    <a href="{{ route('gestion_contenu') }}"><span style="color:#804721">Gestion du contenu</span></a>
                     </div>
                   </div>
                 </div>

@@ -20,13 +20,12 @@
       </section>
     </div>
     
-    <section class="posts grid-system">
+    <section class="posts">
       <div class="container">
         <div class="row">
-          <div class="col-lg-8">
-            <div class="row">
+          <div class="col-lg-7">
+            <div class="profile">
               <div class="col-lg-12">
-                <div class="sidebar-item comments">
                   <div class="sidebar-heading">
                     <h2>informations personnelles</h2>
                   </div>
@@ -71,7 +70,6 @@
                       </li>
                     </ul>
                   </div>
-                </div>
               </div>
               @if($user->transporteur)
                 <div class="col-lg-12">
@@ -84,8 +82,9 @@
                         <li>
                           <a href="" data-toggle="modal" data-target="#wilaya_modal"><div class="right-content">
                           <h4> les wilayas que vous comptez desservir :</h4>
-
-                            <p>{{$user->tarjets[0]}} {{$user->id}}</p>
+                          @foreach ($user->tarjets as $tarjet)
+                            <p>de {{$wilayas[$tarjet->wilaya_depart_id-1]->nom}} vers {{$wilayas[$tarjet->wilaya_arriver_id-1]->nom}}</p>
+                          @endforeach
                           </a>
                         </div>
                       </li>
@@ -106,7 +105,7 @@
                               <p>{{$user->statut}}</p>
                             </div>
                           </li>
-                          @if($user->certifie="refusee")
+                          @if($user->certifie=="refusee")
                           <li>
                             <div class="right-content">
                               <h4>justificatif  :</h4>
@@ -189,8 +188,7 @@
               </div>
             </div>
           </div>
-          
-          <div class="col-lg-4">
+          <div class="col-lg-5">
             <div class="sidebar">
               <div class="row">
                 <div class="col-lg-12">
@@ -207,21 +205,54 @@
                     </div>
                     <div class="content">
                       <ul>
-                        @if($user->annonces) 
-                            @foreach ($user->annonces as $annonce) 
+                        @if(count($user->annonces_user)) 
+                            @foreach ($user->annonces_user as $annonce) 
                               @if(!$annonce->archiver)  
                                 <li><a href="annonce/{{$annonce->id}}">
                                 <h5>{{$annonce->titre}}</h5>
-                                <span>de {{$annonce->depart}} vers {{$annonce->arriver}}</span>
-                                <span>{{$annonce->created_at}}</span>
+                                <span>de {{$wilayas[$annonce->tarjet->wilaya_depart_id-1]->nom}} vers {{$wilayas[$annonce->tarjet->wilaya_arriver_id-1]->nom}}</span>
+                                <span>{{Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $annonce->created_at)->format('H:i:s d-m-Y');}}</span>
                                 </a></li>
                                 @endif
                             @endforeach
+                        @else
+                          <li>
+                            <span>vous n'avez pas fait d'annonce </span>
+                          </li>
                         @endif
                       </ul>
                     </div>
                   </div>
                 </div>
+                @if($user->transporteur==1)
+                <div class="col-lg-12">
+                  <div class="sidebar-item recent-posts">
+                    <div class="sidebar-heading">
+                      <h2>annonces dont vous étiez un transporteur </h2>
+                    </div>
+                    <div class="content">
+                      <ul>
+                        @if(count($user->annonces_tranporteur)) 
+                            @foreach ($user->annonces_tranporteur as $annonce) 
+                              @if(!$annonce->archiver)  
+                                <li><a href="annonce/{{$annonce->id}}">
+                                <h5>{{$annonce->titre}}</h5>
+                                <span>de {{$wilayas[$annonce->tarjet->wilaya_depart_id-1]->nom}} vers {{$wilayas[$annonce->tarjet->wilaya_arriver_id-1]->nom}}</span>
+                                <span>{{Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $annonce->created_at)->format('H:i:s d-m-Y');}}</span>
+                                </a></li>
+                                @endif
+                            @endforeach
+                        @else
+                        <li>
+                          <span>vous n'avez pas tranporter deja</span>
+                        </li>
+                        @endif
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                @endif
+
               </div>
             </div>
           </div>

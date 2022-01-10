@@ -16,7 +16,7 @@ class profileController extends Controller
         $id=session()->get('id');
         $user= User::where("id","$id")->first();
         $wilayas=wilaya::all();
-
+        
         return view('profile',compact('user','wilayas'));
     }
 
