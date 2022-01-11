@@ -11,9 +11,8 @@ use Illuminate\Support\Facades\Storage;
 
 class profileController extends Controller
 {
-    public function index()
+    public function index($id)
     {   
-        $id=session()->get('id');
         $user= User::where("id","$id")->first();
         $wilayas=wilaya::all();
         

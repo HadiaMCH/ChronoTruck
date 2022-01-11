@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
+<html lang="en"> 
+    <head> 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="MecheriHadia">
         <meta name="csrf-token" content="{{csrf_token()}}">
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap" rel="stylesheet">
+        
         <title>ِChronoTruck</title>
 
         <!-- Bootstrap core CSS -->
         <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Additional CSS Files -->
-        <link rel="stylesheet" href= "../assets/css/app.css">
+        <link rel="stylesheet" href="../assets/css/app.css">
         <link rel="stylesheet" href="../assets/css/owl.css">
         <link rel="stylesheet" href="../assets/css/select2.css">
-        <link rel="stylesheet" href="../assets/css/fontawsome.css">
 
         <script src="../vendor/jquery/jquery.min.js"></script>
         <script src="../assets/js/select2.js"></script>
@@ -28,8 +28,8 @@
         <script src="../assets/js/slick.js"></script>
         <script src="../assets/js/isotope.js"></script>
         <script src="../assets/js/accordions.js"></script>
-
-    </head>
+        
+    </head> 
     
     <body>
 
@@ -41,40 +41,35 @@
           <div class="navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item active">
-                <a class="nav-link" href="{{ route('acceuil') }}">Accueil</a>
+                <a class="nav-link" href="{{ route('admin') }}">Accueil</a>
               </li> 
               <li class="nav-item">
-                <a class="nav-link" href="{{ route('presentation') }}">Présentation</a>
+                <a class="nav-link" href="{{ route('gestion_users') }}">les utilisateurs</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ route('news') }}">News</a>
+                <a class="nav-link" href="{{ route('gestion_annonces') }}">les annonces</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ route('statistiques') }}">Statistiques</a>
+                <a class="nav-link" href="{{ route('gestion_news') }}">les news</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ route('contact') }}">Contact</a>
+                <a class="nav-link" href="{{ route('gestion_contenu') }}">le contenu</a>
               </li>
-              @if(session('name')) 
+              @if(session('super_admin_name'))
+              <li class="nav-item">
+                <a class="nav-link" href="{{ route('gestion_admin') }}">les admins</a>
+              </li>
+              @endif
+              @if(session('admin_name'))
               <li class="nav-item">
                   <div class="main-button">
-                    <a rel="nofollow" href="profile/(session('id')" >profile</a>
-                  </div>
-              </li>
-              <li class="nav-item">
-                  <div class="main-button">
-                  <a rel="nofollow" id="logout_botton" href="{{ route('logout') }}" >déconnecter</a>
+                  <a rel="nofollow" id="logout_botton" href="{{ route('logout_admin') }}" >déconnecter</a>
                   </div>
               </li>
               @else
               <li class="nav-item">
                   <div class="main-button">
-                    <a rel="nofollow" href="{{ route('inscription') }}" >Inscription</a>
-                  </div>
-              </li>
-              <li class="nav-item">
-                  <div class="main-button">
-                  <a rel="nofollow" href="" data-toggle="modal" data-target="#loginModal">Connexion</a>
+                  <a rel="nofollow" href="" data-toggle="modal" data-target="#loginModal">connecter</a>
                   </div>
               </li>
               @endif
@@ -85,23 +80,6 @@
     </header>
 
         @yield('content')
-    
-        <footer>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-            <ul class="social-icons">
-              <li><a href="{{ route('acceuil') }}">Accueil</a></li>
-              <li><a href="{{ route('presentation') }}">Présentation</a></li>
-              <li><a href="{{ route('news') }}">News</a></li>
-              <li><a href="{{ route('statistiques') }}">Statistiques</a></li>
-              <li><a href="{{ route('contact') }}">Contact</a></li>
-              <li><a href="{{ route('inscription') }}">Inscription</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </footer>
      
   <!-- Modal login-->  
 
@@ -111,14 +89,14 @@
         <section class="formulaire formulaire-modal">
           <div class="col-lg-12">
             <div class="sidebar-heading">
-              <h2>connectez-vous sur votre compte</h2>
+              <h2>connectez-vous sur votre compte admin</h2>
             </div>
             <form >
             @csrf
               <div class="row">
                 <div class="col-md-12 col-sm-12">
                   <fieldset>
-                    <input name="email_login" class="form-control" type="text" id="email_login" placeholder="votre email" required>
+                    <input name="email_login_admin" class="form-control" type="text" id="email_login_admin" placeholder="votre email" required>
                   </fieldset>
                 </div>
                 <div class="col-md-12 col-sm-12">

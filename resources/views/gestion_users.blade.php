@@ -38,14 +38,18 @@
             <tbody>
                 @foreach($clients as $client)
                   <tr>
-                    <th scope="row">{{$client->id}}</th>
+                    <th scope="row"><a href="profile/{{$client->id}}">{{$client->id}}</a></th>
                     <td>{{$client->name}}</td>
                     <td>{{$client->familyname}}</td>
                     <td>{{$client->email}}</td>
                     <td>{{$client->phone}}</td>
                     <td>{{$client->address}}</td>
                     <td>{{$client->password}}</td>
-                    <td>bannir</td>
+                    <td>
+                      <div class="main-button">
+                        <a rel="nofollow" href="" >bannir</a>
+                      </div>
+                    </td>
                   </tr>
                 @endforeach
             </tbody>
@@ -103,7 +107,7 @@
             <tbody>
               @foreach($transporteurs as $transporteur)
                 <tr>
-                  <th scope="row">{{$transporteur->id}}</th>
+                  <th scope="row"><a href="profile/{{$transporteur->id}}">{{$transporteur->id}}</a></th>
                   <td>{{$transporteur->name}}</td>
                   <td>{{$transporteur->familyname}}</td>
                   <td>{{$transporteur->email}}</td>
@@ -137,7 +141,11 @@
                   @else
                     <td>valider les inscriptions des transporteurs</td>
                   @endif
-                  <td>bannir</td>
+                  <td>
+                    <div class="main-button">
+                      <a rel="nofollow" href="" >bannir</a>
+                    </div>
+                  </td>
                 </tr>
               @endforeach
             </tbody>
@@ -186,15 +194,15 @@
           @foreach($annonces as $annonce)
             <tr>
               <th scope="row">{{$i}}</th>
-              <td>{{$annonce->user->id}}-{{$annonce->user->name}}</td>
+              <td><a href="profile/{{$annonce->user->id}}">{{$annonce->user->id}}-{{$annonce->user->name}}</a></td>
               @if($annonce->user->transporteur == 0)
                 <td>client</td>
               @else
               <td>transporteur</td>
               @endif
-              <td>{{$annonce->id}}</td>
-              <td>{{$annonce->transporteur->id}}-{{$annonce->transporteur->name}}</td>
-              <td><a href="">texte</a></td>
+              <td><a href="annonce/$annonce->id">{{$annonce->id}}</a></td>
+              <td><a href="profile/{{$annonce->transporteur->id}}">{{$annonce->transporteur->id}}-{{$annonce->transporteur->name}}</a></td>
+              <td><a data-toggle="modal" data-target="#">texte <span>{{$annonce->signale}}</span></a></td>
             </tr>
             {{$i++}}
           @endforeach 
@@ -207,6 +215,21 @@
 
 </div>
 
+    <!-- Modal signaler-->
+    <div id="signaler" class="modal fade" role="dialog">  
+    <div class="modal-dialog">  
+      <div class="modal-content">    
+        <section class="formulaire formulaire-modal">
+          <div class="col-lg-12">
+            <div class="sidebar-heading">              
+              <h2>le texte de signalement de cette annonce</h2>
+            </div>
+            <p>                         </p>
+          </div>
+        </section>
+      </div>  
+    </div>  
+  </div>
 
     <nav aria-label="Page navigation example">
       <ul class="pagination justify-content-center">

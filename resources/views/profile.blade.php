@@ -1,5 +1,8 @@
-@extends('layouts.app')
-
+@if( session()->exists('admin_name') || session()->exists('super_admin_name') )
+  @extends('layouts.appsecondadmin')
+@else
+  @extends('layouts.appsecond')
+@endif
 @section('content')
 
         
@@ -33,107 +36,152 @@
                     <ul>
                       <li>
                         <div class="right-content">
-                          <a href="" data-toggle="modal" data-target="#name"><h4>nom :</h4>
-                          <p>{{$user->name}}</p></a>
+                          @if($user->id == session('id') || session()->exists('super_admin_name'))
+                            <a href="" data-toggle="modal" data-target="#name"><h4>nom :</h4>
+                            <p>{{$user->name}}</p></a>
+                          @else
+                            <h4>nom :</h4>
+                            <p>{{$user->name}}</p>
+                          @endif
                         </div>
                       </li>
                       <li>
                         <div class="right-content">
-                          <a href="" data-toggle="modal" data-target="#familyname"><h4>prénom :</h4>
-                          <p>{{$user->familyname}}</p></a>
+                          @if($user->id == session('id') || session()->exists('super_admin_name'))
+                            <a href="" data-toggle="modal" data-target="#familyname"><h4>prénom :</h4>
+                            <p>{{$user->familyname}}</p></a>
+                          @else
+                            <h4>prénom :</h4>
+                            <p>{{$user->familyname}}</p>
+                          @endif
                         </div>
                       </li>
                       <li>
                         <div class="right-content">
-                          <a href="" data-toggle="modal" data-target="#phone"><h4>numéro de téléphone :</h4>
-                          <p>{{$user->phone}}</p></a>
+                          @if($user->id == session('id') || session()->exists('super_admin_name'))
+                            <a href="" data-toggle="modal" data-target="#phone"><h4>numéro de téléphone :</h4>
+                            <p>{{$user->phone}}</p></a>
+                          @else
+                            <h4>numéro de téléphone :</h4>
+                            <p>{{$user->phone}}</p>
+                          @endif
                         </div>
                       </li>
                       <li>
                         <div class="right-content">
-                          <a href="" data-toggle="modal" data-target="#email"><h4>email :</h4>
-                          <p>{{$user->email}}</p></a>
+                          @if($user->id == session('id') || session()->exists('super_admin_name'))
+                            <a href="" data-toggle="modal" data-target="#email"><h4>email :</h4>
+                            <p>{{$user->email}}</p></a>
+                          @else
+                            <h4>email :</h4>
+                            <p>{{$user->email}}</p>
+                          @endif
                         </div>
                       </li>
                       <li>
                         <div class="right-content">
-                          <a href="" data-toggle="modal" data-target="#mot_passe">
-                          <h4> mot de passe :</h4>
-                          <p>{{$user->password}}</p></a>
+                          @if($user->id == session('id') || session()->exists('super_admin_name'))
+                            <a href="" data-toggle="modal" data-target="#mot_passe">
+                            <h4>mot de passe :</h4>
+                            <p>{{$user->password}}</p></a>
+                          @else
+                            <h4>mot de passe :</h4>
+                            <p>{{$user->password}}</p>
+                          @endif
                         </div>
                       </li>
                       <li>
-                          <a href="" data-toggle="modal" data-target="#address"><div class="right-content">
-                          <h4>adresse principale :</h4>
-                          <p>{{$user->address}}</p></a>
+                        <div class="right-content">
+                          @if($user->id == session('id') || session()->exists('super_admin_name'))
+                            <a href="" data-toggle="modal" data-target="#address">
+                            <h4>adresse principale :</h4>
+                            <p>{{$user->address}}</p></a>
+                          @else
+                            <h4>adresse principale :</h4>
+                            <p>{{$user->address}}</p>
+                          @endif
                         </div>
                       </li>
                     </ul>
                   </div>
               </div>
-              @if($user->transporteur)
+              @if($user->transporteur==2)
                 <div class="col-lg-12">
-                  <div class="sidebar-item comments">
                     <div class="sidebar-heading">
                       <h2>informations du transporteur</h2>
                     </div>
                     <div class="content">
                       <ul>
                         <li>
-                          <a href="" data-toggle="modal" data-target="#wilaya_modal"><div class="right-content">
-                          <h4> les wilayas que vous comptez desservir :</h4>
-                          @foreach ($user->tarjets as $tarjet)
-                            <p>de {{$wilayas[$tarjet->wilaya_depart_id-1]->nom}} vers {{$wilayas[$tarjet->wilaya_arriver_id-1]->nom}}</p>
-                          @endforeach
-                          </a>
+                          <div class="right-content">
+                            @if($user->id == session('id') || session()->exists('super_admin_name'))
+                              <a href="" data-toggle="modal" data-target="#wilaya_modal">
+                              @if (session()->exists('super_admin_name'))
+                                <h4> les wilayas que ce transporteur compte desservir :</h4>
+                              @else
+                                <h4> les wilayas que vous comptez desservir :</h4>
+                              @endif
+                              @foreach ($user->tarjets as $tarjet)
+                                <p>de {{$wilayas[$tarjet->wilaya_depart_id-1]->nom}} vers {{$wilayas[$tarjet->wilaya_arriver_id-1]->nom}}</p>
+                              @endforeach
+                              </a>
+                            @else
+                              <h4> les wilayas que ce transporteur compte desservir :</h4>
+                              @foreach ($user->tarjets as $tarjet)
+                                <p>de {{$wilayas[$tarjet->wilaya_depart_id-1]->nom}} vers {{$wilayas[$tarjet->wilaya_arriver_id-1]->nom}}</p>
+                              @endforeach
+                            @endif
+                          </div>
+                        </li>
+                      </ul>
+                  </div>
+                  @if($user->certifie)
+                    <div class="col-lg-12">
+                      <div class="sidebar-item comments">
+                        <div class="sidebar-heading">
+                          <h2>informations de la certification du transporteur</h2>
                         </div>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                @if($user->certifie)
-                  <div class="col-lg-12">
-                    <div class="sidebar-item comments">
-                      <div class="sidebar-heading">
-                        <h2>informations de la certification du transporteur</h2>
-                      </div>
-                      <div class="content">
-                        <ul>
-                          <li>
-                            <div class="right-content">
-                              <h4>le status Le statut de votre demande  :</h4>
-                              <p>{{$user->statut}}</p>
-                            </div>
-                          </li>
-                          @if($user->certifie=="refusee")
-                          <li>
-                            <div class="right-content">
-                              <h4>justificatif  :</h4>
-                              <p>{{$user->justificatif}}</p>
-                            </div>
-                          </li>
-                          @endif
-                        </ul>
+                        <div class="content">
+                          <ul>
+                            <li>
+                              <div class="right-content">
+                                <h4>le status Le statut de la demande de certification :</h4>
+                                <p>{{$user->statut}}</p>
+                              </div>
+                            </li>
+                            @if($user->certifie=="refusée")
+                            <li>
+                              <div class="right-content">
+                                <h4>justificatif  :</h4>
+                                <p>{{$user->justificatif}}</p>
+                              </div>
+                            </li>
+                            @endif
+                          </ul>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                @else
-                  <div class="col-lg-12">
-                    <div class="sidebar-item comments">
-                      <div class="sidebar-heading">
-                        <h2><a href="" data-toggle="modal" data-target="#certifie">voulez vous etre un transporteur certifié ?</a></h2>
+                  @elseif($user->id == session('id'))
+                    <div class="col-lg-12">
+                      <div class="sidebar-item comments">
+                        <div class="sidebar-heading">
+                          <h2><a href="" data-toggle="modal" data-target="#certifie">voulez vous etre un transporteur certifié ?</a></h2>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  @endif
+              @elseif($user->transporteur==1)
+                @if($user->id == session('id'))
+                  <div class="col-lg-12">
+                    <div class="sidebar-heading">
+                      <h2>votre inscription comme un transporteur n'est pas encore validée.</h2>
+                    </div>
                 @endif
-              @else
+              @elseif($user->id == session('id'))
                 <div class="col-lg-12">
-                  <div class="sidebar-item comments">
-                  <div class="sidebar-heading">
+                    <div class="sidebar-heading">
                       <h2><a href="" data-toggle="modal" data-target="#transporteur">voulez vous etre un transporteur ?</a></h2>
                     </div>
-                  </div>
-                </div>
               @endif
 
                 <div class="col-lg-12">
@@ -208,7 +256,7 @@
                         @if(count($user->annonces_user)) 
                             @foreach ($user->annonces_user as $annonce) 
                               @if(!$annonce->archiver)  
-                                <li><a href="annonce/{{$annonce->id}}">
+                                <li><a href="../annonce/{{$annonce->id}}">
                                 <h5>{{$annonce->titre}}</h5>
                                 <span>de {{$wilayas[$annonce->tarjet->wilaya_depart_id-1]->nom}} vers {{$wilayas[$annonce->tarjet->wilaya_arriver_id-1]->nom}}</span>
                                 <span>{{Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $annonce->created_at)->format('H:i:s d-m-Y');}}</span>
@@ -235,7 +283,7 @@
                         @if(count($user->annonces_transporteur)) 
                             @foreach ($user->annonces_transporteur as $annonce) 
                               @if(!$annonce->archiver)  
-                                <li><a href="annonce/{{$annonce->id}}">
+                                <li><a href="../annonce/{{$annonce->id}}">
                                 <h5>{{$annonce->titre}}</h5>
                                 <span>de {{$wilayas[$annonce->tarjet->wilaya_depart_id-1]->nom}} vers {{$wilayas[$annonce->tarjet->wilaya_arriver_id-1]->nom}}</span>
                                 <span>{{Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $annonce->created_at)->format('H:i:s d-m-Y');}}</span>

@@ -58,6 +58,7 @@ Route::post('/connexion', [authController::class,'login'])->name('login');
 Route::get('/deconnexion', [authController::class,'logout'])->name('logout');
 
 Route::get('/profile', [profileController::class,'index'])->name('profile');
+Route::get('/profile/{id}', [profileController::class,'index']);
 Route::post('/profile', [profileController::class,'check_password'])->name('check_password');
 Route::post('/modifier', [profileController::class,'modifier'])->name('modifier');
 Route::post('/etre_transporteur', [profileController::class,'etre_transporteur'])->name('etre_transporteur');
