@@ -99,7 +99,7 @@ class profileController extends Controller
     }
 
     public function noter_transporteur(Request $request){
-        User::where('id',$request->id_tranporteur)->increment('note' , $request->note);
+        User::where('id',$request->id_transporteur)->increment('note' , $request->note);
         annonce::where('id',$request->id_annonce)->update(['note' => $request->note]);
         return response()->json([
             'status' => "rated",

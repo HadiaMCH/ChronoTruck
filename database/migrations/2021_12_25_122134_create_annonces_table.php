@@ -32,7 +32,7 @@ class CreateAnnoncesTable extends Migration
             $table->longText('signale')->nullable();            
 
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('tranporteur_id')->constrained()->nullable();
+            $table->foreignId('transporteur_id')->constrained()->nullable();
 
             $table->boolean('archiver')->default(0);
             $table->timestamps();

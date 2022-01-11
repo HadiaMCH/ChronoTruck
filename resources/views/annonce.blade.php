@@ -111,8 +111,8 @@
                   <li class="col-lg-6">
                     <div class="right-content">
                       <h4>le transporteur</h4>
-                      <p>{{$annonce->tranporteur->name}} {{$annonce->tranporteur->familyname}}</p>
-                      <p id="tranporteur_id" style="display:none;">{{$annonce->tranporteur->id}}</p>
+                      <p>{{$annonce->transporteur->name}} {{$annonce->transporteur->familyname}}</p>
+                      <p id="transporteur_id" style="display:none;">{{$annonce->transporteur->id}}</p>
                     </div>
                   </li>
 
@@ -193,7 +193,7 @@
             </div>
             <button id="noter_submit" type="button" class="btn btn-lg btn-success">Soumettre</button>
             @else
-              <p> vous avez donner une note de {{$annonce->note}} a {{$annonce->tranporteur->name}} {{$annonce->tranporteur->familyname}}</p>
+              <p> vous avez donner une note de {{$annonce->note}} a {{$annonce->transporteur->name}} {{$annonce->transporteur->familyname}}</p>
             @endif
           </div>
         </section>
@@ -217,7 +217,7 @@
             </div>
             <button id="signaler_submit" type="button" class="btn btn-lg btn-success">Soumettre</button>
             @else
-              <p> vous avez deja signaler {{$annonce->tranporteur->name}} {{$annonce->tranporteur->familyname}}</p>
+              <p> vous avez deja signaler {{$annonce->transporteur->name}} {{$annonce->transporteur->familyname}}</p>
             @endif
           </div>
         </section>
@@ -459,7 +459,7 @@
         });
         e.preventDefault();
         let formData = {
-          id_tranporteur: $("#tranporteur_id").html(),
+          id_transporteur: $("#transporteur_id").html(),
           id_annonce:$("#annonce_id").html(), 
           note : count,
         };

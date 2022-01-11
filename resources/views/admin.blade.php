@@ -8,7 +8,7 @@
         <div class="owl-banner owl-carousel">
           
               <div class="item">
-                <img src="assets/images/users_management.jpg" >
+                <img src="assets/images/users_management.jpg" class="img-thumbnail">
                 <div class="item-content">
                   <div class="main-content">
                     <div class="meta-category">
@@ -19,7 +19,7 @@
               </div>
 
               <div class="item">
-                <img src="assets/images/annonces_management.jpg" >
+                <img src="assets/images/annonces_management.jpg" class="img-thumbnail">
                 <div class="item-content">
                   <div class="main-content">
                     <div class="meta-category">
@@ -30,7 +30,7 @@
               </div>
 
               <div class="item">
-                <img src="assets/images/news_management.jpg" >
+                <img src="assets/images/news_management.jpg" class="img-thumbnail">
                 <div class="item-content">
                   <div class="main-content">
                     <div class="meta-category">
@@ -41,7 +41,7 @@
               </div>
 
               <div class="item">
-                <img src="assets/images/contenu_management.jpg" >
+                <img src="assets/images/contenu_management.jpg" class="img-thumbnail">
                 <div class="item-content">
                   <div class="main-content">
                     <div class="meta-category">

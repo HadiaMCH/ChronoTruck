@@ -232,8 +232,8 @@
                     </div>
                     <div class="content">
                       <ul>
-                        @if(count($user->annonces_tranporteur)) 
-                            @foreach ($user->annonces_tranporteur as $annonce) 
+                        @if(count($user->annonces_transporteur)) 
+                            @foreach ($user->annonces_transporteur as $annonce) 
                               @if(!$annonce->archiver)  
                                 <li><a href="annonce/{{$annonce->id}}">
                                 <h5>{{$annonce->titre}}</h5>

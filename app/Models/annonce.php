@@ -23,7 +23,7 @@ class annonce extends Model
         'fourchette_volume_max',
         'moyen_transport',
         'user_id',
-        'tranporteur_id'
+        'transporteur_id'
     ];
 
     public function user()
@@ -31,9 +31,9 @@ class annonce extends Model
         return $this->belongsTo(User::class,'user_id');
     }
 
-    public function tranporteur()
+    public function transporteur()
     {
-        return $this->belongsTo(User::class,'tranporteur_id');
+        return $this->belongsTo(User::class,'transporteur_id');
     }
 
     public function tarjet()

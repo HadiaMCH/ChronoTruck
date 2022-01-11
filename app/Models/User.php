@@ -59,9 +59,9 @@ class User extends Authenticatable
         return $this->hasMany(annonce::class,'user_id');
     }
 
-    public function annonces_tranporteur() // les annonces transporter par le transporteur
+    public function annonces_transporteur() // les annonces transporter par le transporteur
     {
-        return $this->hasMany(annonce::class,'tranporteur_id');
+        return $this->hasMany(annonce::class,'transporteur_id');
     }
 
     public function tarjets()
