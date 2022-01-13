@@ -26,7 +26,7 @@ class CreateAnnoncesTable extends Migration
             $table->enum('fourchette_volume_max', ['100l','500l','1kl','5kl','10kl','50kl','100kl']);
             $table->enum('moyen_transport', ['camion', 'bus', 'voiture', 'moto']);
             $table->enum('status',['validée', 'en attente', 'terminée'])->default('en attente');
-            $table->double('tarif')->nullable();
+            $table->double('tarif')->default(0);
 
             $table->Integer('note')->default(0);
             $table->longText('signale')->nullable();            

@@ -7,22 +7,29 @@
       <section class="page-heading">
         <div class="container">
           <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-10">
               <div class="text-content">
                 <h2>La gestion des clients</h2>
                 <h4>Vous pouvez bannir des clients ainsi que de les filtrer, les trier et accèder aux leurs profils</h4>
               </div>
             </div>
+            <div class="col-lg-2">
+              <div class="main-button">
+                <a data-toggle="modal" data-target="#rechercher_client">rechercher</a>
+              </div>
+            </div> 
           </div>
         </div>
       </section>
     </div> 
 
     <!-- Page Content -->
+
     <section class="posts grid-system">
       <div class="container">
+        <div class="table-responsive">
         @if (count($clients))
-          <table class="table" id="users">
+          <table class="table">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -32,7 +39,7 @@
                 <th scope="col">numéro de téléphone</th>
                 <th scope="col">adresse principale</th>
                 <th scope="col">mot de passe</th>
-                <th scope="col">bannir des clients</th>
+                <th scope="col">bannir</th>
               </tr>
             </thead>
             <tbody>
@@ -57,6 +64,7 @@
         @else
 
         @endif
+        </div>
       </div>
     </section>
 
@@ -67,10 +75,15 @@
       <section class="page-heading">
         <div class="container">
           <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-10">
               <div class="text-content">
                 <h2>La gestion des transporteurs</h2>
                 <h4>Vous pouvez valider les inscriptions des transporteurs, les bannir, les filtrer, les trier et accèder aux leurs profils</h4>
+              </div>
+            </div>
+            <div class="col-lg-2">
+              <div class="main-button">
+                <a data-toggle="modal" data-target="#rechercher_transporteur">rechercher</a>
               </div>
             </div>
           </div>
@@ -79,10 +92,12 @@
     </div> 
 
     <!-- Page Content -->
-    <section class="posts grid-system">
+
+    <section class="posts grid-system ">
       <div class="container">
-      @if (count($transporteurs))
-          <table class="table" id="users">
+        <div class="table-responsive">
+        @if (count($transporteurs))
+          <table class="table ">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -98,10 +113,10 @@
 
                 <th scope="col">status de certification</th>
                 <th scope="col">demande de certification</th>
-                <th scope="col">justificatif de refuse de certification</th>
+                <th scope="col">justificatif de refuse</th>
 
-                <th scope="col">valider les inscriptions des transporteurs</th>
-                <th scope="col">bannir des transporteurs</th>
+                <th scope="col">valider les inscriptions</th>
+                <th scope="col">bannir</th>
               </tr>
             </thead>
             <tbody>
@@ -139,7 +154,11 @@
                   @if($transporteur->transporteur==2)
                     <td>validée</td>
                   @else
-                    <td>valider les inscriptions des transporteurs</td>
+                    <td>
+                      <div class="main-button">
+                        <a rel="nofollow" href="" >valider les inscriptions des transporteurs</a>
+                      </div>
+                    </td>
                   @endif
                   <td>
                     <div class="main-button">
@@ -153,6 +172,7 @@
         @else
 
         @endif
+        </div>
       </div>
     </section>
 
@@ -177,8 +197,9 @@
     <!-- Page Content -->
     <section class="posts grid-system">
       <div class="container">
+      <div class="table-responsive">
       @if (count($annonces))
-        <table class="table" id="users">
+        <table class="table">
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -200,9 +221,9 @@
               @else
               <td>transporteur</td>
               @endif
-              <td><a href="annonce/$annonce->id">{{$annonce->id}}</a></td>
+              <td><a href="annonce/{{$annonce->id}}">{{$annonce->id}}</a></td>
               <td><a href="profile/{{$annonce->transporteur->id}}">{{$annonce->transporteur->id}}-{{$annonce->transporteur->name}}</a></td>
-              <td><a data-toggle="modal" data-target="#">texte <span>{{$annonce->signale}}</span></a></td>
+              <td><a id="signale_afficher">texte <span id="signale_texte" style="display:none;">{{$annonce->signale}}</span></a></td>
             </tr>
             {{$i++}}
           @endforeach 
@@ -210,6 +231,7 @@
         </table>
       @else
       @endif
+      </div>
       </div>
     </section>
 
@@ -224,7 +246,7 @@
             <div class="sidebar-heading">              
               <h2>le texte de signalement de cette annonce</h2>
             </div>
-            <p>                         </p>
+            <p></p>
           </div>
         </section>
       </div>  
@@ -250,12 +272,49 @@
         <div class="row">
           <div class="col-lg-12">
             <ul class="social-icons">
-              <li><a href="">Gestion des transporteurs</a></li>
-              <li><a href="">Gestion des clients</a></li>
-              <li><a href="">Gestion des signalements</a></li>
+              <li><a id="client_show">Gestion des clients</a></li>
+              <li><a id="transporteur_show">Gestion des transporteurs</a></li>
+              <li><a id="signalement_show">Gestion des signalements</a></li>
             </ul>
           </div>
         </div>
       </div>
     </footer>
+
+    <script>
+
+    $( document ).ready(function() {
+      $("#signalement").css("display","none");
+        $("#transporteur").css("display","none");
+        $("#client").css("display","block");
+    });
+
+
+      $("#signale_afficher").click(function (e) {
+        $("#signale_afficher").attr("data-toggle","modal");
+        $("#signale_afficher").attr("data-target","#signaler");
+        let texte=$("#signale_texte").html();
+        $('#signaler').find('p').html(texte);
+        $('#signale_afficher').trigger('click');
+      });
+
+      $("#signalement_show").click(function (e) {
+        $("#signalement").css("display","block");
+        $("#transporteur").css("display","none");
+        $("#client").css("display","none");
+      });
+
+      $("#transporteur_show").click(function (e) {
+        $("#signalement").css("display","none");
+        $("#transporteur").css("display","block");
+        $("#client").css("display","none");
+      });
+
+      $("#client_show").click(function (e) {
+        $("#signalement").css("display","none");
+        $("#transporteur").css("display","none");
+        $("#client").css("display","block");
+      });
+
+    </script>
 @endsection

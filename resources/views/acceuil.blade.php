@@ -3,16 +3,16 @@
 @section('content')
 
     <!-- Page Content -->
+    
     <!-- Diaporama -->
     <div class="main-banner header-text">
       <div class="container-fluid">
         <div class="owl-banner owl-carousel">
           
-          <!-- Diaporama -->
           @if ($news->count())
             @foreach ($news as $new)
               <div class="item">
-                <img src="{{$new->img}}" >
+                <img src=".{{$new->img}}" alt="" style="width: 100%;">
                 <div class="item-content">
                   <div class="main-content">
                     <div class="meta-category">
@@ -28,7 +28,6 @@
         </div>
       </div>
     </div>
-    <!-- Diaporama -->
 
     <!-- Recherche -->
     <section id="recherche">

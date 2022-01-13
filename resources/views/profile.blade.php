@@ -1,8 +1,5 @@
-@if( session()->exists('admin_name') || session()->exists('super_admin_name') )
-  @extends('layouts.appsecondadmin')
-@else
-  @extends('layouts.appsecond')
-@endif
+@extends( (session()->exists('admin_name') || session()->exists('super_admin_name')) ? 'layouts.appsecondadmin' : 'layouts.appsecond')
+
 @section('content')
 
         
@@ -182,6 +179,8 @@
                     <div class="sidebar-heading">
                       <h2><a href="" data-toggle="modal" data-target="#transporteur">voulez vous etre un transporteur ?</a></h2>
                     </div>
+              @else
+                <div>
               @endif
 
                 <div class="col-lg-12">

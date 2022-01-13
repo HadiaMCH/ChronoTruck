@@ -41,7 +41,7 @@
           <div class="navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item active">
-                <a class="nav-link" href="{{ route('admin') }}">Accueil</a>
+                <a class="nav-link" href="{{ route('acceuilAdmin') }}">Accueil</a>
               </li> 
               <li class="nav-item">
                 <a class="nav-link" href="{{ route('gestion_users') }}">les utilisateurs</a>

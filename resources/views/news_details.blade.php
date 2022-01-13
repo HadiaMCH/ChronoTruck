@@ -1,4 +1,4 @@
-@extends('layouts.appsecond')
+@extends( (session()->exists('admin_name') || session()->exists('super_admin_name')) ? 'layouts.appsecondadmin' : 'layouts.appsecond')
 
 @section('content')
 
@@ -24,7 +24,7 @@
             <div class="all-blog-posts">
                   <div class="blog-post">
                     <div class="blog-thumb">
-                      <img src="{{$news->img}}">
+                      <img src="..{{$news->img}}" alt="" style="width: 100%;"">
                     </div>
                     <div class="down-content">
                       <span>{{$news->description}}</span>

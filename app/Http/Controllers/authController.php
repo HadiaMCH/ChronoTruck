@@ -123,7 +123,7 @@ class authController extends Controller
                     'transporteur'=>$transporteur,
                     'certifie'=>$certifie,
                     'demande'=>$dmd,
-                ]); 
+                ]);  
                 foreach($request->depart as $depart){
                     foreach($request->arriver as $arriver){
                         $target= wilaya_wilaya::where("wilaya_depart_id","$depart")->where("wilaya_arriver_id","$arriver")->first();
