@@ -9,13 +9,21 @@
       <section class="page-heading">
         <div class="container">
           <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-10">
               <div class="text-content">
                 <h4>plus d'informations sur cette annonce</h4>
                 <h2>{{$annonce->titre}}</h2>
+                <h2>{{$annonce->user->name}} {{$annonce->user->familyname}}</h2>
                 <h2 id="annonce_id" style="display:none;">{{$annonce->id}}</h2>
               </div>
             </div>
+            @if($annonce->status =='terminée' && session('id')==$annonce->transporteur->id)
+            <div class="col-lg-2">
+              <div class="main-button">
+                <a data-toggle="modal" data-target="#signaler_client">signaler ce client</a>
+              </div>
+            </div>
+            @endif
           </div>
         </div>
       </section>
@@ -124,7 +132,7 @@
                           <button class="col-lg-12" class="main-button" data-toggle="modal" data-target="#noter">noter</button>
                         </div>
                         <div class="col-lg-6">
-                          <button class="col-lg-12" class="main-button" data-toggle="modal" data-target="#signaler">signaler</button>
+                          <button class="col-lg-12" class="main-button" data-toggle="modal" data-target="#signaler_transporteur">signaler ce transporteur</button>
                         </div>  
                       </div>
                     </li>
@@ -202,21 +210,21 @@
     </div>  
   </div>
 
-    <!-- Modal signaler-->
-  <div id="signaler" class="modal fade" role="dialog">  
+    <!-- Modal signaler transporteur-->
+  <div id="signaler_transporteur" class="modal fade" role="dialog">  
     <div class="modal-dialog">  
       <div class="modal-content">    
         <section class="formulaire formulaire-modal">
           <div class="col-lg-12">
             <div class="sidebar-heading">
               
-              @if(!$annonce->signale)
-              <h2>évaluer ce transporteur</h2>
+              @if(!$annonce->signaler_transporteur)
+              <h2>signaler ce transporteur</h2>
             </div>
             <div class="col-lg-12">
-                <input type="textarea" id="signale_texte" placeholder="pourquoi voulez_vous signaler ce transporteur ?!" required="">
+                <input type="textarea" id="signaler_transporteur_texte" placeholder="pourquoi voulez_vous signaler ce transporteur ?!" required="">
             </div>
-            <button id="signaler_submit" type="button" class="btn btn-lg btn-success">Soumettre</button>
+            <button id="signaler_transporteur_submit" type="button" class="btn btn-lg btn-success">Soumettre</button>
             @else
               <p> vous avez deja signaler {{$annonce->transporteur->name}} {{$annonce->transporteur->familyname}}</p>
             @endif
@@ -418,6 +426,29 @@
     </div>  
   </div>  
 
+  <!-- Modal signaler client-->
+  <div id="signaler_client" class="modal fade" role="dialog">  
+    <div class="modal-dialog">  
+      <div class="modal-content">    
+        <section class="formulaire formulaire-modal">
+          <div class="col-lg-12">
+            <div class="sidebar-heading">
+              @if(!$annonce->signaler_client)
+              <h2>signaler ce client</h2>
+            </div>
+            <div class="col-lg-12">
+                <input type="textarea" id="signaler_client_texte" placeholder="pourquoi voulez_vous signaler ce client ?!" required="">
+            </div>
+            <button id="signaler_client_submit" type="button" class="btn btn-lg btn-success">Soumettre</button>
+            @else
+              <p> vous avez deja signaler {{$annonce->user->name}} {{$annonce->user->familyname}}</p>
+            @endif
+          </div>
+        </section>
+      </div>  
+    </div>  
+  </div>
+
     <script>
       $("#supprimer_btn").click(function (e) {
         window.location.href = "delete/{{$annonce->id}}";
@@ -484,7 +515,7 @@
         });
       });
 
-      $("#signaler_submit").click(function (e) {
+      $("#signaler_transporteur_submit").click(function (e) {
         $.ajaxSetup({
           headers: {
           'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
@@ -493,7 +524,7 @@
         e.preventDefault();
         let formData = {
           id_annonce:$("#annonce_id").html(), 
-          texte:$("#signale_texte").val(),
+          texte:$("#signaler_transporteur_texte").val(),
         };
 
         let type = "POST";
@@ -514,6 +545,39 @@
           }
         });
       });
+
+      $("#signaler_client_submit").click(function (e) {
+        $.ajaxSetup({
+          headers: {
+          'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+          }
+        });
+        e.preventDefault();
+        let formData = {
+          id_annonce:$("#annonce_id").html(), 
+          texte:$("#signaler_client_texte").val(),
+        };
+
+        let type = "POST";
+        let ajaxurl = "{{route('signaler_client')}}";
+
+        $.ajax({
+          type: type,
+          url: ajaxurl,
+          data: formData,
+          dataType: 'json',
+          success: function (response) {    
+            if (response.status == "signaled"){
+              location.reload();
+            }
+          },
+          error: function (response) {
+            console.log(response);
+          }
+        });
+      });
     </script>
+
+    
 
 @endsection

@@ -66,6 +66,7 @@ Route::post('/etre_transporteur', [profileController::class,'etre_transporteur']
 Route::post('/etre_certifie', [profileController::class,'etre_certifie'])->name('etre_certifie');
 Route::post('/noter_transporteur', [profileController::class,'noter_transporteur'])->name('noter_transporteur');
 Route::post('/signaler_transporteur', [profileController::class,'signaler_transporteur'])->name('signaler_transporteur');
+Route::post('/signaler_client', [profileController::class,'signaler_client'])->name('signaler_client');
 
 Route::get('/acceuilAdmin', [acceuilAdminController::class,'index'])->name('acceuilAdmin');
 Route::post('/connexion_admin', [gestion_adminsController::class,'login'])->name('login_admin');

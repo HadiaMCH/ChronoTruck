@@ -198,7 +198,7 @@
     <section class="posts grid-system">
       <div class="container">
       <div class="table-responsive">
-      @if (count($annonces))
+      @if (count($client_annonces) || count($transporteur_annonces))
         <table class="table">
           <thead>
             <tr>
@@ -212,21 +212,29 @@
           </thead>
           <tbody>
           {{$i=1}}
-          @foreach($annonces as $annonce)
+          @foreach($client_annonces as $client_annonce)
             <tr>
               <th scope="row">{{$i}}</th>
-              <td><a href="profile/{{$annonce->user->id}}">{{$annonce->user->id}}-{{$annonce->user->name}}</a></td>
-              @if($annonce->user->transporteur == 0)
-                <td>client</td>
-              @else
+              <td><a href="profile/{{$client_annonce->transporteur->id}}">{{$client_annonce->transporteur->id}}-{{$client_annonce->transporteur->name}}</a></td>
               <td>transporteur</td>
-              @endif
-              <td><a href="annonce/{{$annonce->id}}">{{$annonce->id}}</a></td>
-              <td><a href="profile/{{$annonce->transporteur->id}}">{{$annonce->transporteur->id}}-{{$annonce->transporteur->name}}</a></td>
-              <td><a id="signale_afficher">texte <span id="signale_texte" style="display:none;">{{$annonce->signale}}</span></a></td>
+              <td><a href="annonce/{{$client_annonce->id}}">{{$client_annonce->id}}</a></td>
+              <td><a href="profile/{{$client_annonce->user->id}}">{{$client_annonce->user->id}}-{{$client_annonce->user->name}}</a></td>
+              <td><a class="signale_afficher">texte <span style="display:none;">{{$client_annonce->signaler_client}}</span></a></td>
             </tr>
             {{$i++}}
           @endforeach 
+          @foreach($transporteur_annonces as $transporteur_annonce)
+            <tr>
+              <th scope="row">{{$i}}</th>
+              <td><a href="profile/{{$transporteur_annonce->user->id}}">{{$transporteur_annonce->user->id}}-{{$transporteur_annonce->user->name}}</a></td>
+              <td>client</td>
+              <td><a href="annonce/{{$transporteur_annonce->id}}">{{$transporteur_annonce->id}}</a></td>
+              <td><a href="profile/{{$transporteur_annonce->transporteur->id}}">{{$transporteur_annonce->transporteur->id}}-{{$transporteur_annonce->transporteur->name}}</a></td>
+              <td><a class="signale_afficher">texte <span style="display:none;">{{$transporteur_annonce->signaler_transporteur}}</span></a></td>
+            </tr>
+            {{$i++}}
+          @endforeach 
+          
           </tbody>
         </table>
       @else
@@ -290,12 +298,14 @@
     });
 
 
-      $("#signale_afficher").click(function (e) {
-        $("#signale_afficher").attr("data-toggle","modal");
-        $("#signale_afficher").attr("data-target","#signaler");
-        let texte=$("#signale_texte").html();
-        $('#signaler').find('p').html(texte);
-        $('#signale_afficher').trigger('click');
+      $("a").click(function (e) {
+        if ($(e.target).is('.signale_afficher')){
+          $(e.target).attr("data-toggle","modal");
+          $(e.target).attr("data-target","#signaler");
+          let texte=$(e.target).find('span').html();
+          $('#signaler').find('p').empty();
+          $('#signaler').find('p').html(texte);
+        }
       });
 
       $("#signalement_show").click(function (e) {

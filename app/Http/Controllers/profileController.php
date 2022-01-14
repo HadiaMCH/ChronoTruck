@@ -106,7 +106,14 @@ class profileController extends Controller
     }
 
     public function signaler_transporteur(Request $request){
-        annonce::where('id',$request->id_annonce)->update(['signale' => $request->texte]);
+        annonce::where('id',$request->id_annonce)->update(['signaler_transporteur' => $request->texte]);
+        return response()->json([
+            'status' => "signaled",
+          ]); 
+    }
+
+    public function signaler_client(Request $request){
+        annonce::where('id',$request->id_annonce)->update(['signaler_client' => $request->texte]);
         return response()->json([
             'status' => "signaled",
           ]); 
