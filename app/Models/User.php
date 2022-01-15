@@ -67,6 +67,16 @@ class User extends Authenticatable
     public function tarjets()
     {
         return $this->belongsToMany(wilaya_wilaya::class,'user_wilayas');
+    } 
+
+    public function transactions_client() 
+    {
+        return $this->hasMany(transaction::class,'client_id');
+    }
+
+    public function transactions_transporteur() 
+    {
+        return $this->hasMany(transaction::class,'transporteur_id');
     }
 
 }

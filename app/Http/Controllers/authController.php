@@ -28,6 +28,7 @@ class authController extends Controller
                 $request->session()->put('id',$user->id);
                 $request->session()->put('name',$user->name);
                 $request->session()->put('familyname',$user->familyname);
+                $request->session()->put('transporteur',$user->transporteur);
                 $request->session()->put('password',$user->password);
                 
                 return response()->json([
@@ -56,6 +57,7 @@ class authController extends Controller
         $request->session()->forget('id');
         $request->session()->forget('password');
         $request->session()->forget('familyname');
+        $request->session()->forget('transporteur');
 
         return redirect()->route('acceuil');
     }

@@ -29,7 +29,7 @@ class acceuilController extends Controller
 
     public function show()
     {
-        $annonces= annonce::where("status","validée")->where("archiver","0")->orderBy('updated_at', 'desc')->take(8)->get();
+        $annonces= annonce::where("status","validée")->where("archiver","0")->orderBy('created_at', 'asc')->take(8)->get();
         if ($annonces->count()){
             return response()->json($annonces);
         }

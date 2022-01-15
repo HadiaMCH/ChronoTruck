@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\wilaya;
 use App\Models\annonce;
+use App\Models\transaction;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Storage;
@@ -74,6 +75,7 @@ class profileController extends Controller
         }
 
     }
+
     public function etre_transporteur(Request $request)
     {
         $respense=User::where('id',$request->session()->get('id'))->update(['transporteur' => 1]);
@@ -117,6 +119,32 @@ class profileController extends Controller
         return response()->json([
             'status' => "signaled",
           ]); 
+    }
+
+    public function transporteur_add_transaction($id, Request $request){
+        $annonce=annonce::where('id',$id)->first();
+        $id_user= $request->session()->get('id');
+        $transaction=transaction::create([
+            'annonce_id'=>$id,
+            'client_id'=>$annonce->user_id,
+            'transporteur_id'=>$id_user,
+            'contenu'=>'il vous demande de vous transporter',
+        ]);
+
+        return redirect()->route('profile_id', ['id' => $id_user]);                
+    }
+
+    public function client_add_transaction($id,$id_transporteur, Request $request){
+        $annonce=annonce::where('id',$id)->first();
+        $id_user= $request->session()->get('id');
+        $transaction=transaction::create([
+            'annonce_id'=>$id,
+            'client_id'=>$id_user,
+            'transporteur_id'=>$id_transporteur,
+            'contenu'=>'il vous demande de le transporter',
+        ]);
+
+        return redirect()->route('profile_id', ['id' => $id_user]);                
     }
 }
 

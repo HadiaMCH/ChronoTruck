@@ -13,7 +13,6 @@
               <div class="text-content">
                 <h4>plus d'informations sur cette annonce</h4>
                 <h2>{{$annonce->titre}}</h2>
-                <h2>{{$annonce->user->name}} {{$annonce->user->familyname}}</h2>
                 <h2 id="annonce_id" style="display:none;">{{$annonce->id}}</h2>
               </div>
             </div>
@@ -102,8 +101,27 @@
                         <h4>les transporteurs disponible pour votre tarjet</h4>
                         <div class="post-info">
                           @foreach ($annonce->tarjet->users as $transporteur)
-                            @if($transporteur->certifie == 1)
-                              <a href="">{{$transporteur->name}} {{$transporteur->familyname}}</a>
+                            {{$exist=false}}
+                            @foreach ($annonce->transactions as $transaction)
+                              @if($transaction->transporteur_id == $transporteur->id)
+                                <p style="display:none;">{{$exist=true}}</p>
+                              @endif
+                            @endforeach
+                            @if($transporteur->certifie == 1 && $exist==false)
+                              <div class="col-lg-12">
+                              <div class="submit-transporteur annonce_opps">
+                                <div class="row">
+                                  <div class="col-lg-8">
+                                    <a href="">{{$transporteur->name}} {{$transporteur->familyname}}</a>
+                                  </div>
+                                  <div class="col-lg-4">
+                                    <div class="main-button">
+                                      <a href="../client_add_transaction/{{$annonce->id}}/{{$transporteur->id}}">demander</a>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
                             @endif
                           @endforeach
                         </div>
@@ -177,6 +195,26 @@
                 </div>
               </div>
             </div>
+          @else
+            {{$exist=false}}
+            @foreach ($annonce->transactions as $transaction)
+              @if($transaction->transporteur_id == session('id'))
+                <p style="display:none;">{{$exist=true}}</p>
+              @endif
+            @endforeach
+            @if(session('transporteur')==2 && $exist==false)
+            <div class="col-lg-12">
+              <div class="submit-transporteur annonce_opps">
+                <div class="row">
+                  <div class="col-lg-4">
+                    <div class="main-button">
+                      <a href="../transporteur_add_transaction/{{$annonce->id}}">demander de transporter</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            @endif
           @endif
         </div>
       </div>

@@ -58,7 +58,7 @@
               @if(session('name')) 
               <li class="nav-item">
                   <div class="main-button">
-                    <a rel="nofollow" href="profile/(session('id')" >profile</a>
+                    <a rel="nofollow" href="../profile/{{session('id')}}" >profile</a>
                   </div>
               </li>
               <li class="nav-item">

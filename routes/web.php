@@ -59,7 +59,7 @@ Route::post('/connexion', [authController::class,'login'])->name('login');
 Route::get('/deconnexion', [authController::class,'logout'])->name('logout');
 
 Route::get('/profile', [profileController::class,'index'])->name('profile');
-Route::get('/profile/{id}', [profileController::class,'index']);
+Route::get('/profile/{id}', [profileController::class,'index'])->name('profile_id');
 Route::post('/profile', [profileController::class,'check_password'])->name('check_password');
 Route::post('/modifier', [profileController::class,'modifier'])->name('modifier');
 Route::post('/etre_transporteur', [profileController::class,'etre_transporteur'])->name('etre_transporteur');
@@ -67,6 +67,9 @@ Route::post('/etre_certifie', [profileController::class,'etre_certifie'])->name(
 Route::post('/noter_transporteur', [profileController::class,'noter_transporteur'])->name('noter_transporteur');
 Route::post('/signaler_transporteur', [profileController::class,'signaler_transporteur'])->name('signaler_transporteur');
 Route::post('/signaler_client', [profileController::class,'signaler_client'])->name('signaler_client');
+
+Route::get('/transporteur_add_transaction/{id}', [profileController::class,'transporteur_add_transaction']);
+Route::get('/client_add_transaction/{id}/{id_transporteur}', [profileController::class,'client_add_transaction']);
 
 Route::get('/acceuilAdmin', [acceuilAdminController::class,'index'])->name('acceuilAdmin');
 Route::post('/connexion_admin', [gestion_adminsController::class,'login'])->name('login_admin');

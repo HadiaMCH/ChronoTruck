@@ -183,55 +183,105 @@
                 <div>
               @endif
 
+              @if(count($user->transactions_client))
                 <div class="col-lg-12">
                   <div class="sidebar-item comments">
                     <div class="sidebar-heading">
-                      <h2>transactions recente</h2>
+                      <h2>les demandes de transport que vous avez comme client</h2>
                     </div>
-                    <!-- <div class="content">
+                    <div>
                       <ul>
-                        <li>
-                          <div class="author-thumb">
-                            <img src="assets/images/comment-author-01.jpg" alt="">
-                          </div>
-                          <div class="right-content">
-                            <h4>Charles Kate<span>May 16, 2020</span></h4>
-                            <p>Fusce ornare mollis eros. Duis et diam vitae justo fringilla condimentum eu quis leo. Vestibulum id turpis porttitor sapien facilisis scelerisque. Curabitur a nisl eu lacus convallis eleifend posuere id tellus.</p>
-                          </div>
-                        </li>
-                        <li class="replied">
-                          <div class="author-thumb">
-                            <img src="assets/images/comment-author-02.jpg" alt="">
-                          </div>
-                          <div class="right-content">
-                            <h4>Thirteen Man<span>May 20, 2020</span></h4>
-                            <p>In porta urna sed venenatis sollicitudin. Praesent urna sem, pulvinar vel mattis eget.</p>
-                          </div>
-                        </li>
-                        <li>
-                          <div class="author-thumb">
-                            <img src="assets/images/comment-author-03.jpg" alt="">
-                          </div>
-                          <div class="right-content">
-                            <h4>Belisimo Mama<span>May 16, 2020</span></h4>
-                            <p>Nullam nec pharetra nibh. Cras tortor nulla, faucibus id tincidunt in, ultrices eget ligula. Sed vitae suscipit ligula. Vestibulum id turpis volutpat, lobortis turpis ac, molestie nibh.</p>
-                          </div>
-                        </li>
-                        <li class="replied">
-                          <div class="author-thumb">
-                            <img src="assets/images/comment-author-02.jpg" alt="">
-                          </div>
-                          <div class="right-content">
-                            <h4>Thirteen Man<span>May 22, 2020</span></h4>
-                            <p>Mauris sit amet justo vulputate, cursus massa congue, vestibulum odio. Aenean elit nunc, gravida in erat sit amet, feugiat viverra leo.</p>
-                          </div>
-                        </li>
+                        @foreach ($user->transactions_client as $transaction)
+                          <li>
+                            <div class="right-content">
+                              @if($transaction->contenu=='il vous demande de vous transporter')
+                                <h4>{{$transaction->client->name}} {{$transaction->client->familyname}} vous demande de vous transporter :</h4>
+                                <p><a href="../annonce/{{$transaction->annonce->id}}">voir ici l'annonce</a></p>
+                                <div class="col-lg-12">
+                                  <div class="row">
+                                    <div class="col-lg-4">
+                                      <fieldset>
+                                        <button class="col-lg-8" class="main-button">accepter</button>
+                                      </fieldset>
+                                    </div>
+                                    <div class="col-lg-4">
+                                      <fieldset>
+                                        <button class="col-lg-8" class="main-button">refuser</button>
+                                      </fieldset>
+                                    </div>  
+                                  </div>
+                                </div>
+                              @else
+                                <h4>votre demande de transport a {{$transaction->transporteur->name}} {{$transaction->transporteur->familyname}} est {{$transaction->status}}</h4>
+                                <p><a href="../annonce/{{$transaction->annonce->id}}">voir ici l'annonce</a></p>
+                              @endif
+                            </div>
+                          </li>
+                        @endforeach
                       </ul>
-                    </div> -->
+                    </div>
                   </div>
                 </div>
+              @else
+                <div class="col-lg-12">
+                  <div class="sidebar-item comments">
+                    <div class="sidebar-heading">
+                      <h2>aucune demandes de transport que vous avez comme client</h2>
+                    </div>
+                  </div>
+                </div>
+              @endif
+                @if($user->transporteur == 2)
+                  @if(count($user->transactions_transporteur))
+                    <div class="col-lg-12">
+                      <div class="sidebar-item comments">
+                        <div class="sidebar-heading">
+                          <h2>les demandes de transport que vous avez comme transporteur</h2>
+                        </div>
+                        <div>
+                          <ul>
+                            @foreach ($user->transactions_transporteur as $transaction)
+                              <li>
+                                <div class="right-content">
+                                  @if($transaction->contenu=='il vous demande de le transporter')
+                                    <h4>{{$transaction->client->name}} {{$transaction->client->familyname}} vous demande de le transporter :</h4>
+                                    <p><a href="../annonce/{{$transaction->annonce->id}}">voir ici l'annonce</a></p>
+                                    <div class="col-lg-12">
+                                      <div class="row">
+                                        <div class="col-lg-4">
+                                          <fieldset>
+                                            <button class="col-lg-8" class="main-button">accepter</button>
+                                          </fieldset>
+                                        </div>
+                                        <div class="col-lg-4">
+                                          <fieldset>
+                                            <button class="col-lg-8" class="main-button">refuser</button>
+                                          </fieldset>
+                                        </div>  
+                                      </div>
+                                    </div>
+                                  @else
+                                    <h4>votre demande de transport a {{$transaction->transporteur->name}} {{$transaction->transporteur->familyname}} est {{$transaction->status}}</h4>
+                                    <p><a href="../annonce/{{$transaction->annonce->id}}">voir ici l'annonce</a></p>
+                                  @endif
+                                </div>
+                              </li>
+                            @endforeach
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  @else
+                    <div class="col-lg-12">
+                      <div class="sidebar-item comments">
+                        <div class="sidebar-heading">
+                          <h2>aucune demandes de transport que vous avez comme transporteur</h2>
+                        </div>
+                      </div>
+                    </div>
+                  @endif
+                @endif  
                 
-
               </div>
             </div>
           </div>

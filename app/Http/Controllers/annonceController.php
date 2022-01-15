@@ -26,8 +26,7 @@ class annonceController extends Controller
         return view('annonce',compact('annonce','transport_types','fourchette_poid_mins','fourchette_poid_maxs','fourchette_volume_mins','fourchette_volume_maxs','moyen_transports','wilayas'));
     }
 
-    public function add_annonce(Request $request)
-    {        
+    public function add_annonce(Request $request){        
         $request->validate([
             'titre'=>'string',
             'texte'=>'string',
