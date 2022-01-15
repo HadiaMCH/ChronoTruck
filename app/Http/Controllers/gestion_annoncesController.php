@@ -15,4 +15,23 @@ class gestion_annoncesController extends Controller
         $wilayas=wilaya::all();            
         return view('gestion_annonces',compact('annonces','wilayas'));
     }
+
+    public function valider_annonce(Request $request)
+    {       
+        $annonce=annonce::where('id',$request->id)->first();
+        $tarif=$annonce->tarjet->tarif;
+        annonce::where('id',$request->id)->update(['status'=>'validée','tarif'=>$tarif]);
+        return response()->json([
+                'message' => 'validated',
+                'tarif'=> $tarif,
+            ]);    
+    }
+
+    public function annuler_annonce(Request $request)
+    {       
+        annonce::where('id',$request->id)->delete();
+        return response()->json([
+                'message' => 'annonce deleted',
+            ]);    
+    }
 }

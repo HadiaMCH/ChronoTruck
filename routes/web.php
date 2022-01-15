@@ -74,6 +74,8 @@ Route::get('/deconnexion_admin', [gestion_adminsController::class,'logout'])->na
 
 
 Route::get('/gestion_annonces', [gestion_annoncesController::class,'index'])->name('gestion_annonces');
+Route::post('/valider_annonce', [gestion_annoncesController::class,'valider_annonce'])->name('valider_annonce');
+Route::post('/annuler_annonce', [gestion_annoncesController::class,'annuler_annonce'])->name('annuler_annonce');
 
 Route::get('/gestion_contenu', [gestion_contenuController::class,'index'])->name('gestion_contenu');
 
@@ -81,6 +83,9 @@ Route::get('/gestion_news', [gestion_newsController::class,'index'])->name('gest
 Route::post('/add_news', [gestion_newsController::class,'add_news'])->name('add_news');
 
 Route::get('/gestion_users', [gestion_usersController::class,'index'])->name('gestion_users');
+Route::post('/bannir', [gestion_usersController::class,'bannir'])->name('bannir');
+Route::post('/valider_inscription', [gestion_usersController::class,'valider_inscription'])->name('valider_inscription');
+
 
 
 

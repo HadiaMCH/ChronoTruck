@@ -50,6 +50,7 @@
                 <th scope="col">transporteur</th>
                 <th scope="col">archiver</th>
                 <th scope="col">valider</th>
+                <th scope="col">annuler</th>
               </tr>
             </thead>
             <tbody>
@@ -70,8 +71,8 @@
                     <td>{{$annonce->fourchette_volume_min}}</td>
                     <td>{{$annonce->fourchette_volume_max}}</td>
                     <td>{{$annonce->user->id}}-{{$annonce->user->name}}</td>
-                    <td>{{$annonce->status}}</td>
-                    <td>{{$annonce->tarif}}</td>
+                    <td class="annonce_status">{{$annonce->status}}</td>
+                    <td class="annonce_tarif">{{$annonce->tarif}}</td>
                     <td>{{$annonce->note}}</td>
                     @if($annonce->transporteur)
                       <td>{{$annonce->transporteur->id}}-{{$annonce->transporteur->name}}</td> 
@@ -82,7 +83,16 @@
                     @if($annonce->status=='en attente')
                       <td class="col-lg-12">
                         <div class="main-button">
-                          <a rel="nofollow" href="">valider</a>
+                          <a class="valider_annonce">valider</a>
+                        </div>
+                      </td>
+                    @else
+                    <td>validée</td>
+                    @endif
+                    @if($annonce->status!='terminée')
+                      <td class="col-lg-12">
+                        <div class="main-button">
+                          <a class="annuler_annonce">annuler</a>
                         </div>
                       </td>
                     @else
@@ -98,5 +108,82 @@
         </div>
       </div>
     </section>
+
+    <script>
+      $("a").click(function (e) {
+          if ($(e.target).is('.valider_annonce')){
+          let line= $(e.target).parent().parent().parent();
+          let id=line.find('th').find('a').html();
+          $.ajaxSetup({
+              headers: {
+                  'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+              }
+          });
+          e.preventDefault();
+          let formData = {
+            id : id,
+          };
+          let type = "POST";
+          let ajaxurl = "{{route('valider_annonce')}}";
+
+          $.ajax({
+              type: type,
+              url: ajaxurl,
+              data: formData,
+              dataType: 'json',
+              success: function (response) {
+                if (response.message == 'validated'){
+                  let element= $(e.target).parent().parent();
+                  element.empty();
+                  element.html('validée');
+                  element.parent().find('.annonce_status').html('validée');
+                  element.parent().find('.annonce_tarif').html(response.tarif);
+                }
+                else{
+                    //error
+                }
+              },
+              error: function (response) {
+                  console.log(response);
+              }
+            });  
+        }
+
+        if ($(e.target).is('.annuler_annonce')){
+          let line= $(e.target).parent().parent().parent();
+          let id=line.find('th').find('a').html();
+          $.ajaxSetup({
+              headers: {
+                  'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+              }
+          });
+          e.preventDefault();
+          let formData = {
+            id : id,
+          };
+          let type = "POST";
+          let ajaxurl = "{{route('annuler_annonce')}}";
+
+          $.ajax({
+              type: type,
+              url: ajaxurl,
+              data: formData,
+              dataType: 'json',
+              success: function (response) {
+                if (response.message == 'annonce deleted'){
+                  line.remove();
+                }
+                else{
+                    //error
+                }
+              },
+              error: function (response) {
+                  console.log(response);
+              }
+            });
+            
+        }
+      });
+    </script>
 
 @endsection

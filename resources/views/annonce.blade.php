@@ -95,18 +95,22 @@
                 </li>
               </ul>
               @if ($annonce->status =="validée")
-                <ul class="col-lg-12">
-                  <li class="col-lg-12">
-                    <div class="right-content">
-                      <h4>les transporteurs disponible pour votre tarjet</h4>
-                      <div class="post-info">
-                        @foreach ($annonce->tarjet->users as $transporteur)
-                          <a href="">{{$transporteur->name}} {{$transporteur->familyname}}</a>
-                        @endforeach
+                @if($annonce->user->id == session('id'))
+                  <ul class="col-lg-12">
+                    <li class="col-lg-12">
+                      <div class="right-content">
+                        <h4>les transporteurs disponible pour votre tarjet</h4>
+                        <div class="post-info">
+                          @foreach ($annonce->tarjet->users as $transporteur)
+                            @if($transporteur->certifie == 1)
+                              <a href="">{{$transporteur->name}} {{$transporteur->familyname}}</a>
+                            @endif
+                          @endforeach
+                        </div>
                       </div>
-                    </div>
-                  </li>
-                </ul>
+                    </li>
+                  </ul>
+                @endif
                 <ul class="col-lg-12">
                   <li class="col-lg-12">
                     <div class="right-content">

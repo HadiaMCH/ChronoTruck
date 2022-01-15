@@ -54,7 +54,7 @@
                     <td>{{$client->password}}</td>
                     <td>
                       <div class="main-button">
-                        <a rel="nofollow" href="" >bannir</a>
+                        <a class="bannir" >bannir</a>
                       </div>
                     </td>
                   </tr>
@@ -156,13 +156,13 @@
                   @else
                     <td>
                       <div class="main-button">
-                        <a rel="nofollow" href="" >valider les inscriptions des transporteurs</a>
+                        <a class="valider_inscription" >valider</a>
                       </div>
                     </td>
                   @endif
                   <td>
                     <div class="main-button">
-                      <a rel="nofollow" href="" >bannir</a>
+                      <a class="bannir" >bannir</a>
                     </div>
                   </td>
                 </tr>
@@ -306,6 +306,77 @@
           $('#signaler').find('p').empty();
           $('#signaler').find('p').html(texte);
         }
+
+        if ($(e.target).is('.bannir')){
+          let line= $(e.target).parent().parent().parent();
+          let id=line.find('th').find('a').html();
+          $.ajaxSetup({
+              headers: {
+                  'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+              }
+          });
+          e.preventDefault();
+          let formData = {
+            id : id,
+          };
+          let type = "POST";
+          let ajaxurl = "{{route('bannir')}}";
+
+          $.ajax({
+              type: type,
+              url: ajaxurl,
+              data: formData,
+              dataType: 'json',
+              success: function (response) {
+                if (response.message == 'user deleted'){
+                  line.remove();
+                }
+                else{
+                    //error
+                }
+              },
+              error: function (response) {
+                  console.log(response);
+              }
+            });
+            
+        }
+          if ($(e.target).is('.valider_inscription')){
+          let line= $(e.target).parent().parent().parent();
+          let id=line.find('th').find('a').html();
+          $.ajaxSetup({
+              headers: {
+                  'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+              }
+          });
+          e.preventDefault();
+          let formData = {
+            id : id,
+          };
+          let type = "POST";
+          let ajaxurl = "{{route('valider_inscription')}}";
+
+          $.ajax({
+              type: type,
+              url: ajaxurl,
+              data: formData,
+              dataType: 'json',
+              success: function (response) {
+                if (response.message == 'validated'){
+                  let element= $(e.target).parent().parent();
+                  element.empty();
+                  element.html('validée');
+                }
+                else{
+                    //error
+                }
+              },
+              error: function (response) {
+                  console.log(response);
+              }
+            });  
+        }
+
       });
 
       $("#signalement_show").click(function (e) {
