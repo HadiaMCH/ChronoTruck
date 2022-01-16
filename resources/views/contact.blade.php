@@ -19,29 +19,24 @@
 
     <section class="contact-us">
       <div class="container">
-          <div class="down-contact">
-              <div class="sidebar-item contact-information">
-                    <div class="sidebar-heading">
-                      <h2>les informations permettant de contacter les administrateurs</h2>
-                    </div>
-                    <div class="content">
-                      <ul>
-                        <li>
-                          <h5>0778046370</h5>
-                          <span>NUMERO DE TELEPHONE</span>
-                        </li>
-                        <li>
-                          <h5>ih_mecheri@esi.dz</h5>
-                          <span>ADDRESSE MAIL</span>
-                        </li>
-                        <li>
-                          <h5>oued smar - alger</h5>
-                          <span>ADDRESSE</span>
-                        </li>
-                      </ul>
-                    </div>
-              </div>
+        <div class="down-contact">
+          <div class="sidebar-item contact-information">
+            <div class="sidebar-heading">
+              <h2>les informations permettant de contacter les administrateurs</h2>
+            </div>
+            <div class="content">
+              <ul>
+                @foreach($contacts as $contact)
+                  <li>
+                    <h5>{{$contact->contenu}}</h5>
+                    <span>{{$contact->titre}}</span>
+                  </li>
+                @endforeach
+              </ul>
+            </div>
           </div>
+        </div>
       </div>
     </section>
+
 @endsection

@@ -84,6 +84,7 @@ Route::post('/valider_annonce', [gestion_annoncesController::class,'valider_anno
 Route::post('/annuler_annonce', [gestion_annoncesController::class,'annuler_annonce'])->name('annuler_annonce');
 
 Route::get('/gestion_contenu', [gestion_contenuController::class,'index'])->name('gestion_contenu');
+Route::post('/add_contact', [gestion_contenuController::class,'add_contact'])->name('add_contact');
 
 Route::get('/gestion_news', [gestion_newsController::class,'index'])->name('gestion_news');
 Route::post('/add_news', [gestion_newsController::class,'add_news'])->name('add_news');

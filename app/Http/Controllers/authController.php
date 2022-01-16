@@ -46,7 +46,7 @@ class authController extends Controller
         else{
             return response()->json([
                 'status_code' => 500,
-                'message' => 'Error in Login',
+                'message' => 'contenu vide',
             ]);
         }
     }
