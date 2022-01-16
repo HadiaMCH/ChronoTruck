@@ -146,5 +146,17 @@ class profileController extends Controller
 
         return redirect()->route('profile_id', ['id' => $id_user]);                
     }
+
+    public function accepter_transaction($id_transaction){
+        $transaction=transaction::where('id',$id_transaction)->first();
+        annonce::where('id',$transaction->annonce->id)->update(['status' =>'terminée','transporteur_id' =>$transaction->transporteur->id]);
+        return redirect()->route('annonce', ['id' => $transaction->annonce->id]);                
+    }
+
+    public function refuser_transaction($id_transaction){
+        $transaction=transaction::where('id',$id_transaction)->delete();
+        return redirect()->route('profile_id', ['id' => $id_user]); 
+        return redirect()->route('annonce', ['id' => $transaction->annonce->id]);                               
+    }
 }
 

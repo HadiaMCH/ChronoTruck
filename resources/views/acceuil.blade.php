@@ -5,14 +5,15 @@
     <!-- Page Content -->
     
     <!-- Diaporama -->
-    <div class="main-banner header-text">
+
+    <div class="main-banner">
       <div class="container-fluid">
         <div class="owl-banner owl-carousel">
           
           @if ($news->count())
             @foreach ($news as $new)
               <div class="item">
-                <img src=".{{$new->img}}" alt="" style="width: 100%;">
+                <img src=".{{$new->img}}" class="img-thumbnail">
                 <div class="item-content">
                   <div class="main-content">
                     <div class="meta-category">
@@ -22,8 +23,6 @@
                 </div>
               </div>
             @endforeach
-          @else
-
           @endif          
         </div>
       </div>

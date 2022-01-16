@@ -70,6 +70,9 @@ Route::post('/signaler_client', [profileController::class,'signaler_client'])->n
 
 Route::get('/transporteur_add_transaction/{id}', [profileController::class,'transporteur_add_transaction']);
 Route::get('/client_add_transaction/{id}/{id_transporteur}', [profileController::class,'client_add_transaction']);
+Route::get('/accepter_transaction/{id_transaction}', [profileController::class,'accepter_transaction']);
+Route::get('/refuser_transaction/{id_transaction}', [profileController::class,'refuser_transaction']);
+
 
 Route::get('/acceuilAdmin', [acceuilAdminController::class,'index'])->name('acceuilAdmin');
 Route::post('/connexion_admin', [gestion_adminsController::class,'login'])->name('login_admin');

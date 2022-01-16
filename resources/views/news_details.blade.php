@@ -11,6 +11,7 @@
             <div class="col-lg-12">
               <div class="text-content">
                 <h2>{{$news->titre}}</h2>
+                <h4>{{Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $news->created_at)->format('H:i:s d-m-Y')}}</h4>
               </div>
             </div>
           </div>
@@ -18,18 +19,16 @@
       </section>
     </div>
     
-    <section class="blog-posts grid-system">
+    <section class="posts grid-system">
       <div class="container">
           <div class="col-lg-12">
-            <div class="all-blog-posts">
-                  <div class="blog-post">
-                    <div class="blog-thumb">
-                      <img src="..{{$news->img}}" alt="" style="width: 100%;"">
-                    </div>
-                    <div class="down-content">
-                      <span>{{$news->description}}</span>
-                      <p>{{$news->paragraph}}</p>
-                    </div>
+            <div class="post">
+              <div class="thumb">
+                <img src="..{{$news->img}}" alt="">
+              </div>
+              <div class="down-content">
+                <span>{{$news->description}}</span>
+                <p>{{$news->paragraph}}</p>
               </div>
           </div>
         </div>

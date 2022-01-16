@@ -6,7 +6,6 @@
         <meta name="description" content="">
         <meta name="author" content="MecheriHadia">
         <meta name="csrf-token" content="{{csrf_token()}}">
-        <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap" rel="stylesheet">
         
         <title>ِChronoTruck</title>
 
@@ -16,6 +15,8 @@
         <!-- Additional CSS Files -->
         <link rel="stylesheet" href="assets/css/app.css">
         <link rel="stylesheet" href="assets/css/owl.css">
+        <link rel="stylesheet" href="assets/css/font.css">
+        <link rel="stylesheet" href="assets/css/fontawsome.css">
         <link rel="stylesheet" href="assets/css/select2.css">
 
         <script src="vendor/jquery/jquery.min.js"></script>
@@ -25,9 +26,6 @@
         <!-- Additional Scripts -->
         <script src="assets/js/custom.js"></script>
         <script src="assets/js/owl.js"></script>
-        <script src="assets/js/slick.js"></script>
-        <script src="assets/js/isotope.js"></script>
-        <script src="assets/js/accordions.js"></script>
         
     </head> 
     

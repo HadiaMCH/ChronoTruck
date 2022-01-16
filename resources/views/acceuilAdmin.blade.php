@@ -3,7 +3,7 @@
 @section('content')
 
     <!-- Page Content -->
-    <div class="main-banner header-text">
+    <div class="main-banner">
       <div class="container-fluid">
         <div class="owl-banner owl-carousel">
           

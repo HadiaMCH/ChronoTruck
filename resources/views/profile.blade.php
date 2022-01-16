@@ -200,15 +200,15 @@
                                 <div class="col-lg-12">
                                   <div class="row">
                                     <div class="col-lg-4">
-                                      <fieldset>
-                                        <button class="col-lg-8" class="main-button">accepter</button>
-                                      </fieldset>
+                                      <div class="main-button">
+                                        <a href="../accepter_transaction/{{$transaction->id}}">accepter</a>
+                                      </div>
                                     </div>
                                     <div class="col-lg-4">
-                                      <fieldset>
-                                        <button class="col-lg-8" class="main-button">refuser</button>
-                                      </fieldset>
-                                    </div>  
+                                      <div class="main-button">
+                                        <a href="../refuser_transaction/{{$transaction->id}}">refuser</a>
+                                      </div>
+                                    </div>
                                   </div>
                                 </div>
                               @else
@@ -249,15 +249,15 @@
                                     <div class="col-lg-12">
                                       <div class="row">
                                         <div class="col-lg-4">
-                                          <fieldset>
-                                            <button class="col-lg-8" class="main-button">accepter</button>
-                                          </fieldset>
+                                          <div class="main-button">
+                                            <a href="../accepter_transaction/{{$transaction->id}}">accepter</a>
+                                          </div>
                                         </div>
                                         <div class="col-lg-4">
-                                          <fieldset>
-                                            <button class="col-lg-8" class="main-button">refuser</button>
-                                          </fieldset>
-                                        </div>  
+                                          <div class="main-button">
+                                            <a href="../refuser_transaction/{{$transaction->id}}">refuser</a>
+                                          </div>
+                                        </div> 
                                       </div>
                                     </div>
                                   @else

@@ -17,19 +17,18 @@
       </section>
     </div>
     
-    <section class="blog-posts grid-system">
+    <section class="posts grid-system">
       <div class="container">
         <div class="row">
           <div class="col-lg-7">
-            <div class="all-blog-posts">
               <div class="row">
 
                 @if ($news->count())
                   @foreach ($news as $new)
                     <div class="col-lg-12">
-                      <div class="blog-post">
-                        <div class="blog-thumb">
-                          <a href="news/{{$new->id}}"><img src="{{$new->img}}"></a>
+                      <div class="post">
+                        <div class="thumb">
+                          <a href="news/{{$new->id}}"><img src=".{{$new->img}}"></a>
                         </div>
                         <div class="down-content">
                           <a href="news/{{$new->id}}"><span>{{$new->titre}}</span></a>
@@ -40,7 +39,6 @@
                   @endforeach
                 @endif
                 
-              </div>
             </div>
           </div>
           <div class="col-lg-5">

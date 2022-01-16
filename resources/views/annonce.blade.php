@@ -5,7 +5,7 @@
 
     <!-- Page Content -->
 
-    <div class="heading-page header-text">
+    <div class="heading-page">
       <section class="page-heading">
         <div class="container">
           <div class="row">
@@ -29,7 +29,7 @@
     </div>            
 
     <section class="posts grid-system">
-      <div class="container">
+      <div class="container"> 
         <div class="row">
           <div class="col-lg-12">
             <div class="post">
@@ -95,39 +95,51 @@
               </ul>
               @if ($annonce->status =="validée")
                 @if($annonce->user->id == session('id'))
-                  <ul class="col-lg-12">
-                    <li class="col-lg-12">
-                      <div class="right-content">
-                        <h4>les transporteurs disponible pour votre tarjet</h4>
-                        <div class="post-info">
-                          @foreach ($annonce->tarjet->users as $transporteur)
-                            {{$exist=false}}
-                            @foreach ($annonce->transactions as $transaction)
-                              @if($transaction->transporteur_id == $transporteur->id)
-                                <p style="display:none;">{{$exist=true}}</p>
-                              @endif
-                            @endforeach
-                            @if($transporteur->certifie == 1 && $exist==false)
-                              <div class="col-lg-12">
-                              <div class="submit-transporteur annonce_opps">
-                                <div class="row">
-                                  <div class="col-lg-8">
-                                    <a href="">{{$transporteur->name}} {{$transporteur->familyname}}</a>
-                                  </div>
-                                  <div class="col-lg-4">
-                                    <div class="main-button">
-                                      <a href="../client_add_transaction/{{$annonce->id}}/{{$transporteur->id}}">demander</a>
+                  @if(count($annonce->tarjet->users))
+                    <ul class="col-lg-12">
+                      <li class="col-lg-12">
+                        <div class="right-content">
+                          <h4>les transporteurs disponible pour votre tarjet</h4>
+                          <div class="post-info">
+                            @foreach ($annonce->tarjet->users as $transporteur)
+                              @if(session('id') != $transporteur->id)
+                                {{$exist=false}}
+                                @foreach ($annonce->transactions as $transaction)
+                                  @if($transaction->transporteur_id == $transporteur->id)
+                                    <p style="display:none;">{{$exist=true}}</p>
+                                  @endif
+                                @endforeach
+                                @if($transporteur->certifie == 1 && $exist==false)
+                                  <div class="col-lg-12">
+                                  <div class="submit-transporteur" style="margin-top:25px">
+                                    <div class="row">
+                                      <div class="col-lg-8">
+                                        <a href="">{{$transporteur->name}} {{$transporteur->familyname}}</a>
+                                      </div>
+                                      <div class="col-lg-4">
+                                        <div class="main-button">
+                                          <a href="../client_add_transaction/{{$annonce->id}}/{{$transporteur->id}}">demander</a>
+                                        </div>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
-                              </div>
-                            </div>
-                            @endif
-                          @endforeach
+                                @endif
+                              @endif
+                            @endforeach
+                          </div>
                         </div>
-                      </div>
-                    </li>
-                  </ul>
+                      </li>
+                    </ul>
+                  @else
+                  <ul class="col-lg-12">
+                      <li class="col-lg-12">
+                        <div class="right-content">
+                          <h4>il n'existe pas des transporteurs disponible pour votre tarjet</h4>
+                        </div>
+                      </li>
+                    </ul>
+                  @endif
                 @endif
                 <ul class="col-lg-12">
                   <li class="col-lg-12">
