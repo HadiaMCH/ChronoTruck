@@ -8,6 +8,7 @@ use App\Models\annonce;
 use App\Models\transaction;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use App\Http\Controllers\profileView;
 use Illuminate\Support\Facades\Storage;
 
 class profileController extends Controller
@@ -16,6 +17,8 @@ class profileController extends Controller
     {   
         $user= User::where("id","$id")->first();
         $wilayas=wilaya::all();
+
+        (new profileView)->profile($wilayas,$user);
         
         return view('profile',compact('user','wilayas'));
     }

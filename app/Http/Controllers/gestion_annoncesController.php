@@ -6,13 +6,17 @@ use App\Models\wilaya;
 use App\Models\annonce;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use App\Http\Controllers\gestion_annoncesView;
 
 class gestion_annoncesController extends Controller
 {
     public function index()
     {        
         $annonces= annonce::all();
-        $wilayas=wilaya::all();            
+        $wilayas=wilaya::all();    
+        
+        (new gestion_annoncesView)->gestion_annonces($wilayas,$annonces);
+        
         return view('gestion_annonces',compact('annonces','wilayas'));
     }
 

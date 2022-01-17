@@ -8,6 +8,7 @@ use App\Models\annonce;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Routing\Controller;
+use App\Http\Controllers\acceuilView;
 use App\Http\Controllers\annonceController;
 
 class acceuilController extends Controller
@@ -24,7 +25,11 @@ class acceuilController extends Controller
         $moyen_transports= annonceController::getEnumValues('annonces','moyen_transport');
         $wilayas=wilaya::all();
         $news=news::all()->take(6);
-        return view('acceuil',compact('news','status','transport_types','fourchette_poid_mins','fourchette_poid_maxs','fourchette_volume_mins','fourchette_volume_maxs','moyen_transports','wilayas'));
+
+        (new acceuilView)->acceuil($status,$transport_types,$fourchette_poid_mins,$fourchette_poid_maxs,$fourchette_volume_mins,$fourchette_volume_maxs,$moyen_transports,$wilayas,$news);
+
+    return view('acceuil',compact('status','transport_types','fourchette_poid_mins','fourchette_poid_maxs','fourchette_volume_mins','fourchette_volume_maxs','moyen_transports','wilayas','news'));
+
     }
 
     public function show()

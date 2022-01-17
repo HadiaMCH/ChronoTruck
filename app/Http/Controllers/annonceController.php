@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\wilaya_wilaya;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\annonceView;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\annonceController;
 
@@ -23,6 +24,9 @@ class annonceController extends Controller
         $moyen_transports= annonceController::getEnumValues('annonces','moyen_transport');
         $wilayas=wilaya::all();            
         $annonce= annonce::where("id","$id")->first();
+
+        (new annonceView)->annonce($transport_types,$fourchette_poid_mins,$fourchette_poid_maxs,$fourchette_volume_mins,$fourchette_volume_maxs,$moyen_transports,$wilayas,$annonce);
+
         return view('annonce',compact('annonce','transport_types','fourchette_poid_mins','fourchette_poid_maxs','fourchette_volume_mins','fourchette_volume_maxs','moyen_transports','wilayas'));
     }
 

@@ -7,6 +7,7 @@ use App\Models\annonce;
 use App\Models\user_wilaya;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use App\Http\Controllers\gestion_usersView;
 
 class gestion_usersController extends Controller
 {
@@ -16,6 +17,9 @@ class gestion_usersController extends Controller
         $transporteurs= User::where("transporteur","!=","0")->get();
         $transporteur_annonces= annonce::where("status","terminée")->where("signaler_transporteur","!=","NULL")->get();
         $client_annonces= annonce::where("status","terminée")->where("signaler_client","!=","NULL")->get();
+
+        (new gestion_usersView)->gestion_users($clients,$transporteurs,$transporteur_annonces,$client_annonces);
+
         return view('gestion_users',compact('transporteur_annonces','client_annonces','transporteurs','clients'));
     }
 

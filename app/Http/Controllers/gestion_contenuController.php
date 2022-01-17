@@ -7,13 +7,17 @@ use App\Models\presentation;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\gestion_contenuView;
 
 class gestion_contenuController extends Controller
 {
     public function index()
     {  
         $presentation=presentation::first();
-        $contacts=contact::all();      
+        $contacts=contact::all();  
+        
+        (new gestion_contenuView)->gestion_contenu($contacts,$presentation);
+
         return view('gestion_contenu',compact('contacts','presentation'));
     }
 
