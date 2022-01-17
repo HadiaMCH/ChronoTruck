@@ -4,7 +4,6 @@
 
     <!-- Page Content -->
     
-    <!-- Page Content -->
     <!-- Banner Starts Here -->
     <div class="heading-page header-text">
       <section class="page-heading">
@@ -23,15 +22,19 @@
     
     <!-- Banner Ends Here -->
 
-
     <section class="about-us">
       <div class="container">
         <div class="row">
+
           <div class="col-lg-12">
-            <img src="" >
-            <p>presentation du site</p> 
-            <video src="">objectis</video>
-            <p>comment ca fonctionne</p>
+            <img src=".{{$presentation->img}}" >
+            <p>{{$presentation->texte}}</p> 
+            <div class="embed-responsive embed-responsive-16by9">
+              <iframe class="embed-responsive-item" src="{{$presentation->video}}" allowfullscreen></iframe>
+            </div>            
+          </div>
+          <div class="col-lg-12">           
+            <p>{{$presentation->fonctionnement}}</p>
           </div>
         </div>
       </div>

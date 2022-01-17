@@ -85,6 +85,7 @@ Route::post('/annuler_annonce', [gestion_annoncesController::class,'annuler_anno
 
 Route::get('/gestion_contenu', [gestion_contenuController::class,'index'])->name('gestion_contenu');
 Route::post('/add_contact', [gestion_contenuController::class,'add_contact'])->name('add_contact');
+Route::post('/add_presentation', [gestion_contenuController::class,'add_presentation'])->name('add_presentation');
 
 Route::get('/gestion_news', [gestion_newsController::class,'index'])->name('gestion_news');
 Route::post('/add_news', [gestion_newsController::class,'add_news'])->name('add_news');

@@ -29,7 +29,7 @@
       <div class="container">
         <div class="table-responsive">
         @if (count($clients))
-          <table class="table">
+          <table class="example table table-striped" style="width:100%">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -97,7 +97,7 @@
       <div class="container">
         <div class="table-responsive">
         @if (count($transporteurs))
-          <table class="table ">
+          <table class="example table table-striped" style="width:100%">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -199,7 +199,7 @@
       <div class="container">
       <div class="table-responsive">
       @if (count($client_annonces) || count($transporteur_annonces))
-        <table class="table">
+        <table class="example table table-striped" style="width:100%">
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -260,22 +260,8 @@
       </div>  
     </div>  
   </div>
-
-    <nav aria-label="Page navigation example">
-      <ul class="pagination justify-content-center">
-        <li class="page-item disabled">
-          <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-          <a class="page-link" href="#">Next</a>
-        </li>
-      </ul>
-    </nav>
-
-    <footer>
+  
+  <footer>
       <div class="container">
         <div class="row">
           <div class="col-lg-12">
@@ -293,8 +279,9 @@
 
     $( document ).ready(function() {
       $("#signalement").css("display","none");
-        $("#transporteur").css("display","none");
-        $("#client").css("display","block");
+      $("#transporteur").css("display","none");
+      $("#client").css("display","block");
+      $('.example').DataTable();
     });
 
 

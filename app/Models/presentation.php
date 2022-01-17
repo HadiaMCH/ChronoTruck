@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class presentation extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'texte',
+        'img',
+        'video',
+        'fonctionnement',
+    ];
 }

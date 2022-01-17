@@ -831,11 +831,7 @@ body {
         color: #aaa;
         margin-left: 8px;
     }
-
-    .grid-system .down-content ul.post-info li {
-        margin-right: 3px;
-    }
-
+    
     .posts .down-content ul.post-info li:last-child::after {
         display: none;
     }  

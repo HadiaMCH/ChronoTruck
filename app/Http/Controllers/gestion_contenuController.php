@@ -3,15 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\contact;
+use App\Models\presentation;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class gestion_contenuController extends Controller
 {
     public function index()
     {  
+        $presentation=presentation::first();
         $contacts=contact::all();      
-        return view('gestion_contenu',compact('contacts'));
+        return view('gestion_contenu',compact('contacts','presentation'));
     }
 
     public function add_contact(Request $request)
@@ -41,6 +44,18 @@ class gestion_contenuController extends Controller
                 'message' => 'contenu vide',
             ]);
         }
+    }
+
+    public function add_presentation(Request $request){
+        $img= Storage::disk('public')->put('images',$request->img);
+        $image= Storage::url($img);
+        presentation::create([
+            'img'=>$image,
+            'texte'=>$request->texte,
+            'video'=>$request->video,
+            'fonctionnement'=>$request->fonctionnement,
+        ]); 
+        return redirect()->route('gestion_contenu');
     }
 
 }

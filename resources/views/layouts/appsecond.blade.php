@@ -19,7 +19,12 @@
       <link rel="stylesheet" href="../assets/css/select2.css">
 
       <script src="../vendor/jquery/jquery.min.js"></script>
+
+      <link rel="stylesheet" href="../assets/css/bootstrapTable.css">
+
       <script src="../assets/js/select2.js"></script>
+      <script src="assets/js/jquery.dataTables.min.js"></script>
+      <script src="assets/js/dataTables.bootstrap5.min.js"></script>
       <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
       <!-- Additional Scripts -->

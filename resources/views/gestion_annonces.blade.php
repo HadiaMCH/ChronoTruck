@@ -24,11 +24,11 @@
     
     <!-- Page Content -->
     
-    <section class="posts grid-system">
+    <section class="posts" style="margin-bottom:100px">
       <div class="container">
         <div class="table-responsive">
         @if (count($annonces))
-          <table class="table">
+          <table class="example table table-striped" style="width:100%">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -110,6 +110,10 @@
     </section>
 
     <script>
+      $( document ).ready(function() {
+        $('.example').DataTable();
+      });
+
       $("a").click(function (e) {
           if ($(e.target).is('.valider_annonce')){
           let line= $(e.target).parent().parent().parent();

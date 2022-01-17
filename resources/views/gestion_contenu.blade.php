@@ -15,7 +15,7 @@
           </div>
         </div>
       </section>
-    </div> 
+    </div>
     
     <!-- Page Content -->
 
@@ -32,12 +32,40 @@
     <section class="about-us">
       <div class="container">
         <div class="row">
-          <div class="col-lg-12">
-            <img src="" >
-            <p>presentation du site</p> 
-            <video src="">objectis</video>
-            <p>comment ca fonctionne</p>
-          </div>
+          @if($presentation)
+            <table class="example table table-striped" style="width:100%">
+              <thead>
+                <tr>
+                  <th scope="col">image</th>
+                  <th scope="col">texte</th>
+                  <th scope="col">video</th>
+                  <th scope="col">comment il fonctionne</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><img src=".{{$presentation->img}}" id="photo" alt="" style="width: 100%;"></td>
+                  <td>{{$presentation->texte}}</td>
+                  <td>
+                    <div class="embed-responsive embed-responsive-16by9">
+                      <iframe class="embed-responsive-item" src="{{$presentation->video}}" allowfullscreen></iframe>
+                    </div>
+                  </td>
+                  <td>{{$presentation->fonctionnement}}</td>
+              </tbody>
+            </table>
+            <div class="col-lg-12">           
+                <div class="main-button">
+                  <a href="" data-toggle="modal" data-target="#modifier_presentation">modifier</a>
+                </div>
+            </div>
+          @else
+            <div class="col-lg-12">           
+              <div class="main-button">
+                <a href="" data-toggle="modal" data-target="#add_presentation">ajouter</a>
+              </div>
+            </div>
+          @endif
         </div>
       </div>
     </section>
@@ -99,7 +127,7 @@
       </div>
     </section>
 
-    <!-- Modal login-->  
+    <!-- Modal add contact-->  
 
  <div id="add_contact" class="modal fade" role="dialog">  
     <div class="modal-dialog">  
@@ -133,7 +161,54 @@
         </section>
       </div>  
     </div>  
-  </div>  
+  </div>
+  
+  <!-- Modal add presentation-->  
+
+ <div id="add_presentation" class="modal fade" role="dialog">  
+    <div class="modal-dialog">  
+      <div class="modal-content">    
+        <section class="formulaire formulaire-modal">
+          <div class="col-lg-12">
+            <div class="sidebar-heading">
+              <h2>ajouter un nouvelle presenation</h2>
+            </div>
+            <form action="{{route('add_presentation')}}" method="POST">
+            @csrf
+              <div class="row">
+                <div class="col-md-11 col-sm-12" style="margin-left: 18px;">
+                  <fieldset> 
+                    <label for="img" id="image_label" class="custom-file-label" >choisir votre photo</label>
+                    <input type="file" class="custom-file-input" id="img" name="img" accept="image/png, image/jpeg">
+                  </fieldset>
+                </div>
+                <div class="col-md-12 col-sm-12">
+                  <fieldset>
+                    <input name="texte" class="form-control" type="text" id="texte" placeholder="le texte" required>
+                  </fieldset>
+                </div>
+                <div class="col-md-12 col-sm-12">
+                  <fieldset>
+                    <input name="video" class="form-control" type="text" id="video" placeholder="la video" required>
+                  </fieldset>
+                </div>
+                <div class="col-md-12 col-sm-12">
+                  <fieldset>
+                    <input name="fonctionnement" class="form-control" type="text" id="fonctionnement" placeholder="comment il fonctionne" required>
+                  </fieldset>
+                </div>
+                <div class="col-lg-12 col-sm-12">
+                  <fieldset>
+                    <button type="submit"class="main-button btn btn-warning">ajouter</button>
+                  </fieldset>
+                </div>
+              </div>
+            </form>
+          </div>
+        </section>
+      </div>  
+    </div>  
+  </div>
     
   <script>
       $("#add_contact_submit").click(function (e) {

@@ -15,6 +15,10 @@ class CreatePresentationsTable extends Migration
     {
         Schema::create('presentations', function (Blueprint $table) {
             $table->id();
+            $table->longText('texte');
+            $table->longText('img');
+            $table->longText('video');
+            $table->longText('fonctionnement');
             $table->timestamps();
         });
     }
