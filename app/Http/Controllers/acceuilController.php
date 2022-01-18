@@ -6,6 +6,7 @@ use App\Models\news;
 use App\Models\wilaya;
 use App\Models\annonce;
 use Illuminate\Http\Request;
+use App\Models\wilaya_wilaya;
 use Illuminate\Support\Carbon;
 use Illuminate\Routing\Controller;
 use App\Http\Controllers\acceuilView;
@@ -35,8 +36,23 @@ class acceuilController extends Controller
     public function show()
     {
         $annonces= annonce::where("status","validée")->where("archiver","0")->orderBy('created_at', 'asc')->take(8)->get();
+        
+        $wilayas=wilaya::all();
+        $depart = [];
+        $arriver = [];
+        $i=0;
+        foreach($annonces as $annonce){
+            $depart[$i]=$wilayas[$annonce->tarjet->wilaya_depart_id -1]->nom;
+            $arriver[$i]=$wilayas[$annonce->tarjet->wilaya_arriver_id -1]->nom;
+            $i++;
+        }
+
         if ($annonces->count()){
-            return response()->json($annonces);
+            return response()->json([
+                'annonces' => $annonces,
+                'depart' => $depart,
+                'arriver' => $arriver,
+            ]);
         }
         else{
             return response()->json([
@@ -52,15 +68,18 @@ class acceuilController extends Controller
                 $request->validate(['ville_depart'=>'string',
                 'ville_arriver'=>'string',
             ]);
-            $ville_depart=$request->input('ville_depart');
-            $ville_arriver=$request->input('ville_arriver');
-            $annonces= annonce::where("depart","$ville_depart")->where("arriver","$ville_arriver")->where("archiver","0")->take(8)->get();
+            $depart=$request->input('ville_depart');
+            $arriver=$request->input('ville_arriver');
+
+            $tarjet= wilaya_wilaya::where("wilaya_depart_id","$depart")->where("wilaya_arriver_id","$arriver")->first();
+            $id=$tarjet->id;
+            $annonces=annonce::where("wilaya_wilaya_id","$id")->where("status","validée")->where("archiver","0")->orderBy('created_at', 'asc')->get();;
+
             if ($annonces->count()){
-                foreach ($annonces as $annonce){ 
-                    $annonce->created_at= Carbon::parse($annonce->created_at)->format('h:i d/m/Y');
-                    }
                     
-                return response()->json($annonces);
+                return response()->json([
+                    'annonces' => $annonces,
+                ]);
             }
             else{
                 return response()->json([

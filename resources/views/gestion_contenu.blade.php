@@ -163,9 +163,9 @@
     </div>  
   </div>
   
-  <!-- Modal add presentation-->  
+  <!-- Modal modif presentation-->  
 
- <div id="add_presentation" class="modal fade" role="dialog">  
+ <div id="modifier_presentation" class="modal fade" role="dialog">  
     <div class="modal-dialog">  
       <div class="modal-content">    
         <section class="formulaire formulaire-modal">
@@ -173,7 +173,7 @@
             <div class="sidebar-heading">
               <h2>ajouter un nouvelle presenation</h2>
             </div>
-            <form action="{{route('add_presentation')}}" method="POST">
+            <form action="{{route('modifier_presentation')}}" method="POST" enctype="multipart/form-data">
             @csrf
               <div class="row">
                 <div class="col-md-11 col-sm-12" style="margin-left: 18px;">

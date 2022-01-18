@@ -51,7 +51,7 @@ class gestion_contenuController extends Controller
     }
 
     public function add_presentation(Request $request){
-        $img= Storage::disk('public')->put('images',$request->img);
+        $img= Storage::disk('public')->putFile('presentation', $request->file('img'));
         $image= Storage::url($img);
         presentation::create([
             'img'=>$image,
@@ -60,6 +60,10 @@ class gestion_contenuController extends Controller
             'fonctionnement'=>$request->fonctionnement,
         ]); 
         return redirect()->route('gestion_contenu');
+    }
+
+    public function modifier_presentation(Request $request){
+       
     }
 
 }

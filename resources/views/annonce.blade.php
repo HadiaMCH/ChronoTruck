@@ -118,7 +118,7 @@
                                       </div>
                                       <div class="col-lg-4">
                                         <div class="main-button">
-                                          <a href="../client_add_transaction/{{$annonce->id}}/{{$transporteur->id}}">demander</a>
+                                          <a class="demande" href="../client_add_transaction/{{$annonce->id}}/{{$transporteur->id}}">demander</a>
                                         </div>
                                       </div>
                                     </div>
@@ -220,7 +220,7 @@
                 <div class="row">
                   <div class="col-lg-4">
                     <div class="main-button">
-                      <a href="../transporteur_add_transaction/{{$annonce->id}}">demander de transporter</a>
+                      <a class="demande" href="../transporteur_add_transaction/{{$annonce->id}}">demander de transporter</a>
                     </div>
                   </div>
                 </div>

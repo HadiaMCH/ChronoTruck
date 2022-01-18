@@ -21,7 +21,7 @@ class gestion_newsController extends Controller
 
     public function add_news(Request $request)
     {   
-        $img= Storage::disk('public')->put('news',$request->image);
+        $img= Storage::disk('public')->putFile('news', $request->file('image'));
         $image= Storage::url($img);
         $news=news::create([
             'titre'=>$request->titre,

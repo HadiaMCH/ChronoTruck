@@ -6,7 +6,9 @@ use App\Models\User;
 use App\Models\wilaya;
 use App\Models\annonce;
 use App\Models\transaction;
+use App\Models\user_wilaya;
 use Illuminate\Http\Request;
+use App\Models\wilaya_wilaya;
 use Illuminate\Routing\Controller;
 use App\Http\Controllers\profileView;
 use Illuminate\Support\Facades\Storage;
@@ -42,51 +44,69 @@ class profileController extends Controller
     {
         if($request->name){
         $respense=User::where('id',$request->session()->get('id'))->update(['name' => $request->name]);
-        return redirect()->route('profile');
+        return redirect()->route('profile_id', ['id' => $request->session()->get('id')]);
         }
          
         if($request->familyname){
             $respense=User::where('id',$request->session()->get('id'))->update(['familyname' => $request->familyname]);
-            return redirect()->route('profile');
+            return redirect()->route('profile_id', ['id' =>$request->session()->get('id')]);
         }
 
         if($request->email){
             $respense=User::where('id',$request->session()->get('id'))->update(['email' => $request->email]);
-            return redirect()->route('profile');
+            return redirect()->route('profile_id', ['id' =>$request->session()->get('id')]);
         }
 
         if($request->new_password){
             $respense=User::where('id',$request->session()->get('id'))->update(['password' => $request->new_password]);
-            return redirect()->route('profile');
+            return redirect()->route('profile_id', ['id' =>$request->session()->get('id')]);
         }
 
         if($request->address){
             $respense=User::where('id',$request->session()->get('id'))->update(['address' => $request->address]);
-            return redirect()->route('profile');
+            return redirect()->route('profile_id', ['id' =>$request->session()->get('id')]);
         }
         
         if($request->phone){
 
 
             $respense=User::where('id',$request->session()->get('id'))->update(['phone' => $request->phone]);
-            return redirect()->route('profile');
+            return redirect()->route('profile_id', ['id' =>$request->session()->get('id')]);
         }
         
-        if($request->wilaya){
-            $respense=User::where('id',$request->session()->get('id'))->update(['phone' => $request->wilaya]);
-            return redirect()->route('profile');
+        if($request->depart && $request->arriver){
+
+            user_wilaya::where('user_id',$request->session()->get('id'))->delete();
+            foreach($request->depart as $depart){
+                foreach($request->arriver as $arriver){
+                    $target= wilaya_wilaya::where("wilaya_depart_id","$depart")->where("wilaya_arriver_id","$arriver")->first();
+                    user_wilaya::create([
+                        'user_id'=>$request->session()->get('id'),
+                        'wilaya_wilaya_id'=>$target->id,
+                    ]);
+                }
+            }
+
+            return redirect()->route('profile_id', ['id' =>$request->session()->get('id')]);
         }
 
     }
 
     public function etre_transporteur(Request $request)
     {
-        $respense=User::where('id',$request->session()->get('id'))->update(['transporteur' => 1]);
+            foreach($request->depart as $depart){
+                foreach($request->arriver as $arriver){
+                    $target= wilaya_wilaya::where("wilaya_depart_id","$depart")->where("wilaya_arriver_id","$arriver")->first();
+                    user_wilaya::create([
+                        'user_id'=>$request->session()->get('id'),
+                        'wilaya_wilaya_id'=>$target->id,
+                    ]);
+                }
+            }
 
-        $wilaya=json_encode($request->wilaya);
+            $respense=User::where('id',$request->session()->get('id'))->update(['transporteur' => 1]);
 
-        $respense=User::where('id',$request->session()->get('id'))->update(['wilaya' => $wilaya]);
-        return redirect()->route('profile');
+        return redirect()->route('profile_id', ['id' =>$request->session()->get('id')]);
     }
 
     public function etre_certifie(Request $request)
@@ -99,7 +119,7 @@ class profileController extends Controller
         $respense=User::where('id',$request->session()->get('id'))->update(['demande' => $dmd]);
         $respense=User::where('id',$request->session()->get('id'))->update(['statut' => $statut]);
 
-        return redirect()->route('profile');
+        return redirect()->route('profile_id', ['id' =>$request->session()->get('id')]);
     }
 
     public function noter_transporteur(Request $request){

@@ -7,6 +7,7 @@
       <div class="container-fluid">
         <div class="owl-banner owl-carousel">
           
+        @if(session('admin_name'))
               <div class="item">
                 <img src="assets/images/users_management.jpg" class="img-thumbnail">
                 <div class="item-content">
@@ -50,6 +51,9 @@
                   </div>
                 </div>
               </div>
+        @else
+        
+        @endif
                      
         </div>
       </div>

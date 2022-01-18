@@ -6,6 +6,7 @@
     
     <!-- Diaporama -->
 
+    
     <div class="main-banner">
       <div class="container-fluid">
         <div class="owl-banner owl-carousel">
@@ -47,16 +48,34 @@
                     <form id="search">
                     @csrf
                       <div class="row">
-                        <div class="col-md-6 col-sm-12">
-                          <fieldset>
-                            <input name="ville_depart" type="text" id="ville_depart" placeholder="ville de départ" required="">
-                          </fieldset>
-                        </div>
-                        <div class="col-md-6 col-sm-12">
-                          <fieldset>
-                            <input name="ville_arriver" type="text" id="ville_arriver" placeholder="ville d'arriver" required="">
-                          </fieldset>
-                        </div>
+                      <div class="col-md-5 col-sm-12">
+                        <fieldset>                       
+                          <select id="depart" name="depart">
+                            <option value="point d'arriver">point de départ</option>
+                            @if ($wilayas->count())
+                              {{$i=1}}
+                              @foreach ($wilayas as $wilaya)        
+                                <option value="{{$i}}">{{$wilaya->nom}}</option>
+                                {{$i=$i+1}}
+                              @endforeach
+                            @endif  
+                          </select>
+                        </fieldset>
+                      </div>
+                      <div class="col-md-5 col-sm-12">
+                        <fieldset>                       
+                          <select id="arriver" name="arriver">
+                            <option value="point d'arriver">point d'arriver</option>
+                            @if ($wilayas->count())
+                              {{$i=1}}
+                              @foreach ($wilayas as $wilaya)  
+                                <option value="{{$i}}">{{$wilaya->nom}}</option>
+                                {{$i=$i+1}}
+                              @endforeach
+                            @endif  
+                          </select>
+                        </fieldset>
+                      </div>
                         <div class="col-lg-12">
                           <fieldset>
                             <button type="submit" id="search-submit" class="main-button">Rechercher</button>
@@ -277,17 +296,17 @@
                   if(!response['status_code'])
                   {
                     let j=0;
-                    for (let i=0; i < response.length ;i++)
+                    for (let i=0; i < response['annonces'].length ;i++)
                     {
                       j=0;
                       let text="";
-                      while (j < response[i].texte.length && j< 75){
-                        text += response[i].texte[j];
+                      while (j < response['annonces'][i].texte.length && j< 75){
+                        text += response['annonces'][i].texte[j];
                         j++;
                       }
-                      let d = new Date(response[i].created_at);
-                      $("#search_result_not_connected").prepend('<div class="col-lg-3"><div><div class="post"><div class="thumb"><img src=".'+response[i].img+'" alt=""></div><div class="down-content"><span>'+response[i].titre+'</span><ul class="post-info"><li>'+d.getHours() + ":" + d.getMinutes() + " " + d.getDate()+'-'+ d.getMonth()+'-'+d.getFullYear()+'</li></ul><p>'+text+'<a href="" data-toggle="modal" data-target="#loginModal" >...lire la suite</a></p><ul class="post-info"><li>de '+response[i].depart+' vers '+response[i].arriver+'</li></ul></div></div></div></div>');                
-                      $("#search_result_connected").prepend('<div class="col-lg-3"><div><div class="post"><div class="thumb"><img src=".'+response[i].img+'" alt=""></div><div class="down-content"><span>'+response[i].titre+'</span><ul class="post-info"><li>'+d.getHours() + ":" + d.getMinutes() + " " + d.getDate()+'-'+ d.getMonth()+'-'+d.getFullYear()+'</li></ul><p>'+text+'<a href="annonce/'+response[i].id+'" >...lire la suite</a></p><ul class="post-info"><li>de '+response[i].depart+' vers '+response[i].arriver+'</li></ul></div></div></div></div>');                   
+                      let d = new Date(response['annonces'][i].created_at);
+                      $("#search_result_not_connected").prepend('<div class="col-lg-3"><div><div class="post"><div class="thumb"><img src=".'+response['annonces'][i].img+'" alt=""></div><div class="down-content"><span>'+response['annonces'][i].titre+'</span><ul class="post-info"><li>'+d.getHours() + ":" + d.getMinutes() + " " + d.getDate()+'-'+ d.getMonth()+'-'+d.getFullYear()+'</li></ul><p>'+text+'<a href="" data-toggle="modal" data-target="#loginModal" >...lire la suite</a></p><ul class="post-info"><li>de '+response['depart'][i]+' vers '+response['arriver'][i]+'</li></ul></div></div></div></div>');                
+                      $("#search_result_connected").prepend('<div class="col-lg-3"><div><div class="post"><div class="thumb"><img src=".'+response['annonces'][i].img+'" alt=""></div><div class="down-content"><span>'+response['annonces'][i].titre+'</span><ul class="post-info"><li>'+d.getHours() + ":" + d.getMinutes() + " " + d.getDate()+'-'+ d.getMonth()+'-'+d.getFullYear()+'</li></ul><p>'+text+'<a href="annonce/'+response['annonces'][i].id+'" >...lire la suite</a></p><ul class="post-info"><li>de '+response['depart'][i]+' vers '+response['arriver'][i]+'</li></ul></div></div></div></div>');                   
                     }
                   }
                   else{
@@ -308,8 +327,8 @@
           });
           e.preventDefault();
           let formData = {
-            ville_depart : $("#ville_depart").val(),
-            ville_arriver : $("#ville_arriver").val(),
+            ville_depart : $("#depart").val(),
+            ville_arriver : $("#arriver").val(),
           };
           let type = "POST";
           let ajaxurl = "{{route('search')}}";
@@ -322,18 +341,19 @@
               success: function (response) {
                   if(!response['status_code'])
                   {
+                    $("#search_result_connected").empty();
                     $("#search_result_not_connected").empty();
-                    for (let i=0; i < response.length ;i++)
+                    for (let i=0; i < response['annonces'].length ;i++)
                     {
-                      j=0;
-                      let text="";
-                      while (j < response[i].texte.length && j<75){
-                        text += response[i].texte[j];
-                        j++;
-                      }
-                      let d = new Date(response[i].created_at);
-                      $("#search_result_not_connected").prepend('<div class="col-lg-3"><div><div class="post"><div class="thumb"><img src=".'+response[i].img+'" alt=""></div><div class="down-content"><span>'+response[i].titre+'</span><ul class="post-info"><li>'+d.getHours() + ":" + d.getMinutes() + " " + d.getDate()+'-'+ d.getMonth()+'-'+d.getFullYear()+'</li></ul><p>'+text+'<a href="" data-toggle="modal" data-target="#loginModal" >...lire la suite</a></p><ul class="post-info"><li>de '+response[i].depart+' vers '+response[i].arriver+'</li></ul><ul class="post-info"><li>'+response[i].transport_type+'</li></ul><ul class="post-info"><li>entre '+response[i].fourchette_poid_min+'et'+response[i].fourchette_poid_max+'</li></ul><ul class="post-info"><li>entre '+response[i].fourchette_volume_min+'et'+response[i].fourchette_volume_max+'</li></ul></div></div></div></div>');                     
-                      $("#search_result_connected").prepend('<div class="col-lg-3"><div"><div class="post"><div class="thumb"><img src=".'+response[i].img+'" alt=""></div><div class="down-content"><span>'+response[i].titre+'</span><ul class="post-info"><li>'+d.getHours() + ":" + d.getMinutes() + " " + d.getDate()+'-'+ d.getMonth()+'-'+d.getFullYear()+'</li></ul><p>'+text+'<a href="annonce/'+response[i].id+'" >...lire la suite</a></p><ul class="post-info"><li>de '+response[i].depart+' vers '+response[i].arriver+'</li></ul><ul class="post-info"><li>'+response[i].transport_type+'</li></ul><ul class="post-info"><li>entre '+response[i].fourchette_poid_min+'et'+response[i].fourchette_poid_max+'</li></ul><ul class="post-info"><li>entre '+response[i].fourchette_volume_min+'et'+response[i].fourchette_volume_max+'</li></ul></div></div></div></div>');                     
+                        j=0;
+                        let text="";
+                        while (j < response['annonces'][i].texte.length && j<75){
+                          text += response['annonces'][i].texte[j];
+                          j++;
+                        }
+                        let d = new Date(response['annonces'][i].created_at);
+                        $("#search_result_not_connected").prepend('<div class="col-lg-3"><div><div class="post"><div class="thumb"><img src=".'+response['annonces'][i].img+'" alt=""></div><div class="down-content"><span>'+response['annonces'][i].titre+'</span><ul class="post-info"><li>'+d.getHours() + ":" + d.getMinutes() + " " + d.getDate()+'-'+ d.getMonth()+'-'+d.getFullYear()+'</li></ul><p>'+text+'<a href="" data-toggle="modal" data-target="#loginModal" >...lire la suite</a></p><ul class="post-info"><li>de '+$("#depart").val()+' vers '+$("#arriver").val()+'</li></ul><ul class="post-info"><li>'+response['annonces'][i].transport_type+'</li></ul><ul class="post-info"><li>entre '+response['annonces'][i].fourchette_poid_min+'et'+response['annonces'][i].fourchette_poid_max+'</li></ul><ul class="post-info"><li>entre '+response['annonces'][i].fourchette_volume_min+'et'+response['annonces'][i].fourchette_volume_max+'</li></ul></div></div></div></div>');                     
+                        $("#search_result_connected").prepend('<div class="col-lg-3"><div"><div class="post"><div class="thumb"><img src=".'+response['annonces'][i].img+'" alt=""></div><div class="down-content"><span>'+response['annonces'][i].titre+'</span><ul class="post-info"><li>'+d.getHours() + ":" + d.getMinutes() + " " + d.getDate()+'-'+ d.getMonth()+'-'+d.getFullYear()+'</li></ul><p>'+text+'<a href="annonce/'+response['annonces'][i].id+'" >...lire la suite</a></p><ul class="post-info"><li>de '+$("#depart").val()+' vers '+$("#arriver").val()+'</li></ul><ul class="post-info"><li>'+response['annonces'][i].transport_type+'</li></ul><ul class="post-info"><li>entre '+response['annonces'][i].fourchette_poid_min+'et'+response['annonces'][i].fourchette_poid_max+'</li></ul><ul class="post-info"><li>entre '+response['annonces'][i].fourchette_volume_min+'et'+response['annonces'][i].fourchette_volume_max+'</li></ul></div></div></div></div>');                     
                     }
                   }
                   else{

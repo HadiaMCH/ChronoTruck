@@ -30,7 +30,7 @@
             <img src=".{{$presentation->img}}" >
             <p>{{$presentation->texte}}</p> 
             <div class="embed-responsive embed-responsive-16by9">
-              <iframe class="embed-responsive-item" src="{{$presentation->video}}" allowfullscreen></iframe>
+              <iframe class="embed-responsive-item" src="{{$presentation->video}}" frameborder="0" allow="accelerometer;autoplay;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
             </div>            
           </div>
           <div class="col-lg-12">           

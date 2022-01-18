@@ -93,7 +93,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-12">
-            <ul class="social-icons">
+            <ul>
               <li><a href="{{ route('acceuil') }}">Accueil</a></li>
               <li><a href="{{ route('presentation') }}">Présentation</a></li>
               <li><a href="{{ route('news') }}">News</a></li>

@@ -42,4 +42,8 @@ class gestion_usersController extends Controller
             ]);    
     }
 
+    public function valider_certification(Request $request)
+    {       
+         
+    }
 }

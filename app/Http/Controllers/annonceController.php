@@ -44,7 +44,7 @@ class annonceController extends Controller
             'fourchette_volume_max'=>'string',
             'moyen_transport'=>'string',
         ]);
-        $img= Storage::disk('public')->put('images',$request->image);
+        $img= Storage::disk('public')->putFile('images', $request->file('image'));
         $image= Storage::url($img);
         $annonce=annonce::create([
             'titre'=>$request->titre,
@@ -99,7 +99,7 @@ class annonceController extends Controller
           }
 
           if($request->image){
-            $img= Storage::disk('public')->put('images',$request->image);
+            $img= Storage::disk('public')->putFile('images', $request->file('image'));
             $image= Storage::url($img);
             annonce::where('id',$id)->update(['img'=>$image]);
           }

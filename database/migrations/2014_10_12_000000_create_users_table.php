@@ -28,7 +28,7 @@ class CreateUsersTable extends Migration
 
             $table->boolean('certifie')->default(0);
             $table->longText('demande')->nullable();
-            $table->enum('statut', ['en attente','en cours de traitement','validée','refusée'])->default('en attente');
+            $table->enum('statut', ['en attente','en cours de traitement','validée','refusée','certifié'])->default('en attente');
             
             $table->mediumText('justificatif')->nullable();
             $table->rememberToken();

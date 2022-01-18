@@ -117,7 +117,7 @@ class authController extends Controller
             }
             else{ //transporteur certifie
                 $certifie=1;
-                $demande= Storage::disk('public')->put('demandes',$request->demande);
+                $demande= Storage::disk('public')->putFile('demandes', $request->file('demande'));
                 $dmd= Storage::url($demande);
                 $user=User::create([
                     'name'=>$request->nom,

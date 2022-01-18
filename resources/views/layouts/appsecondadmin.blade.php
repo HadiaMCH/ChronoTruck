@@ -43,6 +43,7 @@
           <a class="navbar-brand"><h2>ِChrono<em>Truck</em></h2></a>
           <div class="navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
+            @if(session('admin_name'))
               <li class="nav-item active">
                 <a class="nav-link" href="{{ route('acceuilAdmin') }}">Accueil</a>
               </li> 
@@ -63,7 +64,6 @@
                 <a class="nav-link" href="{{ route('gestion_admin') }}">les admins</a>
               </li>
               @endif
-              @if(session('admin_name'))
               <li class="nav-item">
                   <div class="main-button">
                   <a rel="nofollow" id="logout_botton" href="{{ route('logout_admin') }}" >déconnecter</a>

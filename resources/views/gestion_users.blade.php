@@ -116,6 +116,7 @@
                 <th scope="col">justificatif de refuse</th>
 
                 <th scope="col">valider les inscriptions</th>
+                <th scope="col">valider la certification</th>
                 <th scope="col">bannir</th>
               </tr>
             </thead>
@@ -138,11 +139,7 @@
                     <td>//</td>
                     <td>//</td>
                   @else
-                    @if($transporteur->statut=="validée")
-                      <td>validée</td>
-                    @else
-                      <td>list de validation</td>
-                    @endif
+                    <td>{{$transporteur->statut}}</td>
                     <td>{{$transporteur->demande}}</td>
                     @if($transporteur->statut=="refusée")
                       <td>{{$transporteur->justificatif}}</td>
@@ -160,6 +157,23 @@
                       </div>
                     </td>
                   @endif
+
+                  @if($transporteur->certifie==0)
+                    <td>//</td>
+                  @elseif($transporteur->transporteur=="validée")
+                    <td>validée</td>
+                  @elseif($transporteur->statut=="refusée")
+                    <td>refusée</td>
+                  @elseif($transporteur->statut=="en cours de traitement" || $transporteur->statut=="en attente")
+                    <td>
+                      <div class="main-button">
+                        <a class="valider_certification" >valider</a>
+                      </div>
+                    </td>
+                  @else
+                    <td>//</td>
+                  @endif
+
                   <td>
                     <div class="main-button">
                       <a class="bannir" >bannir</a>
@@ -265,7 +279,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-12">
-            <ul class="social-icons">
+            <ul>
               <li><a id="client_show">Gestion des clients</a></li>
               <li><a id="transporteur_show">Gestion des transporteurs</a></li>
               <li><a id="signalement_show">Gestion des signalements</a></li>
@@ -342,6 +356,42 @@
           };
           let type = "POST";
           let ajaxurl = "{{route('valider_inscription')}}";
+
+          $.ajax({
+              type: type,
+              url: ajaxurl,
+              data: formData,
+              dataType: 'json',
+              success: function (response) {
+                if (response.message == 'validated'){
+                  let element= $(e.target).parent().parent();
+                  element.empty();
+                  element.html('validée');
+                }
+                else{
+                    //error
+                }
+              },
+              error: function (response) {
+                  console.log(response);
+              }
+            });  
+        }
+
+        if ($(e.target).is('.valider_certification')){
+          let line= $(e.target).parent().parent().parent();
+          let id=line.find('th').find('a').html();
+          $.ajaxSetup({
+              headers: {
+                  'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+              }
+          });
+          e.preventDefault();
+          let formData = {
+            id : id,
+          };
+          let type = "POST";
+          let ajaxurl = "{{route('valider_certification')}}";
 
           $.ajax({
               type: type,

@@ -17,7 +17,7 @@
       </section>
     </div>
 
-    <section class="contact-us">
+    <section class="contact-us" >
       <div class="container">
         <div class="down-contact">
           <div class="sidebar-item contact-information">

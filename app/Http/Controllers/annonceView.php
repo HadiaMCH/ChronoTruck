@@ -59,7 +59,7 @@ class annonceView extends Controller
                   <span>'.$annonce->titre.'</span>
                   <ul class="post-info">
                     <li>'.$annonce->user->name.' '.$annonce->user->familyname.'</li>
-                    <li>'.Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $annonce->created_at)->format('H:i:s d-m-Y').'</li>
+                    <li>'.$annonce->created_at.'</li>
                     <li>'.$annonce->status.'</li>
                   </ul>
                   <p>'.$annonce->texte.'</p>

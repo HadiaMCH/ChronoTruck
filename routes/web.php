@@ -86,6 +86,7 @@ Route::post('/annuler_annonce', [gestion_annoncesController::class,'annuler_anno
 Route::get('/gestion_contenu', [gestion_contenuController::class,'index'])->name('gestion_contenu');
 Route::post('/add_contact', [gestion_contenuController::class,'add_contact'])->name('add_contact');
 Route::post('/add_presentation', [gestion_contenuController::class,'add_presentation'])->name('add_presentation');
+Route::post('/modifier_presentation', [gestion_contenuController::class,'modifier_presentation'])->name('modifier_presentation');
 
 Route::get('/gestion_news', [gestion_newsController::class,'index'])->name('gestion_news');
 Route::post('/add_news', [gestion_newsController::class,'add_news'])->name('add_news');
@@ -93,6 +94,7 @@ Route::post('/add_news', [gestion_newsController::class,'add_news'])->name('add_
 Route::get('/gestion_users', [gestion_usersController::class,'index'])->name('gestion_users');
 Route::post('/bannir', [gestion_usersController::class,'bannir'])->name('bannir');
 Route::post('/valider_inscription', [gestion_usersController::class,'valider_inscription'])->name('valider_inscription');
+Route::post('/valider_certification', [gestion_usersController::class,'valider_certification'])->name('valider_certification');
 
 
 

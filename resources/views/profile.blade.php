@@ -184,7 +184,7 @@
               @endif
 
               @if(count($user->transactions_client))
-                <div class="col-lg-12">
+                <div>
                   <div class="sidebar-item comments">
                     <div class="sidebar-heading">
                       <h2>les demandes de transport que vous avez comme client</h2>
@@ -223,7 +223,7 @@
                   </div>
                 </div>
               @else
-                <div class="col-lg-12">
+                <div>
                   <div class="sidebar-item comments">
                     <div class="sidebar-heading">
                       <h2>aucune demandes de transport que vous avez comme client</h2>
@@ -233,7 +233,7 @@
               @endif
                 @if($user->transporteur == 2)
                   @if(count($user->transactions_transporteur))
-                    <div class="col-lg-12">
+                    <div >
                       <div class="sidebar-item comments">
                         <div class="sidebar-heading">
                           <h2>les demandes de transport que vous avez comme transporteur</h2>
@@ -288,13 +288,6 @@
           <div class="col-lg-5">
             <div class="sidebar">
               <div class="row">
-                <div class="col-lg-12">
-                  <div class="sidebar-item search">
-                    <form id="search_form" name="gs" method="GET" action="#">
-                      <input type="text" name="q" class="searchText" placeholder="tapez pour rechercher..." autocomplete="on">
-                    </form>
-                  </div>
-                </div>
                 <div class="col-lg-12">
                   <div class="sidebar-item recent-posts">
                     <div class="sidebar-heading">
@@ -357,397 +350,346 @@
     </section>
 
     <div id="name" class="modal fade" role="dialog">  
-      <div class="modal-dialog">  
-   <!-- Modal content-->  
-        <div class="modal-content">  
-            <div class="modal-body">  
-              <section class="contact-us">
-                <div class="container">
-                  <div class="down-contact">
-                    <div class="col-lg-12">
-                        <div class="sidebar-item contact-form">
-                          <div class="sidebar-heading">
-                            <h2>modifier votre nom</h2>
-                          </div>
-                          <div class="content">
-                            <form id="name_form">
-                              @csrf
-                                <div class="col-md-12 col-sm-12">
-                                  <fieldset>
-                                    <input name="name" type="text" id="name" placeholder="nouveau nom" required="">
-                                  </fieldset>
-                                </div>
-                                <div class="col-md-12 col-sm-12">
-                                  <fieldset>
-                                    <input name="password" type="password" id="name_password" placeholder="mot de passe" required="">
-                                  </fieldset>
-                                </div>
-                                <div class="col-lg-12">
-                                  <fieldset>
-                                    <button type="submit" id="name_submit" class="main-button btn btn-warning">modifier</button>
-                                  </fieldset>
-                                </div>
-                            </form>
-                          </div>
-                        </div>
-                    </div>
+          <div class="modal-dialog">  
+            <div class="modal-content">    
+              <section class="formulaire formulaire-modal">
+                <div class="col-lg-12">
+                  <div class="sidebar-heading">
+                    <h2>modifier votre nom</h2>
+                  </div>
+                  <div class="content">
+                    <form id="name_form">
+                      @csrf
+                      <div class="col-md-12 col-sm-12">
+                        <fieldset>
+                          <input name="name" type="text" id="name" placeholder="nouveau nom" required="">
+                        </fieldset>
+                      </div>
+                      <div class="col-md-12 col-sm-12">
+                        <fieldset>
+                          <input name="password" type="password" id="name_password" placeholder="mot de passe" required="">
+                        </fieldset>
+                      </div>
+                      <div class="col-lg-12">
+                        <fieldset>
+                          <button type="submit" id="name_submit" class="main-button btn btn-warning">modifier</button>
+                        </fieldset>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </section>
             </div>  
-        </div>  
-      </div>  
-    </div>
+          </div>  
+    </div>  
 
     <div id="familyname" class="modal fade" role="dialog">  
       <div class="modal-dialog">  
-   <!-- Modal content-->  
-        <div class="modal-content">  
-            <div class="modal-body">  
-              <section class="contact-us">
-                <div class="container">
-                  <div class="down-contact">
-                    <div class="col-lg-12">
-                        <div class="sidebar-item contact-form">
-                          <div class="sidebar-heading">
-                            <h2>modifier votre prénom</h2>
-                          </div>
-                          <div class="content">
-                            <form id="familyname_form">
-                              @csrf
-                                <div class="col-md-12 col-sm-12">
-                                  <fieldset>
-                                    <input name="familyname" type="text" id="familyname" placeholder="nouveau prénom" required="">
-                                  </fieldset>
-                                </div>
-                                <div class="col-md-12 col-sm-12">
-                                  <fieldset>
-                                    <input name="password" type="password" id="familyname_password" placeholder="mot de passe" required="">
-                                  </fieldset>
-                                </div>
-                                <div class="col-lg-12">
-                                  <fieldset>
-                                    <button type="submit" id="familyname_submit" class="main-button btn btn-warning">modifier</button>
-                                  </fieldset>
-                                </div>
-                            </form>
-                          </div>
-                        </div>
-                    </div>
+        <div class="modal-content">    
+          <section class="formulaire formulaire-modal">
+            <div class="col-lg-12">
+              <div class="sidebar-heading">
+                <h2>modifier votre prénom</h2>
+              </div>
+              <div class="content">
+                <form id="familyname_form">
+                  @csrf
+                  <div class="col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="familyname" type="text" id="familyname" placeholder="nouveau prénom" required="">
+                    </fieldset>
                   </div>
-                </div>
-              </section>
-            </div>  
+                  <div class="col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="password" type="password" id="familyname_password" placeholder="mot de passe" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12">
+                    <fieldset>
+                      <button type="submit" id="familyname_submit" class="main-button btn btn-warning">modifier</button>
+                    </fieldset>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </section>
         </div>  
       </div>  
     </div>
 
     <div id="phone" class="modal fade" role="dialog">  
       <div class="modal-dialog">  
-   <!-- Modal content-->  
-        <div class="modal-content">  
-            <div class="modal-body">  
-              <section class="contact-us">
-                <div class="container">
-                  <div class="down-contact">
-                    <div class="col-lg-12">
-                        <div class="sidebar-item contact-form">
-                          <div class="sidebar-heading">
-                            <h2>modifier votre numéro de téléphone</h2>
-                          </div>
-                          <div class="content">
-                            <form id="phone_form">
-                              @csrf
-                                <div class="col-md-12 col-sm-12">
-                                  <fieldset>
-                                    <input name="phone" type="text" id="phone" placeholder="nouveau numéro de téléphone" required="">
-                                  </fieldset>
-                                </div>
-                                <div class="col-md-12 col-sm-12">
-                                  <fieldset>
-                                    <input name="password" type="password" id="phone_password" placeholder="mot de passe" required="">
-                                  </fieldset>
-                                </div>
-                                <div class="col-lg-12">
-                                  <fieldset>
-                                    <button type="submit" id="phone_submit" class="main-button btn btn-warning">modifier</button>
-                                  </fieldset>
-                                </div>
-                            </form>
-                          </div>
-                        </div>
-                    </div>
+        <div class="modal-content">    
+          <section class="formulaire formulaire-modal">
+            <div class="col-lg-12">
+              <div class="sidebar-heading">
+                <h2>modifier votre numéro de téléphone</h2>
+              </div>
+              <div class="content">
+                <form id="phone_form">
+                  @csrf
+                  <div class="col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="phone" type="text" id="phone" placeholder="nouveau numéro de téléphone" required="">
+                    </fieldset>
                   </div>
-                </div>
-              </section>
-            </div>  
+                  <div class="col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="password" type="password" id="phone_password" placeholder="mot de passe" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12">
+                    <fieldset>
+                      <button type="submit" id="phone_submit" class="main-button btn btn-warning">modifier</button>
+                    </fieldset>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </section>
         </div>  
       </div>  
     </div>
 
     <div id="address" class="modal fade" role="dialog">  
       <div class="modal-dialog">  
-   <!-- Modal content-->  
-        <div class="modal-content">  
-            <div class="modal-body">  
-              <section class="contact-us">
-                <div class="container">
-                  <div class="down-contact">
-                    <div class="col-lg-12">
-                        <div class="sidebar-item contact-form">
-                          <div class="sidebar-heading">
-                            <h2>modifier votre adresse principale</h2>
-                          </div>
-                          <div class="content">
-                            <form id="address_form">
-                              @csrf
-                                <div class="col-md-12 col-sm-12">
-                                  <fieldset>
-                                    <input name="address" type="text" id="address" placeholder="adresse principale" required="">
-                                  </fieldset>
-                                </div>
-                                <div class="col-md-12 col-sm-12">
-                                  <fieldset>
-                                    <input name="password" type="password" id="address_password" placeholder="mot de passe" required="">
-                                  </fieldset>
-                                </div>
-                                <div class="col-lg-12">
-                                  <fieldset>
-                                    <button type="submit" id="address_submit" class="main-button btn btn-warning">modifier</button>
-                                  </fieldset>
-                                </div>
-                            </form>
-                          </div>
-                        </div>
-                    </div>
+        <div class="modal-content">    
+          <section class="formulaire formulaire-modal">
+            <div class="col-lg-12">
+              <div class="sidebar-heading">
+                <h2>modifier votre adresse principale</h2>
+              </div>
+              <div class="content">
+                <form id="address_form">
+                  @csrf
+                  <div class="col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="address" type="text" id="address" placeholder="adresse principale" required="">
+                    </fieldset>
                   </div>
-                </div>
-              </section>
-            </div>  
+                  <div class="col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="password" type="password" id="address_password" placeholder="mot de passe" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12">
+                    <fieldset>
+                      <button type="submit" id="address_submit" class="main-button btn btn-warning">modifier</button>
+                    </fieldset>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </section>
         </div>  
       </div>  
     </div>
 
     <div id="email" class="modal fade" role="dialog">  
       <div class="modal-dialog">  
-   <!-- Modal content-->  
-        <div class="modal-content">  
-            <div class="modal-body">  
-              <section class="contact-us">
-                <div class="container">
-                  <div class="down-contact">
-                    <div class="col-lg-12">
-                        <div class="sidebar-item contact-form">
-                          <div class="sidebar-heading">
-                            <h2>modifier votre email</h2>
-                          </div>
-                          <div class="content">
-                            <form id="email_form">
-                              @csrf
-                                <div class="col-md-12 col-sm-12">
-                                  <fieldset>
-                                    <input name="email" type="text" id="email" placeholder="nouveau email" required="">
-                                  </fieldset>
-                                </div>
-                                <div class="col-md-12 col-sm-12">
-                                  <fieldset>
-                                    <input name="password" type="password" id="email_password" placeholder="mot de passe" required="">
-                                  </fieldset>
-                                </div>
-                                <div class="col-lg-12">
-                                  <fieldset>
-                                    <button type="submit" id="email_submit" class="main-button btn btn-warning">modifier</button>
-                                  </fieldset>
-                                </div>
-                            </form>
-                          </div>
-                        </div>
-                    </div>
+        <div class="modal-content">    
+          <section class="formulaire formulaire-modal">
+            <div class="col-lg-12">
+              <div class="sidebar-heading">
+                <h2>modifier votre email</h2>
+              </div>
+              <div class="content">
+                <form id="email_form">
+                  @csrf
+                  <div class="col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="email" type="text" id="email" placeholder="nouveau email" required="">
+                    </fieldset>
                   </div>
-                </div>
-              </section>
-            </div>  
+                  <div class="col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="password" type="password" id="email_password" placeholder="mot de passe" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12">
+                    <fieldset>
+                      <button type="submit" id="email_submit" class="main-button btn btn-warning">modifier</button>
+                    </fieldset>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </section>
         </div>  
       </div>  
     </div>
 
     <div id="mot_passe" class="modal fade" role="dialog">  
       <div class="modal-dialog">  
-   <!-- Modal content-->  
-        <div class="modal-content">  
-            <div class="modal-body">  
-              <section class="contact-us">
-                <div class="container">
-                  <div class="down-contact">
-                    <div class="col-lg-12">
-                        <div class="sidebar-item contact-form">
-                          <div class="sidebar-heading">
-                            <h2>modifier votre mot de passe</h2>
-                          </div>
-                          <div class="content">
-                            <form id="password_form">
-                              @csrf
-                                <div class="col-md-12 col-sm-12">
-                                  <fieldset>
-                                    <input name="password" type="password" id="pass_password" placeholder="mot de passe" required="">
-                                  </fieldset>
-                                </div>
-                                <div class="col-md-12 col-sm-12">
-                                  <fieldset>
-                                    <input name="new_password" type="password" id="new_password" placeholder="nouveau mot de passe" required="">
-                                  </fieldset>
-                                </div>
-                                <div class="col-lg-12">
-                                  <fieldset>
-                                    <button type="submit" id="password_submit" class="main-button btn btn-warning">modifier</button>
-                                  </fieldset>
-                                </div>
-                            </form>
-                          </div>
-                        </div>
-                    </div>
+        <div class="modal-content">    
+          <section class="formulaire formulaire-modal">
+            <div class="col-lg-12">
+              <div class="sidebar-heading">
+                <h2>modifier votre mot de passe</h2>
+              </div>
+              <div class="content">
+                <form id="password_form">
+                  @csrf
+                  <div class="col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="password" type="password" id="pass_password" placeholder="mot de passe" required="">
+                    </fieldset>
                   </div>
-                </div>
-              </section>
-            </div>  
+                  <div class="col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="new_password" type="password" id="new_password" placeholder="nouveau mot de passe" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12">
+                    <fieldset>
+                      <button type="submit" id="password_submit" class="main-button btn btn-warning">modifier</button>
+                    </fieldset>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </section>
         </div>  
       </div>  
     </div>
 
-    <div id="transporteur" class="modal fade" role="dialog">  
+    <div id="transporteur" class="modal fade" role="dialog"> 
       <div class="modal-dialog">  
-   <!-- Modal content-->  
-        <div class="modal-content">  
-            <div class="modal-body">  
-              <section class="contact-us">
-                <div class="container">
-                  <div class="down-contact">
-                    <div class="col-lg-12">
-                        <div class="sidebar-item contact-form">
-                          <div class="sidebar-heading">
-                            <h2>modifier votre état vers un transporteur</h2>
-                          </div>
-                          <div class="content">
-                            <form id="transporteur_form">
-                              @csrf
-                                <div class="col-md-12 col-sm-12">
-                                  <fieldset>
-                                    <select class="mul-select" id="wilaya" name="wilaya[]" multiple="true">
-                                      @foreach ($wilayas as $wilaya)
-                                        <option value="{{$wilaya->nom}}" >{{$wilaya->nom}}</option>
-                                      @endforeach
-                                    </select>
-                                  </fieldset>
-                                </div>
-                                <div class="col-md-12 col-sm-12">
-                                  <fieldset>
-                                    <input name="password" type="password" id="transporteur_password" placeholder="mot de passe" required="">
-                                  </fieldset>
-                                </div>
-                                <div class="col-lg-12">
-                                  <fieldset>
-                                    <button type="submit" id="transporteur_submit" class="main-button btn btn-warning">modifier</button>
-                                  </fieldset>
-                                </div>
-                            </form>
-                          </div>
-                        </div>
-                    </div>
+        <div class="modal-content">    
+          <section class="formulaire formulaire-modal">
+            <div class="col-lg-12">
+              <div class="sidebar-heading"> 
+                <h2>modifier votre état vers un transporteur</h2>
+              </div>
+              <div class="content">
+                <form id="transporteur_form">
+                  @csrf
+                  <div class="col-md-12 col-sm-12">
+                    <fieldset>
+                      <label for="depart">les points de départ :</label>
+                      <select class="mul-select" id="depart" name="depart[]" multiple="true" >
+                        {{$i=1}}
+                        @foreach ($wilayas as $wilaya)
+                          <option value="{{$i}}">{{$wilaya->nom}}</option>
+                          {{$i++}}
+                        @endforeach
+                      </select>
+                    </fieldset>
                   </div>
-                </div>
-              </section>
-            </div>  
+                  <div class="col-md-12 col-sm-12">
+                    <fieldset>
+                      <label for="arriver">les points d'arrivée :</label>
+                      <select class="mul-select col-lg-12" id="arriver" name="arriver[]" multiple="true" >
+                        {{$i=1}}
+                        @foreach ($wilayas as $wilaya)
+                          <option value="{{$i}}">{{$wilaya->nom}}</option>
+                          {{$i++}}
+                        @endforeach
+                      </select>
+                    </fieldset>
+                  </div>
+                    <div class="col-md-12 col-sm-12">
+                      <fieldset>
+                        <input name="password" type="password" id="transporteur_password" placeholder="mot de passe" required="">
+                      </fieldset>
+                    </div>
+                    <div class="col-lg-12">
+                      <fieldset>
+                        <button type="submit" id="transporteur_submit" class="main-button btn btn-warning">modifier</button>
+                      </fieldset>
+                    </div>
+                </form>
+              </div>
+            </div>
+          </section>
         </div>  
       </div>  
     </div>
 
     <div id="certifie" class="modal fade" role="dialog">  
       <div class="modal-dialog">  
-   <!-- Modal content-->  
-        <div class="modal-content">  
-            <div class="modal-body">  
-              <section class="contact-us">
-                <div class="container">
-                  <div class="down-contact">
-                    <div class="col-lg-12">
-                        <div class="sidebar-item contact-form">
-                          <div class="sidebar-heading">
-                            <h2>modifier votre état vers un transporteur certifié</h2>
-                          </div>
-                          <div class="content">
-                            <form id="certifie_form">
-                              @csrf
-                              <div class="col-md-12 col-sm-12">
-                                  <fieldset>
-                                    <label for="demande">uploader votre demande</label>
-                                    <input type="file" id="demande" name="demande" accept="image/png, image/jpeg, .doc, .docx, application/pdf">
-                                  </fieldset>
-                                </div>
-                                <div class="col-md-12 col-sm-12">
-                                  <fieldset>
-                                    <input name="password" type="password" id="certifie_password" placeholder="mot de passe" required="">
-                                  </fieldset>
-                                </div>
-                                <div class="col-lg-12">
-                                  <fieldset>
-                                    <button type="submit" id="certifie_submit" class="main-button btn btn-warning">modifier</button>
-                                  </fieldset>
-                                </div>
-                            </form>
-                          </div>
-                        </div>
-                    </div>
+        <div class="modal-content">    
+          <section class="formulaire formulaire-modal">
+            <div class="col-lg-12">
+              <div class="sidebar-heading">
+                <h2>modifier votre état vers un transporteur certifié</h2>
+              </div>
+              <div class="content">
+                <form id="certifie_form">
+                @csrf
+                  <div class="col-md-12 col-sm-12">
+                    <fieldset>
+                      <label for="demande">uploader votre demande</label>
+                      <input type="file" id="demande" name="demande" accept="image/png, image/jpeg, .doc, .docx, application/pdf">
+                    </fieldset>
                   </div>
-                </div>
-              </section>
-            </div>  
+                  <div class="col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="password" type="password" id="certifie_password" placeholder="mot de passe" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12">
+                    <fieldset>
+                      <button type="submit" id="certifie_submit" class="main-button btn btn-warning">modifier</button>
+                    </fieldset>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </section>
         </div>  
       </div>  
     </div>
 
     <div id="wilaya_modal" class="modal fade" role="dialog">  
       <div class="modal-dialog">  
-   <!-- Modal content-->  
-        <div class="modal-content">  
-            <div class="modal-body">  
-              <section class="contact-us">
-                <div class="container">
-                  <div class="down-contact">
-                    <div class="col-lg-12">
-                        <div class="sidebar-item contact-form">
-                          <div class="sidebar-heading">
-                            <h2>les wilayas que vous comptez desservir</h2>
-                          </div>
-                          <div class="content">
-                            <form id="wilaya_form">
-                              @csrf
-                                <div class="col-md-12 col-sm-12">
-                                  <fieldset>
-                                    <select class="mul-select" id="wilaya" name="wilaya[]" multiple="true">
-                                      @foreach ($wilayas as $wilaya)
-                                        <option value="{{$wilaya->nom}}" >{{$wilaya->nom}}</option>
-                                      @endforeach
-                                    </select>
-                                  </fieldset>
-                                </div>
-                                <div class="col-md-12 col-sm-12">
-                                  <fieldset>
-                                    <input name="password" type="password" id="wilaya_password" placeholder="votre mot de passe" required="">
-                                  </fieldset>
-                                </div>
-                                <div class="col-lg-12">
-                                  <fieldset>
-                                    <button type="submit" id="wilaya_submit" class="main-button btn btn-warning">modifier</button>
-                                  </fieldset>
-                                </div>
-                            </form>
-                          </div>
-                        </div>
-                    </div>
+        <div class="modal-content">    
+          <section class="formulaire formulaire-modal">
+            <div class="col-lg-12">
+              <div class="sidebar-heading">
+                <h2>les wilayas que vous comptez desservir</h2>
+              </div>
+              <div class="content">
+                <form id="wilaya_form">
+                  @csrf
+                  <div class="col-md-12 col-sm-12 ">
+                    <fieldset>
+                      <label for="depart">les points de départ :</label>
+                      <select class="mul-select" id="depart" name="depart[]" multiple="true" >
+                        {{$i=1}}
+                        @foreach ($wilayas as $wilaya)
+                          <option value="{{$i}}">{{$wilaya->nom}}</option>
+                          {{$i++}}
+                        @endforeach
+                      </select>
+                    </fieldset>
                   </div>
-                </div>
-              </section>
-            </div>  
+                  <div class="col-md-12 col-sm-12 ">
+                    <fieldset>
+                      <label for="arriver">les points d'arrivée :</label>
+                      <select class="mul-select col-lg-12" id="arriver" name="arriver[]" multiple="true" >
+                        {{$i=1}}
+                        @foreach ($wilayas as $wilaya)
+                          <option value="{{$i}}">{{$wilaya->nom}}</option>
+                          {{$i++}}
+                        @endforeach
+                      </select>
+                    </fieldset>
+                  </div>
+                  <div class="col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="password" type="password" id="wilaya_password" placeholder="votre mot de passe" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12">
+                    <fieldset>
+                      <button type="submit" id="wilaya_submit" class="main-button btn btn-warning">modifier</button>
+                    </fieldset>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </section>
         </div>  
       </div>  
     </div>
@@ -933,9 +875,9 @@
                     console.log(response);
                 }
               });
-        }); 
+        });
 
-        $("#passworde_submit").click(function (e) {
+        $("#password_submit").click(function (e) {
             $.ajaxSetup({
               headers: {
                   'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')

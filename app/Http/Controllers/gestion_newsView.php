@@ -60,7 +60,7 @@ class gestion_newsView extends Controller
                       <td>'.$new->description.'</td>
                       <td>'.$new->paragraph.'</td>
                       <td><img src=".'.$new->img.'" alt="" style="width: 100%;"></td>
-                      <td>'.Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $new->created_at)->format('H:i:s d-m-Y').'</td>
+                      <td>'.$new->created_at.'</td>
                     </tr>';
                   }
                   $code=$code.'</tbody>
