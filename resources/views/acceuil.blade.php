@@ -6,27 +6,29 @@
     
     <!-- Diaporama -->
 
-    
-    <div class="main-banner">
-      <div class="container-fluid">
-        <div class="owl-banner owl-carousel">
-          
-          @if ($news->count())
-            @foreach ($news as $new)
-              <div class="item">
-                <img src=".{{$new->img}}" class="img-thumbnail">
-                <div class="item-content">
-                  <div class="main-content">
-                    <div class="meta-category">
-                    <a href="news/{{$new->id}}"><span style="color:#804721">{{$new->titre}}</span></a>
-                    </div>
-                  </div>
+    <div class="slider">
+      @if ($news->count())
+        <div class="slide-track">
+              @foreach ($news as $new)
+                <div class="slide">
+                <a href="news/{{$new->id}}"><img src=".{{$new->img}}" class="img-thumbnail">
+                  <span >{{$new->titre}}</span></a>
                 </div>
-              </div>
-            @endforeach
-          @endif          
+              @endforeach
+              @foreach ($news as $new)
+                <div class="slide">
+                <a href="news/{{$new->id}}"><img src=".{{$new->img}}" class="img-thumbnail">
+                  <span >{{$new->titre}}</span></a>
+                </div>
+              @endforeach
+              @foreach ($news as $new)
+                <div class="slide">
+                <a href="news/{{$new->id}}"><img src=".{{$new->img}}" class="img-thumbnail">
+                  <span >{{$new->titre}}</span></a>
+                </div>
+              @endforeach
         </div>
-      </div>
+      @endif 
     </div>
 
     <!-- Recherche -->
