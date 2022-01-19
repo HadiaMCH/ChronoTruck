@@ -77,6 +77,7 @@ Route::get('/refuser_transaction/{id_transaction}', [profileController::class,'r
 Route::get('/acceuilAdmin', [acceuilAdminController::class,'index'])->name('acceuilAdmin');
 Route::post('/connexion_admin', [gestion_adminsController::class,'login'])->name('login_admin');
 Route::get('/deconnexion_admin', [gestion_adminsController::class,'logout'])->name('logout_admin');
+Route::get('/gestion_admin', [gestion_adminsController::class,'super_admin'])->name('super_admin');
 
 
 Route::get('/gestion_annonces', [gestion_annoncesController::class,'index'])->name('gestion_annonces');

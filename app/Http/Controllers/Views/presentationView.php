@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Views;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\acceuilView;
 use Illuminate\Routing\Controller;
+use App\Http\Controllers\Views\acceuilView;
 
 class presentationView extends Controller
 {

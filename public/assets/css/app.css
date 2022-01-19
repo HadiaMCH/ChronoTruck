@@ -101,6 +101,35 @@ body {
       color: #f48840;
   }
   
+  /* acceuil admin */
+
+    #acceuil_admin{
+        padding-top:110px;
+        padding-right:5%;
+        padding-left:5%;
+    }
+
+    #acceuil_admin .row{
+    padding-bottom:20px;
+    }
+    
+    #acceuil_admin .slide{
+
+        align-items:center;
+    }
+
+    #acceuil_admin .slide img{
+        width: 500px; 
+    }
+
+    #acceuil_admin .slide a{
+        margin: auto; 
+    }
+
+    #acceuil_admin .slide a span{
+        bottom: 40px;
+        left: 150px; 
+    }
 
   /* diaporama */
   .slider {
@@ -117,7 +146,7 @@ body {
         display:flex;
         width:calc(500px * 18);
         animation: scroll 12s linear infinite;
-        }
+        }  
 
     .slide-track:hover{
         animation-play-state:paused;

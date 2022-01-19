@@ -7,15 +7,10 @@
       <section class="page-heading">
         <div class="container">
           <div class="row">
-            <div class="col-lg-10">
+            <div class="col-lg-12">
               <div class="text-content">
                 <h2>La gestion des clients</h2>
                 <h4>Vous pouvez bannir des clients ainsi que de les filtrer, les trier et accèder aux leurs profils</h4>
-              </div>
-            </div>
-            <div class="col-lg-2">
-              <div class="main-button">
-                <a data-toggle="modal" data-target="#rechercher_client">rechercher</a>
               </div>
             </div> 
           </div>
@@ -75,15 +70,10 @@
       <section class="page-heading">
         <div class="container">
           <div class="row">
-            <div class="col-lg-10">
+            <div class="col-lg-12">
               <div class="text-content">
                 <h2>La gestion des transporteurs</h2>
                 <h4>Vous pouvez valider les inscriptions des transporteurs, les bannir, les filtrer, les trier et accèder aux leurs profils</h4>
-              </div>
-            </div>
-            <div class="col-lg-2">
-              <div class="main-button">
-                <a data-toggle="modal" data-target="#rechercher_transporteur">rechercher</a>
               </div>
             </div>
           </div>
