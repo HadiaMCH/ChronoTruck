@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\news;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use App\Http\Controllers\news_detailsView;
+use App\Http\Controllers\Views\news_detailsView;
 
 class news_detailsController extends Controller
 {

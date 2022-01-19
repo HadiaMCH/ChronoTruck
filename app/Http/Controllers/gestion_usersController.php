@@ -7,7 +7,7 @@ use App\Models\annonce;
 use App\Models\user_wilaya;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use App\Http\Controllers\gestion_usersView;
+use App\Http\Controllers\Views\gestion_usersView;
 
 class gestion_usersController extends Controller
 {

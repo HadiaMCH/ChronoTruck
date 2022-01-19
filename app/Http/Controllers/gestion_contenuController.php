@@ -7,7 +7,7 @@ use App\Models\presentation;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Storage;
-use App\Http\Controllers\gestion_contenuView;
+use App\Http\Controllers\Views\gestion_contenuView;
 
 class gestion_contenuController extends Controller
 {

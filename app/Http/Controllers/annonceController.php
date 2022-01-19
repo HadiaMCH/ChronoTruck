@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 use App\Models\wilaya_wilaya;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\annonceView;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\annonceController;
+use App\Http\Controllers\Views\annonceView;
 
 class annonceController extends Controller
 {

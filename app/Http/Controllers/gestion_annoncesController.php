@@ -6,7 +6,7 @@ use App\Models\wilaya;
 use App\Models\annonce;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use App\Http\Controllers\gestion_annoncesView;
+use App\Http\Controllers\Views\gestion_annoncesView;
 
 class gestion_annoncesController extends Controller
 {

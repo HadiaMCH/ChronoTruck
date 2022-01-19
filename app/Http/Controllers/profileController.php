@@ -10,8 +10,8 @@ use App\Models\user_wilaya;
 use Illuminate\Http\Request;
 use App\Models\wilaya_wilaya;
 use Illuminate\Routing\Controller;
-use App\Http\Controllers\profileView;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\Views\profileView;
 
 class profileController extends Controller
 {

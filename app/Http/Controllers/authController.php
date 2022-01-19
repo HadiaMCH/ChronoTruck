@@ -8,9 +8,9 @@ use App\Models\wilaya;
 use App\Models\user_wilaya;
 use Illuminate\Http\Request;
 use App\Models\wilaya_wilaya;
-use App\Http\Controllers\authView;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\authController;
 
 class authController extends Controller
 {

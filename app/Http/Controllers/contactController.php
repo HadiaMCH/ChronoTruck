@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\contact;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use App\Http\Controllers\contactView;
+use App\Http\Controllers\Views\contactView;
 
 class contactController extends Controller
 {

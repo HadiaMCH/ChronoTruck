@@ -9,8 +9,8 @@ use Illuminate\Http\Request;
 use App\Models\wilaya_wilaya;
 use Illuminate\Support\Carbon;
 use Illuminate\Routing\Controller;
-use App\Http\Controllers\acceuilView;
 use App\Http\Controllers\annonceController;
+use App\Http\Controllers\Views\acceuilView;
 
 class acceuilController extends Controller
 {
