@@ -144,7 +144,7 @@ class profileView extends Controller
                             </li>
                           </ul>
                       </div>
-                      @if($user->certifie)
+                      @if($user->status=="certifié")
                         <div class="col-lg-12">
                           <div class="sidebar-item comments">
                             <div class="sidebar-heading">
@@ -158,7 +158,7 @@ class profileView extends Controller
                                     <p>{{$user->statut}}</p>
                                   </div>
                                 </li>
-                                @if($user->certifie=="refusée")
+                                @if($user->status=="refusée")
                                 <li>
                                   <div class="right-content">
                                     <h4>justificatif  :</h4>

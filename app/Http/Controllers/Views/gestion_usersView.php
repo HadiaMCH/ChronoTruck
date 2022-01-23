@@ -145,7 +145,7 @@ class gestion_usersView extends Controller
                       <td>tarjets</td>
                       <td>{{$transporteur->note}}</td>';
     
-                      if($transporteur->certifie==0){
+                      if($transporteur->status=="certifié"){
                         $code=$code.'<td>//</td>
                         <td>//</td>
                         <td>//</td>';

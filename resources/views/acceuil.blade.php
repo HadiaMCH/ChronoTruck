@@ -53,7 +53,7 @@
                       <div class="col-md-5 col-sm-12">
                         <fieldset>                       
                           <select id="depart" name="depart">
-                            <option value="point d'arriver">point de départ</option>
+                            <option value="">point de départ</option>
                             @if ($wilayas->count())
                               {{$i=1}}
                               @foreach ($wilayas as $wilaya)        
@@ -67,7 +67,7 @@
                       <div class="col-md-5 col-sm-12">
                         <fieldset>                       
                           <select id="arriver" name="arriver">
-                            <option value="point d'arriver">point d'arriver</option>
+                            <option value="">point d'arriver</option>
                             @if ($wilayas->count())
                               {{$i=1}}
                               @foreach ($wilayas as $wilaya)  
@@ -106,7 +106,7 @@
 
       @if(session('name')) <!-- Resultat du recherche       connected -->
         <div class="row" id="search_result_connected">  
-
+            
         </div>
       </div>
     </section>
@@ -171,11 +171,11 @@
                   <div class="col-md-12 col-sm-12">
                     <fieldset>                       
                       <select id="depart" name="depart">
-                        <option value="point d'arriver">point de départ</option>
+                        <option value="">point de départ</option>
                         @if ($wilayas->count())
                           {{$i=1}}
                           @foreach ($wilayas as $wilaya)        
-                            <option value="{{$i}}">{{$wilaya->nom}}</option>
+                            <option value="{{$i}}" id="depart{{$i}}">{{$wilaya->nom}}</option>
                             {{$i=$i+1}}
                           @endforeach
                         @endif  
@@ -185,11 +185,11 @@
                   <div class="col-md-12 col-sm-12">
                     <fieldset>                       
                       <select id="arriver" name="arriver">
-                        <option value="point d'arriver">point d'arriver</option>
+                        <option value="">point d'arriver</option>
                         @if ($wilayas->count())
                           {{$i=1}}
                           @foreach ($wilayas as $wilaya)  
-                            <option value="{{$i}}">{{$wilaya->nom}}</option>
+                            <option value="{{$i}}" id="arriver{{$i}}">{{$wilaya->nom}}</option>
                             {{$i=$i+1}}
                            @endforeach
                         @endif  
@@ -199,7 +199,7 @@
                   <div class="col-md-12 col-sm-12">
                     <fieldset>                       
                       <select id="transport_type" name="transport_type">
-                        <option value="type de transport">type de transport</option>
+                        <option value="">type de transport</option>
                         @if ($transport_types)
                           @foreach ($transport_types as $transport_type)        
                             <option value="{{$transport_type}}">{{$transport_type}}</option>
@@ -211,7 +211,7 @@
                   <div class="col-md-6 col-sm-12">
                     <fieldset>                       
                       <select id="fourchette_poid_min" name="fourchette_poid_min">
-                        <option value="poids minimum">poids minimum</option>
+                        <option value="">poids minimum</option>
                         @if ($fourchette_poid_mins)
                           @foreach ($fourchette_poid_mins as $fourchette_poid_min)        
                             <option value="{{$fourchette_poid_min}}">{{$fourchette_poid_min}}</option>
@@ -223,7 +223,7 @@
                   <div class="col-md-6 col-sm-12">
                     <fieldset>                       
                       <select id="fourchette_poid_max" name="fourchette_poid_max">
-                        <option value="poids maximum">poids maximum</option>
+                        <option value="">poids maximum</option>
                         @if ($fourchette_poid_maxs)
                           @foreach ($fourchette_poid_maxs as $fourchette_poid_max)        
                             <option value="{{$fourchette_poid_max}}">{{$fourchette_poid_max}}</option>
@@ -235,7 +235,7 @@
                   <div class="col-md-6 col-sm-12">
                     <fieldset>                       
                       <select id="fourchette_volume_min" name="fourchette_volume_min">
-                        <option value="volume minimum">volume minimum</option>
+                        <option value="">volume minimum</option>
                         @if ($fourchette_volume_mins)
                           @foreach ($fourchette_volume_mins as $fourchette_volume_min)        
                             <option value="{{$fourchette_volume_min}}">{{$fourchette_volume_min}}</option>
@@ -247,7 +247,7 @@
                   <div class="col-md-6 col-sm-12">
                     <fieldset>                       
                       <select id="fourchette_volume_max" name="fourchette_volume_max">
-                        <option value="volume maximum">volume maximum</option>
+                        <option value="">volume maximum</option>
                         @if ($fourchette_volume_maxs)
                           @foreach ($fourchette_volume_maxs as $fourchette_volume_max)        
                             <option value="{{$fourchette_volume_max}}">{{$fourchette_volume_max}}</option>
@@ -259,7 +259,7 @@
                   <div class="col-md-12 col-sm-12">
                     <fieldset>                       
                       <select id="moyen_transport" name="moyen_transport">
-                        <option value="moyen de transport">moyen de transport</option>
+                        <option value="">moyen de transport</option>
                         @if ($moyen_transports)
                           @foreach ($moyen_transports as $moyen_transport)        
                             <option value="{{$moyen_transport}}">{{$moyen_transport}}</option>
@@ -312,7 +312,11 @@
                     }
                   }
                   else{
-                    //no annonce dans la bdd
+                    $("#search_result_connected").empty();
+                    $("#search_result_not_connected").empty();
+                    $("#search_result_not_connected").prepend('<div class="sidebar-heading"><h2 style="border-bottom: 0;">pas de resultat trouvée pour votre recherche</h2></div>');
+                    $("#search_result_connected").prepend('<div class="sidebar-heading"><h2 style="border-bottom: 0;">pas de resultat trouvée pour votre recherche</h2></div>');
+                    
                   }
               },
               error: function (response) {
@@ -354,8 +358,10 @@
                           j++;
                         }
                         let d = new Date(response['annonces'][i].created_at);
-                        $("#search_result_not_connected").prepend('<div class="col-lg-3"><div><div class="post"><div class="thumb"><img src=".'+response['annonces'][i].img+'" alt=""></div><div class="down-content"><span>'+response['annonces'][i].titre+'</span><ul class="post-info"><li>'+d.getHours() + ":" + d.getMinutes() + " " + d.getDate()+'-'+ d.getMonth()+'-'+d.getFullYear()+'</li></ul><p>'+text+'<a href="" data-toggle="modal" data-target="#loginModal" >...lire la suite</a></p><ul class="post-info"><li>de '+$("#depart").val()+' vers '+$("#arriver").val()+'</li></ul><ul class="post-info"><li>'+response['annonces'][i].transport_type+'</li></ul><ul class="post-info"><li>entre '+response['annonces'][i].fourchette_poid_min+'et'+response['annonces'][i].fourchette_poid_max+'</li></ul><ul class="post-info"><li>entre '+response['annonces'][i].fourchette_volume_min+'et'+response['annonces'][i].fourchette_volume_max+'</li></ul></div></div></div></div>');                     
-                        $("#search_result_connected").prepend('<div class="col-lg-3"><div"><div class="post"><div class="thumb"><img src=".'+response['annonces'][i].img+'" alt=""></div><div class="down-content"><span>'+response['annonces'][i].titre+'</span><ul class="post-info"><li>'+d.getHours() + ":" + d.getMinutes() + " " + d.getDate()+'-'+ d.getMonth()+'-'+d.getFullYear()+'</li></ul><p>'+text+'<a href="annonce/'+response['annonces'][i].id+'" >...lire la suite</a></p><ul class="post-info"><li>de '+$("#depart").val()+' vers '+$("#arriver").val()+'</li></ul><ul class="post-info"><li>'+response['annonces'][i].transport_type+'</li></ul><ul class="post-info"><li>entre '+response['annonces'][i].fourchette_poid_min+'et'+response['annonces'][i].fourchette_poid_max+'</li></ul><ul class="post-info"><li>entre '+response['annonces'][i].fourchette_volume_min+'et'+response['annonces'][i].fourchette_volume_max+'</li></ul></div></div></div></div>');                     
+                        let depart = $("#depart").val();
+                        let arriver = $("#arriver").val();
+                        $("#search_result_not_connected").prepend('<div class="col-lg-3"><div><div class="post"><div class="thumb"><img src=".'+response['annonces'][i].img+'" alt=""></div><div class="down-content"><span>'+response['annonces'][i].titre+'</span><ul class="post-info"><li>'+d.getHours() + ":" + d.getMinutes() + " " + d.getDate()+'-'+ d.getMonth()+'-'+d.getFullYear()+'</li></ul><p>'+text+'<a href="" data-toggle="modal" data-target="#loginModal" >...lire la suite</a></p><ul class="post-info"><li>de '+$('#depart'+depart+'').html()+' vers '+$('#arriver'+arriver+'').html()+'</li></ul><ul class="post-info"><li>'+response['annonces'][i].transport_type+'</li></ul><ul class="post-info"><li>entre '+response['annonces'][i].fourchette_poid_min+'et'+response['annonces'][i].fourchette_poid_max+'</li></ul><ul class="post-info"><li>entre '+response['annonces'][i].fourchette_volume_min+'et'+response['annonces'][i].fourchette_volume_max+'</li></ul></div></div></div></div>');                     
+                        $("#search_result_connected").prepend('<div class="col-lg-3"><div"><div class="post"><div class="thumb"><img src=".'+response['annonces'][i].img+'" alt=""></div><div class="down-content"><span>'+response['annonces'][i].titre+'</span><ul class="post-info"><li>'+d.getHours() + ":" + d.getMinutes() + " " + d.getDate()+'-'+ d.getMonth()+'-'+d.getFullYear()+'</li></ul><p>'+text+'<a href="annonce/'+response['annonces'][i].id+'" >...lire la suite</a></p><ul class="post-info"><li>de '+$('#depart'+depart+'').html()+' vers '+$('#arriver'+arriver+'').html()+'</li></ul><ul class="post-info"><li>'+response['annonces'][i].transport_type+'</li></ul><ul class="post-info"><li>entre '+response['annonces'][i].fourchette_poid_min+'et'+response['annonces'][i].fourchette_poid_max+'</li></ul><ul class="post-info"><li>entre '+response['annonces'][i].fourchette_volume_min+'et'+response['annonces'][i].fourchette_volume_max+'</li></ul></div></div></div></div>');                     
                     }
                   }
                   else{
@@ -368,7 +374,10 @@
                       $("#ville_arriver").attr("placeholder","Ville d'arriver");
                     }
                     else{
-                      //no annonce dans la bdd
+                      $("#search_result_connected").empty();
+                      $("#search_result_not_connected").empty();
+                      $("#search_result_not_connected").prepend('<div class="sidebar-heading"><h2 style="border-bottom: 0;">pas de resultat trouvée pour votre recherche</h2></div>');
+                      $("#search_result_connected").prepend('<div class="sidebar-heading"><h2 style="border-bottom: 0;">pas de resultat trouvée pour votre recherche</h2></div>');
                     }
                   }
               },

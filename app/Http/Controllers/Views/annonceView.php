@@ -129,7 +129,7 @@ class annonceView extends Controller
                                         $code=$code.'<p style="display:none;">'.$exist=true.'</p>';
                                     }
                                 }
-                                  if($transporteur->certifie == 1 && $exist==false){
+                                  if($transporteur->status == "certifié" && $exist==false){
                                   $code=$code.'<div class="col-lg-12">
                                     <div class="submit-transporteur" style="margin-top:25px">
                                       <div class="row">

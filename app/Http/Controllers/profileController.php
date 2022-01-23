@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\wilaya;
 use App\Models\annonce;
+use App\Models\documents;
 use App\Models\transaction;
 use App\Models\user_wilaya;
 use Illuminate\Http\Request;
@@ -19,10 +20,11 @@ class profileController extends Controller
     {   
         $user= User::where("id","$id")->first();
         $wilayas=wilaya::all();
+        $documents=documents::all();        
 
         (new profileView)->profile($wilayas,$user);
         
-        return view('profile',compact('user','wilayas'));
+        return view('profile',compact('user','wilayas','documents'));
     }
 
     public function check_password(Request $request)
@@ -111,7 +113,7 @@ class profileController extends Controller
 
     public function etre_certifie(Request $request)
     {
-        $respense=User::where('id',$request->session()->get('id'))->update(['certifie' => 1]);
+        $respense=User::where('id',$request->session()->get('id'))->update(['status' => "en attente"]);
         $demande= Storage::disk('public')->put('demandes',$request->demande);
         $dmd= Storage::url($demande);
         $statut='en attente';

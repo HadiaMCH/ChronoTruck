@@ -88,6 +88,8 @@ Route::get('/gestion_contenu', [gestion_contenuController::class,'index'])->name
 Route::post('/add_contact', [gestion_contenuController::class,'add_contact'])->name('add_contact');
 Route::post('/add_presentation', [gestion_contenuController::class,'add_presentation'])->name('add_presentation');
 Route::post('/modifier_presentation', [gestion_contenuController::class,'modifier_presentation'])->name('modifier_presentation');
+Route::post('/add_document', [gestion_contenuController::class,'add_document'])->name('add_document');
+Route::post('/supp_document', [gestion_contenuController::class,'supp_document'])->name('supp_document');
 
 Route::get('/gestion_news', [gestion_newsController::class,'index'])->name('gestion_news');
 Route::post('/add_news', [gestion_newsController::class,'add_news'])->name('add_news');
@@ -96,6 +98,8 @@ Route::get('/gestion_users', [gestion_usersController::class,'index'])->name('ge
 Route::post('/bannir', [gestion_usersController::class,'bannir'])->name('bannir');
 Route::post('/valider_inscription', [gestion_usersController::class,'valider_inscription'])->name('valider_inscription');
 Route::post('/valider_certification', [gestion_usersController::class,'valider_certification'])->name('valider_certification');
+Route::post('/valider_demande_certification', [gestion_usersController::class,'valider_demande_certification'])->name('valider_demande_certification');
+Route::post('/refuser_justificatif', [gestion_usersController::class,'refuser_justificatif'])->name('refuser_justificatif');
 
 
 

@@ -22,7 +22,7 @@ class news_detailsView extends Controller
               <div class="col-lg-12">
                 <div class="text-content">
                   <h2>'.$news->titre.'</h2>
-                  <h4>'.Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $news->created_at)->format('H:i:s d-m-Y').'</h4>
+                  <h4>'.$news->created_at.'</h4>
                 </div>
               </div>
             </div>

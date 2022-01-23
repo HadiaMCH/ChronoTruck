@@ -132,7 +132,7 @@
                         </li>
                       </ul>
                   </div>
-                  @if($user->certifie)
+                  @if($user->statut=="certifié")
                     <div class="col-lg-12">
                       <div class="sidebar-item comments">
                         <div class="sidebar-heading">
@@ -146,7 +146,7 @@
                                 <p>{{$user->statut}}</p>
                               </div>
                             </li>
-                            @if($user->certifie=="refusée")
+                            @if($user->statut=="refusée")
                             <li>
                               <div class="right-content">
                                 <h4>justificatif  :</h4>
@@ -343,9 +343,31 @@
                 </div>
                 @endif
 
+                @if($user->statut=="validée")
+                <div class="col-lg-12">
+                  <div class="sidebar-item recent-posts">
+                    <div class="sidebar-heading">
+                      <h2> la liste de documents à rapporter au bureau de l'entreprise afin de signer son contrat </h2>
+                    </div>
+                    <div class="content">
+                      <ul>
+                        @if(count($documents)) 
+                            @foreach ($documents as $document) 
+                                <li>
+                                  <span>{{$document->name}}</span>
+                                </li>
+                            @endforeach
+                        @endif
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                @endif
               </div>
             </div>
           </div>
+
+          
         </div>
     </section>
 

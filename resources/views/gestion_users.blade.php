@@ -106,6 +106,7 @@
                 <th scope="col">justificatif de refuse</th>
 
                 <th scope="col">valider les inscriptions</th>
+                <th scope="col">valider la demande de certification</th>
                 <th scope="col">valider la certification</th>
                 <th scope="col">bannir</th>
               </tr>
@@ -124,12 +125,12 @@
                   <td>tarjets</td>
                   <td>{{$transporteur->note}}</td>
 
-                  @if($transporteur->certifie==0)
+                  @if(!$transporteur->statut)
                     <td>//</td>
                     <td>//</td>
                     <td>//</td>
                   @else
-                    <td>{{$transporteur->statut}}</td>
+                    <td class="statut">{{$transporteur->statut}}</td>
                     <td>{{$transporteur->demande}}</td>
                     @if($transporteur->statut=="refusée")
                       <td>{{$transporteur->justificatif}}</td>
@@ -148,20 +149,44 @@
                     </td>
                   @endif
 
-                  @if($transporteur->certifie==0)
+                  @if($transporteur->transporteur==2)
+
+                    @if($transporteur->statut=="certifié")
+                      <td>certifié</td>
+                    @elseif($transporteur->statut=="validée")
+                      <td>validée</td>
+                    @elseif($transporteur->statut=="refusée")
+                      <td>refusée</td>
+                    @elseif($transporteur->statut=="en cours de traitement" || $transporteur->statut=="en attente")
+                      <td>
+                        <div class="main-button">
+                          <a class="valider_demande_certification">valider</a>
+                        </div>
+                        <div class="main-button">
+                          <a class="show_justificatif">refuser<span style="display:none;">{{$transporteur->id}}</span></a>
+                        </div>
+                      </td>
+                    @else
+                      <td>//</td>
+                    @endif
+                  @elseif($transporteur->statut=="en attente")
+                    <td class="demande_inscription">//</td>
+                  @else
                     <td>//</td>
-                  @elseif($transporteur->transporteur=="validée")
-                    <td>validée</td>
+                  @endif
+
+                  @if($transporteur->statut=="certifié")
+                    <td>certifié</td>
                   @elseif($transporteur->statut=="refusée")
                     <td>refusée</td>
-                  @elseif($transporteur->statut=="en cours de traitement" || $transporteur->statut=="en attente")
+                  @elseif($transporteur->statut=="validée")
                     <td>
                       <div class="main-button">
                         <a class="valider_certification" >valider</a>
                       </div>
                     </td>
                   @else
-                    <td>//</td>
+                    <td class="certifie">//</td>
                   @endif
 
                   <td>
@@ -170,6 +195,7 @@
                     </div>
                   </td>
                 </tr>
+                
               @endforeach
             </tbody>
           </table>
@@ -264,6 +290,41 @@
       </div>  
     </div>  
   </div>
+
+  <!-- Modal refuser-->
+  <div id="justificatif" class="modal fade" role="dialog">  
+    <div class="modal-dialog">  
+      <div class="modal-content">    
+        <section class="formulaire formulaire-modal">
+          <div class="col-lg-12">
+            <div class="sidebar-heading">              
+              <h2>pourquoi refuser cette demande de certification</h2>
+            </div>
+            <form action="{{route('refuser_justificatif')}}" method="post" enctype="multipart/form-data">
+              @csrf
+                <div class="row">
+                  <div class="col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="justificatif" type="textarea" id="justificatif" placeholder="justificatif" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-md-12 col-sm-12" style="display:none;">
+                    <fieldset>
+                      <input name="id" type="text" id="id_justificatif" >
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12">
+                    <fieldset>
+                      <button type="submit" class="main-button btn btn-warning">soumettre</button>
+                    </fieldset>
+                  </div>  
+                </div>              
+            </form>
+          </div>
+        </section>
+      </div>  
+    </div>  
+  </div>
   
   <footer>
       <div class="container">
@@ -288,7 +349,6 @@
       $('.example').DataTable();
     });
 
-
       $("a").click(function (e) {
         if ($(e.target).is('.signale_afficher')){
           $(e.target).attr("data-toggle","modal");
@@ -297,6 +357,14 @@
           $('#signaler').find('p').empty();
           $('#signaler').find('p').html(texte);
         }
+
+        if ($(e.target).is('.show_justificatif')){
+          $(e.target).attr("data-toggle","modal");
+          $(e.target).attr("data-target","#justificatif");
+          let id=$(e.target).find('span').html();
+          $('#justificatif').find('#id_justificatif').attr('value',id);
+        }
+
 
         if ($(e.target).is('.bannir')){
           let line= $(e.target).parent().parent().parent();
@@ -321,9 +389,6 @@
               success: function (response) {
                 if (response.message == 'user deleted'){
                   line.remove();
-                }
-                else{
-                    //error
                 }
               },
               error: function (response) {
@@ -354,12 +419,52 @@
               dataType: 'json',
               success: function (response) {
                 if (response.message == 'validated'){
-                  let element= $(e.target).parent().parent();
+                  let element= $(e.target).parent().parent().parent();
+                  let certifie=element.find('.demande_inscription');
+                  certifie.empty();
+                  certifie.html('<div class="main-button"><a class="valider_demande_certification" >valider</a></div>');
+                  element= $(e.target).parent().parent();
                   element.empty();
                   element.html('validée');
                 }
-                else{
-                    //error
+              },
+              error: function (response) {
+                  console.log(response);
+              }
+            });  
+        }
+        if ($(e.target).is('.valider_demande_certification')){
+          let line= $(e.target).parent().parent().parent();
+          let id=line.find('th').find('a').html();
+          $.ajaxSetup({
+              headers: {
+                  'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+              }
+          });
+          e.preventDefault();
+          let formData = {
+            id : id,
+          };
+          let type = "POST"; 
+          let ajaxurl = "{{route('valider_demande_certification')}}";
+
+          $.ajax({
+              type: type,
+              url: ajaxurl,
+              data: formData,
+              dataType: 'json',
+              success: function (response) {
+                if (response.message == 'validated'){
+                  let element= $(e.target).parent().parent().parent();
+                  let statut=element.find('.statut');
+                  statut.empty();
+                  statut.html('validée');
+                  let certifie=element.find('.certifie');
+                  certifie.empty();
+                  certifie.html('<div class="main-button"><a class="valider_certification" >valider</a></div>');
+                  element= $(e.target).parent().parent();
+                  element.empty();
+                  element.html('validée');
                 }
               },
               error: function (response) {
@@ -380,7 +485,7 @@
           let formData = {
             id : id,
           };
-          let type = "POST";
+          let type = "POST"; 
           let ajaxurl = "{{route('valider_certification')}}";
 
           $.ajax({
@@ -390,12 +495,13 @@
               dataType: 'json',
               success: function (response) {
                 if (response.message == 'validated'){
-                  let element= $(e.target).parent().parent();
+                  let element= $(e.target).parent().parent().parent();
+                  element=element.find('.statut');
                   element.empty();
-                  element.html('validée');
-                }
-                else{
-                    //error
+                  element.html('certifié');
+                  element= $(e.target).parent().parent();
+                  element.empty();
+                  element.html('certifié');
                 }
               },
               error: function (response) {

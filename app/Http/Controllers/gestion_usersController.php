@@ -44,6 +44,25 @@ class gestion_usersController extends Controller
 
     public function valider_certification(Request $request)
     {       
-         
+        User::where('id',$request->id)->update(['statut'=>'certifié']);
+        return response()->json([
+                'message' => 'validated',
+            ]);
+    }
+
+    public function valider_demande_certification(Request $request)
+    {
+        User::where('id',$request->id)->update(['statut'=>'validée']);
+        return response()->json([
+                'message' => 'validated',
+            ]);
+    }
+
+    public function refuser_justificatif(Request $request)
+    {
+        User::where('id',$request->id)->update(['statut'=>'refusée']);
+        User::where('id',$request->id)->update(['justificatif'=>$request->justificatif]);
+
+        return redirect()->route('gestion_users');        
     }
 }

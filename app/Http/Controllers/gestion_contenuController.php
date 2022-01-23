@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\contact;
+use App\Models\documents;
 use App\Models\presentation;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -15,10 +16,11 @@ class gestion_contenuController extends Controller
     {  
         $presentation=presentation::first();
         $contacts=contact::all();  
-        
+        $documents=documents::all();  
+
         (new gestion_contenuView)->gestion_contenu($contacts,$presentation);
 
-        return view('gestion_contenu',compact('contacts','presentation'));
+        return view('gestion_contenu',compact('contacts','presentation','documents'));
     }
 
     public function add_contact(Request $request)
@@ -64,6 +66,22 @@ class gestion_contenuController extends Controller
 
     public function modifier_presentation(Request $request){
        
+    }
+
+    public function add_document(Request $request)
+    {
+        documents::create([
+            'name'=>$request->document,
+        ]); 
+        return redirect()->route('gestion_contenu');
+
+    }
+
+    public function supp_document(Request $request)
+    {
+        documents::where('id',$request->id)->delete();
+        return redirect()->route('gestion_contenu');
+
     }
 
 }

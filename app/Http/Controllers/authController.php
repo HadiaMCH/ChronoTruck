@@ -11,6 +11,7 @@ use App\Models\wilaya_wilaya;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\authController;
+use App\Http\Controllers\Views\authView;
 
 class authController extends Controller
 {
@@ -116,7 +117,7 @@ class authController extends Controller
                 }
             }
             else{ //transporteur certifie
-                $certifie=1;
+                $statut="en attente";
                 $demande= Storage::disk('public')->putFile('demandes', $request->file('demande'));
                 $dmd= Storage::url($demande);
                 $user=User::create([
@@ -127,7 +128,7 @@ class authController extends Controller
                     'address'=>$request->adresse,
                     'phone'=>$request->phone,
                     'transporteur'=>$transporteur,
-                    'certifie'=>$certifie,
+                    'statut'=>$statut,
                     'demande'=>$dmd,
                 ]);  
                 foreach($request->depart as $depart){

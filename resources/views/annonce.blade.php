@@ -109,7 +109,7 @@
                                     <p style="display:none;">{{$exist=true}}</p>
                                   @endif
                                 @endforeach
-                                @if($transporteur->certifie == 1 && $exist==false)
+                                @if($transporteur->status == "certifié" && $exist==false)
                                   <div class="col-lg-12">
                                   <div class="submit-transporteur" style="margin-top:25px">
                                     <div class="row">

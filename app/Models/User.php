@@ -28,8 +28,6 @@ class User extends Authenticatable
         'address',
         'phone',
         'transporteur',
-        'wilaya',
-        'certifie',
         'demande',
         'statut',
         'justificatif'

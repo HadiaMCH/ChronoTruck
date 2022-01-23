@@ -107,6 +107,50 @@
       </div>
     </section>
 
+    <!-- document de certification -->
+
+    <section class="header_contenu">
+      <div class="container">
+        <div class="main-content">
+            <h4>La gestion de la liste de documents à rapporter au bureau de l'entreprise afin de signer les contrats de certification</h4>
+        </div>
+      </div>
+    </section>
+
+    <section class="posts grid-system">
+      <div class="container">
+        <div class="table-responsive">
+        @if (count($documents))
+          <table class="example table table-striped" style="width:100%">
+            <thead>
+              <tr>
+                <th scope="col">document</th>
+                <th scope="col">supprimer</th>
+              </tr>
+            </thead>
+            <tbody> 
+                @foreach($documents as $document)
+                  <tr>
+                    <th scope="row">{{$document->name}}</th>
+                    <td>
+                      <form action="{{route('supp_document')}}" method="post">
+                        @csrf
+                        <input name="id" class="form-control" type="text" value="{{$document->id}}" style="display:none;">
+                        <button type="submit"class="main-button btn btn-warning">supprimer</button>
+                      </form>
+                    </td>
+                  </tr>
+                @endforeach
+            </tbody>
+          </table>
+        @endif
+        <div class="main-button col-lg-2">
+          <a href="" data-toggle="modal" data-target="#add_document">ajouter</a>
+        </div>
+        </div>
+      </div>
+    </section>
+
     <!-- criteres de selection des annonce -->
 
     <section class="header_contenu">
@@ -163,6 +207,37 @@
     </div>  
   </div>
   
+    <!-- Modal add contact-->  
+
+ <div id="add_document" class="modal fade" role="dialog">  
+    <div class="modal-dialog">  
+      <div class="modal-content">    
+        <section class="formulaire formulaire-modal">
+          <div class="col-lg-12">
+            <div class="sidebar-heading">
+              <h2>ajouter un nouveau contact</h2>
+            </div>
+            <form action="{{route('add_document')}}" method="post" enctype="multipart/form-data">
+            @csrf
+              <div class="row">
+                <div class="col-md-12 col-sm-12">
+                  <fieldset>
+                    <input name="document" class="form-control" type="text" id="document" placeholder="nom du document" required>
+                  </fieldset>
+                </div>
+                <div class="col-lg-12 col-sm-12">
+                  <fieldset>
+                    <button type="submit" class="main-button btn btn-warning">ajouter</button>
+                  </fieldset>
+                </div>
+              </div>
+            </form>
+          </div>
+        </section>
+      </div>  
+    </div>  
+  </div>
+
   <!-- Modal modif presentation-->  
 
  <div id="modifier_presentation" class="modal fade" role="dialog">  
