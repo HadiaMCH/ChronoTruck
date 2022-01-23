@@ -32,6 +32,8 @@ class authController extends Controller
                 $request->session()->put('familyname',$user->familyname);
                 $request->session()->put('transporteur',$user->transporteur);
                 $request->session()->put('password',$user->password);
+                $request->session()->put('statut',$user->statut);
+                
                 
                 return response()->json([
                     'status_code' => 501,
@@ -60,6 +62,7 @@ class authController extends Controller
         $request->session()->forget('password');
         $request->session()->forget('familyname');
         $request->session()->forget('transporteur');
+        $request->session()->forget('statut');
 
         return redirect()->route('acceuil');
     }

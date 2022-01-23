@@ -155,6 +155,9 @@ class profileController extends Controller
             'transporteur_id'=>$id_user,
             'contenu'=>'il vous demande de vous transporter',
         ]);
+        $o_tarif=$annonce->tarjet->tarif;
+        $tarif=$o_tarif+$o_tarif*$request->pourcentage/100;
+        $annonce=annonce::where('id',$id)->update(['tarif'=>$tarif]);
 
         return redirect()->route('profile_id', ['id' => $id_user]);                
     }
@@ -168,6 +171,9 @@ class profileController extends Controller
             'transporteur_id'=>$id_transporteur,
             'contenu'=>'il vous demande de le transporter',
         ]);
+        $o_tarif=$annonce->tarjet->tarif;
+        $tarif=$o_tarif+$o_tarif*$request->pourcentage/100;
+        $annonce=annonce::where('id',$id)->update(['tarif'=>$tarif]);
 
         return redirect()->route('profile_id', ['id' => $id_user]);                
     }

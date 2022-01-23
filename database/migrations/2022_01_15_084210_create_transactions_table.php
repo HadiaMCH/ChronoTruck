@@ -20,6 +20,7 @@ class CreateTransactionsTable extends Migration
             $table->foreignId('transporteur_id')->constrained()->nullable();
             $table->enum('contenu',['il vous demande de vous transporter', 'il vous demande de le transporter']);
             $table->enum('status',['acceptée', 'en attente', 'refusée'])->default('en attente');
+            $table->double('pourcentage')->default(20.00);
 
             $table->timestamps();
         });

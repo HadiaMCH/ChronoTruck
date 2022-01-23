@@ -17,6 +17,7 @@ class transaction extends Model
         'transporteur_id',
         'contenu',
         'status',
+        'pourcentage'
     ];
 
     public function annonce()

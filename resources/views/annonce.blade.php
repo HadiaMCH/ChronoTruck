@@ -214,7 +214,7 @@
                 <p style="display:none;">{{$exist=true}}</p>
               @endif
             @endforeach
-            @if(session('transporteur')==2 && $exist==false)
+            @if(session('statut')=="certifié" && $exist==false)
             <div class="col-lg-12">
               <div class="submit-transporteur annonce_opps">
                 <div class="row">

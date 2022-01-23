@@ -136,7 +136,7 @@
                       <form action="{{route('supp_document')}}" method="post">
                         @csrf
                         <input name="id" class="form-control" type="text" value="{{$document->id}}" style="display:none;">
-                        <button type="submit"class="main-button btn btn-warning">supprimer</button>
+                        <button type="submit"class="main-button">supprimer</button>
                       </form>
                     </td>
                   </tr>
@@ -147,6 +147,59 @@
         <div class="main-button col-lg-2">
           <a href="" data-toggle="modal" data-target="#add_document">ajouter</a>
         </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- gestion des transactions -->
+
+    <section class="header_contenu">
+      <div class="container">
+        <div class="col-sm-12">
+          <div class="row">
+            <div class="main-content col-sm-12">
+                <h4>La gestion des transactions entres les utilisateurs</h4>
+                <span> le pourcentage des transactions par defaut est: 20% vous pouvez le modifier</span>
+            </div>
+            <!--<div class="main-content col-sm-2">
+              <button type="submit"class="main-button">modifier</button>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="posts grid-system">
+      <div class="container">
+        <div class="table-responsive">
+          @if (count($transactions))
+          <table class="example table table-striped" style="width:100%">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">l'identifiant de l'annonce en cause</th>
+                <th scope="col">tarif</th>
+                <th scope="col">pourcentage %</th>
+                <th scope="col">modifier le poucentage</th>
+              </tr>
+            </thead>
+            <tbody>
+                @foreach($transactions as $transaction)
+                  <tr>
+                    <th scope="row">{{$transaction->id}}</th>
+                    <td><a href="annonce/{{$transaction->annonce_id}}">{{$transaction->annonce_id}}</a></td>
+                    <td>{{$transaction->annonce->tarif}}</td>
+                    <td>{{$transaction->pourcentage}}</td>
+                    <td>
+                      <div class="main-button">
+                        <a class="modifier_pourcentage">modifier</a>
+                      </div>
+                    </td>
+                  </tr>
+                @endforeach
+            </tbody>
+          </table>
+          @endif
         </div>
       </div>
     </section>
@@ -285,7 +338,52 @@
     </div>  
   </div>
     
+  <!-- Modal modifier pourcentage-->
+  <div id="modif_p" class="modal fade" role="dialog">  
+    <div class="modal-dialog">  
+      <div class="modal-content">    
+        <section class="formulaire formulaire-modal">
+          <div class="col-lg-12">
+            <div class="sidebar-heading">              
+              <h2>modifier le pourcentage de cette transaction</h2>
+            </div>
+            <form action="{{route('pourcentage')}}" method="post" enctype="multipart/form-data">
+              @csrf
+                <div class="row">
+                  <div class="col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="pourcentage" type="number" placeholder="le pourcentage" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-md-12 col-sm-12" style="display:none;">
+                    <fieldset>
+                      <input name="id" type="text" id="id_transaction" >
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12">
+                    <fieldset>
+                      <button type="submit" class="main-button btn btn-warning">soumettre</button>
+                    </fieldset>
+                  </div>  
+                </div>              
+            </form>
+          </div>
+        </section>
+      </div>  
+    </div>  
+  </div>
+
   <script>
+
+      $("a").click(function (e) {
+        if ($(e.target).is('.modifier_pourcentage')){
+          $(e.target).attr("data-toggle","modal");
+          $(e.target).attr("data-target","#modif_p");
+          let id=$(e.target).parent().parent().parent().children(":first").html();
+          $('#modif_p').find('#id_transaction').attr('value',id);
+        }
+      });
+
       $("#add_contact_submit").click(function (e) {
           $.ajaxSetup({
               headers: {

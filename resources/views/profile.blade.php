@@ -130,9 +130,15 @@
                             @endif
                           </div>
                         </li>
+                        <li>
+                          <div class="right-content">
+                            <h4> votre note :</h4>
+                            <p>{{$user->note}}</p>
+                          </div>
+                        </li>
                       </ul>
                   </div>
-                  @if($user->statut=="certifié")
+                  @if($user->statut)
                     <div class="col-lg-12">
                       <div class="sidebar-item comments">
                         <div class="sidebar-heading">
@@ -182,56 +188,57 @@
               @else
                 <div>
               @endif
-
-              @if(count($user->transactions_client))
-                <div>
-                  <div class="sidebar-item comments">
-                    <div class="sidebar-heading">
-                      <h2>les demandes de transport que vous avez comme client</h2>
-                    </div>
-                    <div>
-                      <ul>
-                        @foreach ($user->transactions_client as $transaction)
-                          <li>
-                            <div class="right-content">
-                              @if($transaction->contenu=='il vous demande de vous transporter')
-                                <h4>{{$transaction->client->name}} {{$transaction->client->familyname}} vous demande de vous transporter :</h4>
-                                <p><a href="../annonce/{{$transaction->annonce->id}}">voir ici l'annonce</a></p>
-                                <div class="col-lg-12">
-                                  <div class="row">
-                                    <div class="col-lg-4">
-                                      <div class="main-button">
-                                        <a href="../accepter_transaction/{{$transaction->id}}">accepter</a>
-                                      </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                      <div class="main-button">
-                                        <a href="../refuser_transaction/{{$transaction->id}}">refuser</a>
-                                      </div>
-                                    </div>
+              @if ($user->statut == "certifié")
+                @if(count($user->transactions_client))
+                  <div>
+                    <div class="sidebar-item comments">
+                      <div class="sidebar-heading">
+                        <h2>les demandes de transport que vous avez comme client</h2>
+                      </div>
+                      <div>
+                        <ul>
+                          @foreach ($user->transactions_client as $transaction)
+                            <li>
+                              <div class="right-content">
+                                @if($transaction->contenu=='il vous demande de vous transporter')
+                                <div class="row">
+                                  <div class="col-lg-9">
+                                    <h4>{{$transaction->client->name}} {{$transaction->client->familyname}} vous demande de vous transporter :</h4>
+                                    <p>le tarif : {{$transaction->annonce->tarif}}</p>
+                                    <p><a href="../annonce/{{$transaction->annonce->id}}">voir ici l'annonce</a></p>
+                                  </div>
+                                  <div class="col-lg-3">
+                                        <div class="main-button">
+                                          <a href="../accepter_transaction/{{$transaction->id}}">accepter</a>
+                                        </div>
+                                        <div class="main-button">
+                                          <a href="../refuser_transaction/{{$transaction->id}}">refuser</a>
+                                        </div>
                                   </div>
                                 </div>
-                              @else
-                                <h4>votre demande de transport a {{$transaction->transporteur->name}} {{$transaction->transporteur->familyname}} est {{$transaction->status}}</h4>
-                                <p><a href="../annonce/{{$transaction->annonce->id}}">voir ici l'annonce</a></p>
-                              @endif
-                            </div>
-                          </li>
-                        @endforeach
-                      </ul>
+                                @else
+                                  <h4>votre demande de transport a {{$transaction->transporteur->name}} {{$transaction->transporteur->familyname}} est {{$transaction->status}}</h4>
+                                  <p>le tarif : {{$transaction->annonce->tarif}}</p>
+                                  <p><a href="../annonce/{{$transaction->annonce->id}}">voir ici l'annonce</a></p>
+                                @endif
+                              </div>
+                            </li>
+                          @endforeach
+                        </ul>
+                      </div>
                     </div>
                   </div>
-                </div>
-              @else
-                <div>
-                  <div class="sidebar-item comments">
-                    <div class="sidebar-heading">
-                      <h2>aucune demandes de transport que vous avez comme client</h2>
+                @else
+                  <div>
+                    <div class="sidebar-item comments">
+                      <div class="sidebar-heading">
+                        <h2>aucune demandes de transport que vous avez comme client</h2>
+                      </div>
                     </div>
                   </div>
-                </div>
+                @endif
               @endif
-                @if($user->transporteur == 2)
+                @if($user->statut == "certifié")
                   @if(count($user->transactions_transporteur))
                     <div >
                       <div class="sidebar-item comments">
@@ -244,24 +251,25 @@
                               <li>
                                 <div class="right-content">
                                   @if($transaction->contenu=='il vous demande de le transporter')
-                                    <h4>{{$transaction->client->name}} {{$transaction->client->familyname}} vous demande de le transporter :</h4>
-                                    <p><a href="../annonce/{{$transaction->annonce->id}}">voir ici l'annonce</a></p>
-                                    <div class="col-lg-12">
-                                      <div class="row">
-                                        <div class="col-lg-4">
+                                  <div class="row">
+                                    <div class="col-lg-9">
+                                      <h4>{{$transaction->client->name}} {{$transaction->client->familyname}} vous demande de le transporter :</h4>
+                                      <p>le tarif : {{$transaction->annonce->tarif}}</p>
+                                      <p>le pourcentage a donner au site : {{$transaction->pourcentage}}%</p>
+                                      <p><a href="../annonce/{{$transaction->annonce->id}}">voir ici l'annonce</a></p>
+                                    </div>
+                                    <div class="col-lg-3">
                                           <div class="main-button">
                                             <a href="../accepter_transaction/{{$transaction->id}}">accepter</a>
-                                          </div>
-                                        </div>
-                                        <div class="col-lg-4">
                                           <div class="main-button">
                                             <a href="../refuser_transaction/{{$transaction->id}}">refuser</a>
                                           </div>
-                                        </div> 
-                                      </div>
                                     </div>
+                                  </div>
                                   @else
                                     <h4>votre demande de transport a {{$transaction->transporteur->name}} {{$transaction->transporteur->familyname}} est {{$transaction->status}}</h4>
+                                    <p>le tarif : {{$transaction->annonce->tarif}}</p>
+                                    <p>le pourcentage a donner au site : {{$transaction->pourcentage}}%</p>
                                     <p><a href="../annonce/{{$transaction->annonce->id}}">voir ici l'annonce</a></p>
                                   @endif
                                 </div>

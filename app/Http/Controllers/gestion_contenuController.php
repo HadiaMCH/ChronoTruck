@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\annonce;
 use App\Models\contact;
 use App\Models\documents;
+use App\Models\transaction;
 use App\Models\presentation;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -16,11 +18,12 @@ class gestion_contenuController extends Controller
     {  
         $presentation=presentation::first();
         $contacts=contact::all();  
-        $documents=documents::all();  
+        $documents=documents::all();
+        $transactions=transaction::all();  
 
         (new gestion_contenuView)->gestion_contenu($contacts,$presentation);
 
-        return view('gestion_contenu',compact('contacts','presentation','documents'));
+        return view('gestion_contenu',compact('contacts','presentation','documents','transactions'));
     }
 
     public function add_contact(Request $request)
@@ -80,6 +83,18 @@ class gestion_contenuController extends Controller
     public function supp_document(Request $request)
     {
         documents::where('id',$request->id)->delete();
+        return redirect()->route('gestion_contenu');
+
+    }
+
+    public function pourcentage(Request $request)
+    {
+        transaction::where('id',$request->id)->update(['pourcentage'=>$request->pourcentage]);
+        $transaction=transaction::where('id',$request->id)->first();
+        $o_tarif=$transaction->annonce->tarjet->tarif;
+        $tarif=$o_tarif+$o_tarif*$request->pourcentage/100;
+        annonce::where('id',$transaction->annonce->id)->update(['tarif'=>$tarif]);
+
         return redirect()->route('gestion_contenu');
 
     }

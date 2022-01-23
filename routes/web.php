@@ -90,6 +90,7 @@ Route::post('/add_presentation', [gestion_contenuController::class,'add_presenta
 Route::post('/modifier_presentation', [gestion_contenuController::class,'modifier_presentation'])->name('modifier_presentation');
 Route::post('/add_document', [gestion_contenuController::class,'add_document'])->name('add_document');
 Route::post('/supp_document', [gestion_contenuController::class,'supp_document'])->name('supp_document');
+Route::post('/pourcentage', [gestion_contenuController::class,'pourcentage'])->name('pourcentage');
 
 Route::get('/gestion_news', [gestion_newsController::class,'index'])->name('gestion_news');
 Route::post('/add_news', [gestion_newsController::class,'add_news'])->name('add_news');

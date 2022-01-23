@@ -55,13 +55,11 @@ class annonceController extends Controller
             'fourchette_poid_max'=>$request->fourchette_poid_max,
             'fourchette_volume_min'=>$request->fourchette_volume_min,
             'fourchette_volume_max'=>$request->fourchette_volume_max,
-            'tarif'=>null,
             'user_id'=>$request->session()->get('id'),
         ]); 
 
         $target= wilaya_wilaya::where("wilaya_depart_id","$request->depart")->where("wilaya_arriver_id","$request->arriver")->first();
-        annonce::where('id',$annonce->id)->update(['wilaya_wilaya_id'=>$target->id]);
-        
+        annonce::where('id',$annonce->id)->update(['wilaya_wilaya_id'=>$target->id]);        
         return redirect()->route('annonce', ['id' => $annonce->id]);        
     }
 
