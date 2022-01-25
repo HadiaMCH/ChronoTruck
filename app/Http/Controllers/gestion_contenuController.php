@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\annonce;
 use App\Models\contact;
+use App\Models\critere;
 use App\Models\documents;
 use App\Models\transaction;
 use App\Models\presentation;
@@ -20,10 +21,12 @@ class gestion_contenuController extends Controller
         $contacts=contact::all();  
         $documents=documents::all();
         $transactions=transaction::all();  
+        $criteres_picked= critere::where('picked',1)->get();
+        $criteres= critere::all();
 
         (new gestion_contenuView)->gestion_contenu($contacts,$presentation);
 
-        return view('gestion_contenu',compact('contacts','presentation','documents','transactions'));
+        return view('gestion_contenu',compact('contacts','presentation','documents','transactions','criteres_picked','criteres'));
     }
 
     public function add_contact(Request $request)
@@ -94,6 +97,23 @@ class gestion_contenuController extends Controller
         $o_tarif=$transaction->annonce->tarjet->tarif;
         $tarif=$o_tarif+$o_tarif*$request->pourcentage/100;
         annonce::where('id',$transaction->annonce->id)->update(['tarif'=>$tarif]);
+
+        return redirect()->route('gestion_contenu');
+    }
+
+    public function critere_add(Request $request)
+    {
+        $criteres= critere::all();
+
+        foreach($criteres as $critere){
+
+            if(in_array($critere->id,$request->criteres)){
+                critere::where('id',$critere->id)->update(['picked'=>1]);
+            }
+            else{
+                critere::where('id',$critere->id)->update(['picked'=>0]);
+            }
+        }
 
         return redirect()->route('gestion_contenu');
 

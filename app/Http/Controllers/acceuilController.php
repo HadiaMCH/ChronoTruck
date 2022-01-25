@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\news;
 use App\Models\wilaya;
 use App\Models\annonce;
+use App\Models\critere;
 use Illuminate\Http\Request;
 use App\Models\wilaya_wilaya;
 use Illuminate\Support\Carbon;
@@ -17,6 +18,7 @@ class acceuilController extends Controller
     
     public function index()
     {        
+
         $status= annonceController::getEnumValues('annonces','status');
         $transport_types= annonceController::getEnumValues('annonces','transport_type');
         $fourchette_poid_mins= annonceController::getEnumValues('annonces','fourchette_poid_min');
@@ -35,8 +37,25 @@ class acceuilController extends Controller
 
     public function show()
     {
-        $annonces= annonce::where("status","validée")->where("archiver","0")->orderBy('created_at', 'asc')->take(8)->get();
-        
+
+        $criteres_picked= critere::where('picked',1)->get();
+
+        if(!$criteres_picked){
+            $annonces= annonce::where("status","!=","en attente")->where("archiver","0")->take(8)->get();
+        }
+
+        if(!$criteres_picked->contains('id','1') && $criteres_picked->contains('id','2')){
+            $annonces= annonce::where("status","!=","en attente")->where("archiver","0")->orderBy('note', 'desc')->take(8)->get();
+        }
+
+        if($criteres_picked->contains('id','1') && !$criteres_picked->contains('id','2')){
+            $annonces= annonce::where("status","!=","en attente")->where("archiver","0")->orderBy('created_at', 'desc')->take(8)->get();
+        }
+
+        if($criteres_picked->contains('id','1') && $criteres_picked->contains('id','2')){
+            $annonces= annonce::where("status","!=","en attente")->where("archiver","0")->orderBy('created_at', 'desc')->orderBy('note', 'desc')->take(8)->get();
+        }
+
         $wilayas=wilaya::all();
         $depart = [];
         $arriver = [];
@@ -73,7 +92,7 @@ class acceuilController extends Controller
 
             $tarjet= wilaya_wilaya::where("wilaya_depart_id","$depart")->where("wilaya_arriver_id","$arriver")->first();
             $id=$tarjet->id;
-            $annonces=annonce::where("wilaya_wilaya_id","$id")->where("status","validée")->where("archiver","0")->orderBy('created_at', 'asc')->get();;
+            $annonces=annonce::where("wilaya_wilaya_id","$id")->where("status","!=","en attente")->where("archiver","0")->orderBy('created_at', 'desc')->get();;
 
             if ($annonces->count()){
                     

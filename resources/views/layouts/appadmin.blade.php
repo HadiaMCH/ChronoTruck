@@ -35,7 +35,17 @@
     </head> 
     
     <body>
-
+    @if(!session('admin_name'))
+      <style>
+        html { 
+        background: url(assets/images/about-us.jpg) no-repeat center center fixed; 
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        }
+      </style>
+    @endif
     <!-- Header -->
     <header >
       <nav class="navbar navbar-expand-lg">

@@ -117,7 +117,7 @@
       </div>
     </section>
 
-    <section class="posts grid-system">
+    <section class="posts ">
       <div class="container">
         <div class="table-responsive">
         @if (count($documents))
@@ -145,7 +145,7 @@
           </table>
         @endif
         <div class="main-button col-lg-2">
-          <a href="" data-toggle="modal" data-target="#add_document">ajouter</a>
+          <a data-toggle="modal" data-target="#add_document">ajouter</a>
         </div>
         </div>
       </div>
@@ -169,7 +169,7 @@
       </div>
     </section>
 
-    <section class="posts grid-system">
+    <section class="posts ">
       <div class="container">
         <div class="table-responsive">
           @if (count($transactions))
@@ -214,13 +214,38 @@
       </div>
     </section>
 
-    <!-- style et diapo -->
-
-    <section class="header_contenu">
+    <section class="posts" style="margin-bottom:100px;">
       <div class="container">
-        <div class="main-content">
-            <h4>La gestion des diaporamas et les options de styles du site</h4>
-        </div>  
+        <div class="table-responsive">
+          @if (count($criteres_picked))
+          <table class="example table table-striped" style="width:100%">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Texte du critère</th>
+              </tr>
+            </thead>
+            <tbody>
+                @foreach($criteres_picked as $critere_picked)
+                  <tr>
+                    <th scope="row">{{$critere_picked->id}}</th>
+                    <td>{{$critere_picked->texte}}</td>
+                  </tr>
+                @endforeach
+            </tbody>
+          </table>
+          <div class="main-button col-lg-4">
+            <a data-toggle="modal" data-target="#critere_add">modifier</a>
+          </div>
+          @else
+            <div class="sidebar-heading">
+              <h2 style="border-bottom: 0;">pas de resultat trouvée pour votre recherche</h2>
+            </div>
+            <div class="main-button col-lg-4">
+              <a data-toggle="modal" data-target="#critere_add">ajouter</a>
+            </div>
+          @endif
+        </div>
       </div>
     </section>
 
@@ -250,6 +275,42 @@
                 <div class="col-lg-12 col-sm-12">
                   <fieldset>
                     <button type="submit" id="add_contact_submit" class="main-button btn btn-warning">ajouter</button>
+                  </fieldset>
+                </div>
+              </div>
+            </form>
+          </div>
+        </section>
+      </div>  
+    </div>  
+  </div>
+
+  <!-- Modal add critere-->  
+
+ <div id="critere_add" class="modal fade" role="dialog">  
+    <div class="modal-dialog">  
+      <div class="modal-content">    
+        <section class="formulaire formulaire-modal">
+          <div class="col-lg-12">
+            <div class="sidebar-heading">
+              <h2>modifier la liste des critères de sélection des annonces à publier sur la page principale</h2>
+            </div>
+            <form method="POST" action="{{route('critere_add')}}">
+            @csrf
+              <div class="row">
+                <div class="col-md-12 col-sm-12">
+                  <fieldset>
+                    <label for="criteres">les critères disponibles :</label>
+                    <select class="mul-select col-lg-12" id="criteres" name="criteres[]" multiple="true" >
+                      @foreach ($criteres as $critere)
+                        <option value="{{$critere->id}}">{{$critere->texte}}</option>
+                      @endforeach
+                    </select>
+                  </fieldset>
+                </div>
+                <div class="col-lg-12 col-sm-12">
+                  <fieldset>
+                    <button type="submit" class="main-button btn btn-warning">ajouter</button>
                   </fieldset>
                 </div>
               </div>
@@ -374,6 +435,12 @@
   </div>
 
   <script>
+
+        $(".mul-select").select2({
+          placeholder: "select critere", //placeholder
+          tags: true,
+          tokenSeparators: ['/',',',';'," "] 
+        });
 
       $("a").click(function (e) {
         if ($(e.target).is('.modifier_pourcentage')){

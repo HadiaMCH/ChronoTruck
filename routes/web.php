@@ -91,6 +91,7 @@ Route::post('/modifier_presentation', [gestion_contenuController::class,'modifie
 Route::post('/add_document', [gestion_contenuController::class,'add_document'])->name('add_document');
 Route::post('/supp_document', [gestion_contenuController::class,'supp_document'])->name('supp_document');
 Route::post('/pourcentage', [gestion_contenuController::class,'pourcentage'])->name('pourcentage');
+Route::post('/critere_add', [gestion_contenuController::class,'critere_add'])->name('critere_add');
 
 Route::get('/gestion_news', [gestion_newsController::class,'index'])->name('gestion_news');
 Route::post('/add_news', [gestion_newsController::class,'add_news'])->name('add_news');
