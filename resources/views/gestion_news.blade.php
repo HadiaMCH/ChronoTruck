@@ -36,6 +36,7 @@
                 <th scope="col">description</th>
                 <th scope="col">paragraph</th>
                 <th scope="col">image</th>
+                <th scope="col">le nombre de vues</th>
                 <th scope="col">date d'ajout</th>
               </tr>
             </thead>
@@ -47,6 +48,7 @@
                     <td>{{$new->description}}</td>
                     <td>{{$new->paragraph}}</td>
                     <td><img src=".{{$new->img}}" alt="" style="width: 100%;"></td>
+                    <td>{{$new->views}}</td>
                     <td>{{Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $new->created_at)->format('H:i:s d-m-Y')}}</td>
                   </tr>
                 @endforeach

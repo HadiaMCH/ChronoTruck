@@ -19,6 +19,7 @@ class CreateNewsTable extends Migration
             $table->mediumText('description');
             $table->longText('paragraph');
             $table->longText('img');
+            $table->Integer('views')->default(0);
             $table->timestamps();
         });
     }

@@ -140,4 +140,13 @@ class annonceController extends Controller
 
           return redirect()->route('annonce', ['id' => $id]);        
       }
+
+      public function views_annonce(Request $request)
+    {
+        $annonce= annonce::where("id","$request->id")->first();
+        $views=$annonce->views+1;
+        annonce::where("id","$request->id")->update(['views'=>$views]);
+
+        return redirect()->route('annonce', ['id' => $request->id]);        
+      }
 }

@@ -46,6 +46,7 @@
                 <th scope="col">utilisateur</th>
                 <th scope="col">status</th>
                 <th scope="col">tarif</th>
+                <th scope="col">le nombre de vues</th>
                 <th scope="col">note donnée au transporteur</th>
                 <th scope="col">transporteur</th>
                 <th scope="col">archiver</th>
@@ -73,6 +74,7 @@
                     <td>{{$annonce->user->id}}-{{$annonce->user->name}}</td>
                     <td class="annonce_status">{{$annonce->status}}</td>
                     <td class="annonce_tarif">{{$annonce->tarif}}</td>
+                    <td>{{$annonce->views}}</td>
                     <td>{{$annonce->note}}</td>
                     @if($annonce->transporteur)
                       <td>{{$annonce->transporteur->id}}-{{$annonce->transporteur->name}}</td> 

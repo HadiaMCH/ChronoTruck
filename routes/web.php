@@ -41,12 +41,14 @@ Route::post('/annonce', [annonceController::class,'add_annonce'])->name('add_ann
 Route::post('/annonce/modifier/{id}', [annonceController::class,'modifier']);
 Route::get('/annonce/delete/{id}', [annonceController::class,'delete']);
 Route::get('/annonce/cancel/{id}', [annonceController::class,'cancel']);
+Route::get('/views_annonce', [annonceController::class,'views_annonce'])->name('views_annonce');
 
 
 Route::get('/presentation', [presentationController::class,'index'])->name('presentation');
 
 Route::get('/news', [newsController::class,'index'])->name('news');
-Route::get('/news/{id}', [news_detailsController::class,'index']);
+Route::get('/news/{id}', [news_detailsController::class,'index'])->name('news_details');
+Route::get('/views_news', [news_detailsController::class,'views_news'])->name('views_news');
 
 Route::get('/statistiques', [statistiquesController::class,'index'])->name('statistiques');
 

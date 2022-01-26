@@ -29,6 +29,7 @@ class CreateAnnoncesTable extends Migration
             $table->double('tarif')->default(0);
 
             $table->Integer('note')->default(0);
+            $table->Integer('views')->default(0);
             $table->longText('signaler_client')->nullable();            
             $table->longText('signaler_transporteur')->nullable();            
 

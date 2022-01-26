@@ -24,7 +24,8 @@ class annonce extends Model
         'fourchette_volume_max',
         'moyen_transport',
         'user_id',
-        'transporteur_id'
+        'transporteur_id',
+        'views'
     ];
 
     public function user()

@@ -5,6 +5,7 @@
 
     <!-- Page Content -->
 
+
     <div class="heading-page">
       <section class="page-heading">
         <div class="container">
@@ -42,6 +43,7 @@
                   <li>{{$annonce->user->name}} {{$annonce->user->familyname}}</li>
                   <li>{{Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $annonce->created_at)->format('H:i:s d-m-Y')}}</li>
                   <li>{{$annonce->status}}</li>
+                  <li>{{$annonce->views+1}} vues</li>
                 </ul>
                 <p>{{$annonce->texte}}</p>
                 <div class="post-options">
@@ -504,6 +506,31 @@
   </div>
 
     <script>
+      $( document ).ready(function() {
+        $.ajaxSetup({
+              headers: {
+                  'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+              }
+          });
+          let formData = {
+            id : "{{$annonce->id}}",
+          };
+          let type = "GET";
+          let ajaxurl = "{{route('views_annonce')}}";
+
+          $.ajax({
+              type: type,
+              url: ajaxurl,
+              data: formData,
+              dataType: 'json',
+              success: function (response) {
+              },
+              error: function (response) {
+                  console.log(response);
+              }
+            });
+       });
+
       $("#supprimer_btn").click(function (e) {
         window.location.href = "delete/{{$annonce->id}}";
       });

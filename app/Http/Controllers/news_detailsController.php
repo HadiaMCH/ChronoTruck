@@ -17,4 +17,14 @@ class news_detailsController extends Controller
 
         return view('news_details',compact('news'));
     }
+
+    public function views_news(Request $request)
+    {
+        $news= news::where("id","$request->id")->first();
+        $views=$news->views+1;
+        news::where("id","$request->id")->update(['views'=>$views]);
+        $news= news::where("id","$request->id")->first();
+
+        return redirect()->route('news_details', ['id' => $request->id]);        
+    }
 }
