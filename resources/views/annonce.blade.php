@@ -339,7 +339,6 @@
               <h2>modifier votre annonce</h2>
             </div>
             <form action="modifier/{{$annonce->id}}" method="post" enctype="multipart/form-data">
-              @csrf
               <div class="row">
                 <div class="col-md-12 col-sm-12">
                   <fieldset>

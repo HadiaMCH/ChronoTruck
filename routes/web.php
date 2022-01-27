@@ -31,9 +31,6 @@ use App\Http\Controllers\gestion_annoncesController;
 Route::get('/acceuil', [acceuilController::class,'index'])->name('acceuil');
 Route::get('/show', [acceuilController::class,'show'])->name('show');
 
-Route::post('/acceuil', [acceuilController::class,'index'])->name('acceuil_connexion');
-
-
 Route::post('/acceuil', [acceuilController::class,'search'])->name('search');
 
 Route::get('/annonce/{id}', [annonceController::class,'index'])->name('annonce');
@@ -104,6 +101,8 @@ Route::post('/valider_inscription', [gestion_usersController::class,'valider_ins
 Route::post('/valider_certification', [gestion_usersController::class,'valider_certification'])->name('valider_certification');
 Route::post('/valider_demande_certification', [gestion_usersController::class,'valider_demande_certification'])->name('valider_demande_certification');
 Route::post('/refuser_justificatif', [gestion_usersController::class,'refuser_justificatif'])->name('refuser_justificatif');
+Route::get('/show_demande/{id}', [gestion_usersController::class,'show_demande'])->name('show_demande');
+
 
 
 

@@ -72,7 +72,6 @@
               <h2>ajouter news</h2>
             </div>
             <form action="{{route('add_news')}}" method="post" enctype="multipart/form-data">
-              @csrf
                 <div class="row">
                   <div class="col-md-12 col-sm-12">
                     <fieldset>

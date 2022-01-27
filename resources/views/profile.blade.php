@@ -389,7 +389,6 @@
                   </div>
                   <div class="content">
                     <form id="name_form">
-                      @csrf
                       <div class="col-md-12 col-sm-12">
                         <fieldset>
                           <input name="name" type="text" id="name" placeholder="nouveau nom" required="">
@@ -423,7 +422,6 @@
               </div>
               <div class="content">
                 <form id="familyname_form">
-                  @csrf
                   <div class="col-md-12 col-sm-12">
                     <fieldset>
                       <input name="familyname" type="text" id="familyname" placeholder="nouveau prénom" required="">
@@ -457,7 +455,6 @@
               </div>
               <div class="content">
                 <form id="phone_form">
-                  @csrf
                   <div class="col-md-12 col-sm-12">
                     <fieldset>
                       <input name="phone" type="text" id="phone" placeholder="nouveau numéro de téléphone" required="">
@@ -491,7 +488,6 @@
               </div>
               <div class="content">
                 <form id="address_form">
-                  @csrf
                   <div class="col-md-12 col-sm-12">
                     <fieldset>
                       <input name="address" type="text" id="address" placeholder="adresse principale" required="">
@@ -525,7 +521,6 @@
               </div>
               <div class="content">
                 <form id="email_form">
-                  @csrf
                   <div class="col-md-12 col-sm-12">
                     <fieldset>
                       <input name="email" type="text" id="email" placeholder="nouveau email" required="">
@@ -559,7 +554,6 @@
               </div>
               <div class="content">
                 <form id="password_form">
-                  @csrf
                   <div class="col-md-12 col-sm-12">
                     <fieldset>
                       <input name="password" type="password" id="pass_password" placeholder="mot de passe" required="">
@@ -593,7 +587,6 @@
               </div>
               <div class="content">
                 <form id="transporteur_form">
-                  @csrf
                   <div class="col-md-12 col-sm-12">
                     <fieldset>
                       <label for="depart">les points de départ :</label>
@@ -646,7 +639,6 @@
               </div>
               <div class="content">
                 <form id="certifie_form">
-                @csrf
                   <div class="col-md-12 col-sm-12">
                     <fieldset>
                       <label for="demande">uploader votre demande</label>
@@ -681,7 +673,6 @@
               </div>
               <div class="content">
                 <form id="wilaya_form">
-                  @csrf
                   <div class="col-md-12 col-sm-12 ">
                     <fieldset>
                       <label for="depart">les points de départ :</label>

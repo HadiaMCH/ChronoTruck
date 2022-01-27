@@ -125,11 +125,13 @@
         ]);
 
         var options = {
-        title: 'Les utilisateurs de ChronoTruck'
+        title: 'Les utilisateurs de ChronoTruck',
+        is3D: true,
         };
 
         var options2 = {
-        title: 'Les annonces de ChronoTruck'
+        title: 'Les annonces de ChronoTruck',
+        is3D: true,
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('users'));

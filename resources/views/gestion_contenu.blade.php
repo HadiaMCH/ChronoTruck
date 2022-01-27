@@ -134,7 +134,6 @@
                     <th scope="row">{{$document->name}}</th>
                     <td>
                       <form action="{{route('supp_document')}}" method="post">
-                        @csrf
                         <input name="id" class="form-control" type="text" value="{{$document->id}}" style="display:none;">
                         <button type="submit"class="main-button">supprimer</button>
                       </form>
@@ -260,7 +259,6 @@
               <h2>ajouter un nouveau contact</h2>
             </div>
             <form >
-            @csrf
               <div class="row">
                 <div class="col-md-12 col-sm-12">
                   <fieldset>
@@ -296,7 +294,6 @@
               <h2>modifier la liste des critères de sélection des annonces à publier sur la page principale</h2>
             </div>
             <form method="POST" action="{{route('critere_add')}}">
-            @csrf
               <div class="row">
                 <div class="col-md-12 col-sm-12">
                   <fieldset>
@@ -332,7 +329,6 @@
               <h2>ajouter un nouveau contact</h2>
             </div>
             <form action="{{route('add_document')}}" method="post" enctype="multipart/form-data">
-            @csrf
               <div class="row">
                 <div class="col-md-12 col-sm-12">
                   <fieldset>
@@ -363,7 +359,6 @@
               <h2>ajouter un nouvelle presenation</h2>
             </div>
             <form action="{{route('modifier_presentation')}}" method="POST" enctype="multipart/form-data">
-            @csrf
               <div class="row">
                 <div class="col-md-11 col-sm-12" style="margin-left: 18px;">
                   <fieldset> 
@@ -409,7 +404,6 @@
               <h2>modifier le pourcentage de cette transaction</h2>
             </div>
             <form action="{{route('pourcentage')}}" method="post" enctype="multipart/form-data">
-              @csrf
                 <div class="row">
                   <div class="col-md-12 col-sm-12">
                     <fieldset>

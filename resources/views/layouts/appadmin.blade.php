@@ -105,7 +105,6 @@
               <h2>connectez-vous sur votre compte admin</h2>
             </div>
             <form >
-            @csrf
               <div class="row">
                 <div class="col-md-12 col-sm-12">
                   <fieldset>

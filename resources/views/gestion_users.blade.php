@@ -131,7 +131,7 @@
                     <td>//</td>
                   @else
                     <td class="statut">{{$transporteur->statut}}</td>
-                    <td>{{$transporteur->demande}}</td>
+                    <td><iframe src=".{{$transporteur->demande}}"></iframe><a href="{{route('show_demande', ['id' => $transporteur->id])}}">voir plus</a></td>
                     @if($transporteur->statut=="refusée")
                       <td>{{$transporteur->justificatif}}</td>
                     @else
@@ -301,7 +301,6 @@
               <h2>pourquoi refuser cette demande de certification</h2>
             </div>
             <form action="{{route('refuser_justificatif')}}" method="post" enctype="multipart/form-data">
-              @csrf
                 <div class="row">
                   <div class="col-md-12 col-sm-12">
                     <fieldset>

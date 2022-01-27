@@ -48,7 +48,6 @@
                       <h2>Trouver un target</h2>
                     </div>
                     <form id="search">
-                    @csrf
                       <div class="row">
                       <div class="col-md-5 col-sm-12">
                         <fieldset>                       
@@ -150,7 +149,6 @@
               <h2>connectez-vous sur votre compte</h2>
             </div>
             <form action="{{route('add_annonce')}}" method="post" enctype="multipart/form-data">
-              @csrf
                 <div class="row">
                   <div class="col-md-12 col-sm-12">
                     <fieldset>
@@ -283,11 +281,6 @@
 
     <script>
       $( document ).ready(function() {
-        $.ajaxSetup({
-              headers: {
-                  'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
-              }
-          });
           let type = "GET";
           let ajaxurl = "{{route('show')}}";
           $.ajax({

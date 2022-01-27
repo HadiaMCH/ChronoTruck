@@ -7,6 +7,7 @@ use App\Models\annonce;
 use App\Models\user_wilaya;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Views\gestion_usersView;
 
 class gestion_usersController extends Controller
@@ -64,5 +65,11 @@ class gestion_usersController extends Controller
         User::where('id',$request->id)->update(['justificatif'=>$request->justificatif]);
 
         return redirect()->route('gestion_users');        
+    }
+
+    public function show_demande($id)
+    {
+        $user=User::where('id',$id)->first();
+        return response()->download(public_path('.'.$user->demande));
     }
 }

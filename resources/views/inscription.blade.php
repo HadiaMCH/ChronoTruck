@@ -29,7 +29,6 @@
     <section class="formulaire">
       <div class="container">
         <form id="inscription" action="{{route('add_user')}}" method="post" enctype="multipart/form-data">
-          @csrf
             <div class="sidebar-heading">
               <h2>remplir vos informations en dessous</h2>
             </div>
