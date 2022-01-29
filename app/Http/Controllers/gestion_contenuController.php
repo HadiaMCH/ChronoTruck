@@ -24,9 +24,8 @@ class gestion_contenuController extends Controller
         $criteres_picked= critere::where('picked',1)->get();
         $criteres= critere::all();
 
-        (new gestion_contenuView)->gestion_contenu($contacts,$presentation);
-
-        return view('gestion_contenu',compact('contacts','presentation','documents','transactions','criteres_picked','criteres'));
+        return (new gestion_contenuView)->gestion_contenu($contacts,$presentation,$documents,$transactions,$criteres_picked,$criteres);
+ 
     }
 
     public function add_contact(Request $request)
@@ -71,7 +70,16 @@ class gestion_contenuController extends Controller
     }
 
     public function modifier_presentation(Request $request){
-       
+        $presentation=presentation::first()->delete();
+        $img= Storage::disk('public')->putFile('presentation', $request->file('img'));
+        $image= Storage::url($img);
+        presentation::create([
+            'img'=>$image,
+            'texte'=>$request->texte,
+            'video'=>$request->video,
+            'fonctionnement'=>$request->fonctionnement,
+        ]); 
+        return redirect()->route('gestion_contenu');
     }
 
     public function add_document(Request $request)

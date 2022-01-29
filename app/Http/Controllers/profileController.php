@@ -22,9 +22,8 @@ class profileController extends Controller
         $wilayas=wilaya::all();
         $documents=documents::all();        
 
-        (new profileView)->profile($wilayas,$user);
+        return (new profileView)->profile($wilayas,$user,$documents);
         
-        return view('profile',compact('user','wilayas','documents'));
     }
 
     public function check_password(Request $request)
@@ -154,10 +153,8 @@ class profileController extends Controller
             'client_id'=>$annonce->user_id,
             'transporteur_id'=>$id_user,
             'contenu'=>'il vous demande de vous transporter',
+            'pourcentage'=>20
         ]);
-        $o_tarif=$annonce->tarjet->tarif;
-        $tarif=$o_tarif+$o_tarif*$request->pourcentage/100;
-        $annonce=annonce::where('id',$id)->update(['tarif'=>$tarif]);
 
         return redirect()->route('profile_id', ['id' => $id_user]);                
     }
@@ -170,10 +167,8 @@ class profileController extends Controller
             'client_id'=>$id_user,
             'transporteur_id'=>$id_transporteur,
             'contenu'=>'il vous demande de le transporter',
+            'pourcentage'=>20
         ]);
-        $o_tarif=$annonce->tarjet->tarif;
-        $tarif=$o_tarif+$o_tarif*$request->pourcentage/100;
-        $annonce=annonce::where('id',$id)->update(['tarif'=>$tarif]);
 
         return redirect()->route('profile_id', ['id' => $id_user]);                
     }
@@ -181,13 +176,18 @@ class profileController extends Controller
     public function accepter_transaction($id_transaction){
         $transaction=transaction::where('id',$id_transaction)->first();
         annonce::where('id',$transaction->annonce->id)->update(['status' =>'terminée','transporteur_id' =>$transaction->transporteur->id]);
+        $annonce=annonce::where('id',$transaction->annonce->id)->first();
+        
+        $o_tarif=$annonce->tarjet->tarif;
+        $tarif=$o_tarif+$o_tarif*$transaction->pourcentage/100;
+        $annonce=annonce::where('id',$transaction->annonce->id)->update(['tarif'=>$tarif]);
+
         return redirect()->route('annonce', ['id' => $transaction->annonce->id]);                
     }
 
-    public function refuser_transaction($id_transaction){
+    public function refuser_transaction($id_transaction, Request $request){
         $transaction=transaction::where('id',$id_transaction)->delete();
-        return redirect()->route('profile_id', ['id' => $id_user]); 
-        return redirect()->route('annonce', ['id' => $transaction->annonce->id]);                               
+        return redirect()->route('profile_id', ['id' => $request->session()->get('id')]); 
     }
 }
 

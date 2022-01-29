@@ -19,9 +19,8 @@ class gestion_usersController extends Controller
         $transporteur_annonces= annonce::where("status","terminée")->where("signaler_transporteur","!=","NULL")->get();
         $client_annonces= annonce::where("status","terminée")->where("signaler_client","!=","NULL")->get();
 
-        (new gestion_usersView)->gestion_users($clients,$transporteurs,$transporteur_annonces,$client_annonces);
+        return (new gestion_usersView)->gestion_users($clients,$transporteurs,$transporteur_annonces,$client_annonces);
 
-        return view('gestion_users',compact('transporteur_annonces','client_annonces','transporteurs','clients'));
     }
 
     public function bannir(Request $request)

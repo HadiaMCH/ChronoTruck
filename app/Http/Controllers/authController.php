@@ -72,9 +72,7 @@ class authController extends Controller
         $wilayas=wilaya::all();
         $statut_creation='before';
 
-        (new authView)->inscription($wilayas,$statut_creation);
-
-        return view('inscription',compact('wilayas','statut_creation'));
+        return (new authView)->inscription($wilayas,$statut_creation);
     }
 
     public function register(Request $request)
@@ -147,7 +145,7 @@ class authController extends Controller
         } 
         $wilayas=wilaya::all();
         $statut_creation='after';
-        return view('inscription',compact('wilayas','statut_creation'));
+        return (new authView)->inscription($wilayas,$statut_creation);
     }
 
 }

@@ -23,8 +23,7 @@ class statistiquesController extends Controller
 
         $clients=$clients+$clients_t;
 
-        (new statistiquesView)->statistiques($clients,$transporteurs,$transporteurs_c,$annonces_v,$annonces_e,$annonces_t);
+        return (new statistiquesView)->statistiques($clients,$transporteurs,$transporteurs_c,$annonces_v,$annonces_e,$annonces_t);
 
-        return view('statistiques',compact('clients','transporteurs','transporteurs_c','annonces_v','annonces_e','annonces_t'));
     }
 }

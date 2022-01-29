@@ -13,9 +13,8 @@ class news_detailsController extends Controller
     {
         $news= news::where("id","$id")->first();
 
-        (new news_detailsView)->news_details($news);
+        return (new news_detailsView)->news_details($news);
 
-        return view('news_details',compact('news'));
     }
 
     public function views_news(Request $request)

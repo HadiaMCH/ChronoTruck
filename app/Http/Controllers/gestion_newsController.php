@@ -14,9 +14,8 @@ class gestion_newsController extends Controller
     {        
         $news=news::all();
 
-        (new gestion_newsView)->gestion_news($news);
+        return (new gestion_newsView)->gestion_news($news);
 
-        return view('gestion_news',compact('news'));
     }
 
     public function add_news(Request $request)

@@ -13,9 +13,7 @@ class presentationController extends Controller
     {        
         $presentation=presentation::first();
 
-        (new presentationView)->presentation($presentation);
-
-        return view('presentation',compact('presentation'));
+        return (new presentationView)->presentation($presentation);
 
     }
 }

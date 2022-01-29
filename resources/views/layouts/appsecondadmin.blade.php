@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en"> 
     <head> 
         <meta charset="utf-8">
@@ -136,7 +136,7 @@
           });
           e.preventDefault();
           let formData = {
-            email : $("#email_login").val(),
+            email : $("#email_login_admin").val(),
             password : $("#password_login").val(),
           };
           let type = "POST";

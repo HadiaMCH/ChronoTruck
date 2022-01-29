@@ -29,7 +29,7 @@
       </section>
     </div>            
 
-    <section class="posts grid-system">
+    <section class="posts">
       <div class="container"> 
         <div class="row">
           <div class="col-lg-12">

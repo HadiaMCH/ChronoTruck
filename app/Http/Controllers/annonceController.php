@@ -25,9 +25,8 @@ class annonceController extends Controller
         $wilayas=wilaya::all();            
         $annonce= annonce::where("id","$id")->first();
 
-        (new annonceView)->annonce($transport_types,$fourchette_poid_mins,$fourchette_poid_maxs,$fourchette_volume_mins,$fourchette_volume_maxs,$moyen_transports,$wilayas,$annonce);
+        return (new annonceView)->annonce($transport_types,$fourchette_poid_mins,$fourchette_poid_maxs,$fourchette_volume_mins,$fourchette_volume_maxs,$moyen_transports,$wilayas,$annonce);
 
-        return view('annonce',compact('annonce','transport_types','fourchette_poid_mins','fourchette_poid_maxs','fourchette_volume_mins','fourchette_volume_maxs','moyen_transports','wilayas'));
     }
 
     public function add_annonce(Request $request){        

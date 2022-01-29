@@ -29,9 +29,7 @@ class acceuilController extends Controller
         $wilayas=wilaya::all();
         $news=news::all()->take(6);
 
-        (new acceuilView)->acceuil($status,$transport_types,$fourchette_poid_mins,$fourchette_poid_maxs,$fourchette_volume_mins,$fourchette_volume_maxs,$moyen_transports,$wilayas,$news);
-
-    return view('acceuil',compact('status','transport_types','fourchette_poid_mins','fourchette_poid_maxs','fourchette_volume_mins','fourchette_volume_maxs','moyen_transports','wilayas','news'));
+        return (new acceuilView)->acceuil($status,$transport_types,$fourchette_poid_mins,$fourchette_poid_maxs,$fourchette_volume_mins,$fourchette_volume_maxs,$moyen_transports,$wilayas,$news);
 
     }
 
@@ -40,7 +38,7 @@ class acceuilController extends Controller
 
         $criteres_picked= critere::where('picked',1)->get();
 
-        if(!$criteres_picked){
+        if(!$criteres_picked->contains('id','1') && !$criteres_picked->contains('id','2')){
             $annonces= annonce::where("status","!=","en attente")->where("archiver","0")->take(8)->get();
         }
 

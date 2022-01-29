@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+ 
 use App\Models\wilaya;
 use App\Models\annonce;
 use Illuminate\Http\Request;
@@ -15,9 +15,7 @@ class gestion_annoncesController extends Controller
         $annonces= annonce::all();
         $wilayas=wilaya::all();    
         
-        (new gestion_annoncesView)->gestion_annonces($wilayas,$annonces);
-        
-        return view('gestion_annonces',compact('annonces','wilayas'));
+        return (new gestion_annoncesView)->gestion_annonces($wilayas,$annonces);
     }
 
     public function valider_annonce(Request $request)

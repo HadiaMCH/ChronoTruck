@@ -13,8 +13,7 @@ class contactController extends Controller
     {
         $contacts=contact::all();
 
-        (new contactView)->contact($contacts);
+        return (new contactView)->contact($contacts);
 
-        return view('contact',compact('contacts'));
     }
 }

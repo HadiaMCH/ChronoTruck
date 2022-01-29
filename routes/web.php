@@ -21,7 +21,7 @@ use App\Http\Controllers\gestion_annoncesController;
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
+| 
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
@@ -56,7 +56,7 @@ Route::post('/inscription', [authController::class,'register'])->name('add_user'
 
 Route::post('/connexion', [authController::class,'login'])->name('login');
 Route::get('/deconnexion', [authController::class,'logout'])->name('logout');
-
+ 
 Route::get('/profile', [profileController::class,'index'])->name('profile');
 Route::get('/profile/{id}', [profileController::class,'index'])->name('profile_id');
 Route::post('/profile', [profileController::class,'check_password'])->name('check_password');

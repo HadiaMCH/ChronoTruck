@@ -10,6 +10,6 @@ class acceuilAdminController extends Controller
 {
     public function index()
     {        
-        return view('acceuilAdmin');
+        return (new acceuilAdminView)->acceuilAdmin();
     }
 }
